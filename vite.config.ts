@@ -9,7 +9,9 @@ import devtoolsJson from 'vite-plugin-devtools-json';
 
 export default defineConfig({
 	plugins: [
-		react(),
+    process.env.NODE_ENV !== 'production' ? react({
+      jsxRuntime: 'classic',
+    }) : react(),
     devtoolsJson(),
 		tsconfigPaths(),
 		dts({ tsconfigPath: './tsconfig.app.json' }),
@@ -21,6 +23,9 @@ export default defineConfig({
 			emitErrorAsWarning: true,
 		}),
 	],
+  ssr: {
+      noExternal: ['@concero/ui-kit']
+	},
 	css: {
 		postcss: {
 			plugins: [precss()],
