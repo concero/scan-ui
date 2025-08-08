@@ -1,0 +1,13 @@
+:root {
+	--header-height: 48px;
+	--breakpoint-mobile-max: 576px;
+	--breakpoint-tablet-min: 577px;
+	--breakpoint-tablet-max: 768px;
+	--breakpoint-desktop-min: 769px;
+	--breakpoint-desktop-max: 1280px;
+	--breakpoint-ultrawide-min: 1281px;
+
+	--border-radius-small: 12px;
+	--border-radius-medium: 16px;
+	--border-radius-large: 24px;
+}
