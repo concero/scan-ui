@@ -5,12 +5,12 @@ import precss from 'precss'
 import stylelint from 'vite-plugin-stylelint'
 import dts from 'vite-plugin-dts'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
-import devtoolsJson from 'vite-plugin-devtools-json';
+import devtoolsJson from 'vite-plugin-devtools-json'
 
 export default defineConfig({
 	plugins: [
 		react(),
-    devtoolsJson(),
+		devtoolsJson(),
 		tsconfigPaths(),
 		dts({ tsconfigPath: './tsconfig.app.json' }),
 		cssInjectedByJsPlugin(),
@@ -21,11 +21,12 @@ export default defineConfig({
 			emitErrorAsWarning: true,
 		}),
 	],
-  ssr: {
-      noExternal: ['@concero/ui-kit']},
+	ssr: {
+		noExternal: ['@concero/ui-kit'],
+	},
 	css: {
 		postcss: {
 			plugins: [precss()],
 		},
-	}
+	},
 })
