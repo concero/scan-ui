@@ -10,7 +10,7 @@ export const Header = (): ReactElement => {
 				<img src="/Concero.svg" alt="Concero" />
 			</div>
 			<div className="header_actions">
-                <ThemeToggle />
+				<ThemeToggle />
 				<span className="header_divider" />
 				<Button variant="secondary" size="m">
 					Contact Support

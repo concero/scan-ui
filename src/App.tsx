@@ -8,13 +8,12 @@ function App() {
 	return (
 		<>
 			<Header />
-      <BrowserRouter>
-      		<Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/message/:id" element={<></>} />
-        </Routes>
-      </BrowserRouter>
-
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/message/:id" element={<></>} />
+				</Routes>
+			</BrowserRouter>
 		</>
 	)
 }
