@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import { DarkThemeIcon } from '@/assets/dark-theme-icon'
+import { DarkThemeIcon } from '../../../assets'
 import { Switch } from '@concero/ui-kit'
 import './style.pcss'
 
