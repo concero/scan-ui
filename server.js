@@ -30,32 +30,33 @@ if (!isProduction) {
 
 app.use('*all', async (req, res) => {
   try {
-    const url = req.originalUrl.replace(base, '')
+    let url = req.originalUrl.replace(base, '');
+    if (!url.startsWith('/')) url = '/' + url;
 
     /** @type {string} */
-    let template
+    let template;
     /** @type {import('./src/ssr/entry-server.tsx').render} */
-    let render
+    let render;
     if (!isProduction) {
-      template = await fs.readFile('./index.html', 'utf-8')
-      template = await vite.transformIndexHtml(url, template)
-      render = (await vite.ssrLoadModule('/src/ssr/entry-server.tsx')).render
+      template = await fs.readFile('./index.html', 'utf-8');
+      template = await vite.transformIndexHtml(url, template);
+      render = (await vite.ssrLoadModule('/src/ssr/entry-server.tsx')).render;
     } else {
-      template = templateHtml
-      render = (await import('./dist/server/entry-server.js')).render
+      template = templateHtml;
+      render = (await import('./dist/server/entry-server.js')).render;
     }
 
-    const rendered = await render(url)
+    const rendered = await render(url);
 
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? '')
-      .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace(`<!--app-html-->`, rendered.html ?? '');
 
-    res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
+    res.status(200).set({ 'Content-Type': 'text/html' }).send(html);
   } catch (e) {
-    vite?.ssrFixStacktrace(e)
-    console.log(e.stack)
-    res.status(500).end(e.stack)
+    vite?.ssrFixStacktrace(e);
+    console.log(e.stack);
+    res.status(500).end(e.stack);
   }
 })
 

@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import './styles/App.css'
+import './styles/App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { Message } from './pages/Message';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/message/:id" element={<Message />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
