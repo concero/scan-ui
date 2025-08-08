@@ -25,13 +25,13 @@
 		"max-empty-lines": 1,
 		"no-duplicate-selectors": true,
 		"selector-class-pattern": [
-			"^[a-z0-9]+(-[a-z0-9]+)*$",
+			"^[a-z0-9_]+(-[a-z0-9_]+)*$",
 			{
 				"message": "Please use only lowercase letters, numbers, and underscores in class names.",
 				"resolveNestedSelectors": true
 			}
 		],
-		"selector-max-id": [0],
+		"selector-max-id": null,
 		"string-quotes": "single",
 		"value-no-vendor-prefix": true,
 		"font-family-no-missing-generic-family-keyword": null,
