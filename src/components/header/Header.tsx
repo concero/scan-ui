@@ -1,10 +1,9 @@
-
-import type { ReactElement } from 'react';
-import { useMemo } from 'react';
-import { Button } from '@concero/ui-kit';
-import { SearchBar, ThemeToggle } from '../common';
-import { useLocation } from 'react-router-dom';
-import './style.pcss';
+import type { ReactElement } from 'react'
+import { useMemo } from 'react'
+import { Button } from '@concero/ui-kit'
+import { SearchBar, ThemeToggle } from '../common'
+import { useLocation } from 'react-router-dom'
+import './style.pcss'
 
 const HeaderLogo = (): ReactElement => {
 	return useMemo(
@@ -13,9 +12,9 @@ const HeaderLogo = (): ReactElement => {
 				<img src="/Concero.svg" alt="Concero" />
 			</div>
 		),
-		[]
-	);
-};
+		[],
+	)
+}
 
 const HeaderActions = (): ReactElement => {
 	return useMemo(
@@ -28,13 +27,13 @@ const HeaderActions = (): ReactElement => {
 				</Button>
 			</div>
 		),
-		[]
-	);
-};
+		[],
+	)
+}
 
 export const Header = (): ReactElement => {
-	const location = useLocation();
-	const isHomePage = useMemo(() => location.pathname === '/', [location.pathname]);
+	const location = useLocation()
+	const isHomePage = useMemo(() => location.pathname === '/', [location.pathname])
 
 	return (
 		<header className="header">
@@ -46,5 +45,5 @@ export const Header = (): ReactElement => {
 			)}
 			<HeaderActions />
 		</header>
-	);
+	)
 }

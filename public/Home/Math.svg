@@ -1,7 +1,7 @@
 <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_362_18628)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M24 16C19.5817 16 16 19.5817 16 24L16 136C16 140.418 19.5817 144 24 144H48V160H24C10.7452 160 0 149.255 0 136L0 24C0 10.7452 10.7452 0 24 0L48 0V16L24 16Z" fill="url(#paint0_linear_362_18628)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M112 144L136 144C140.418 144 144 140.418 144 136L144 24C144 19.5817 140.418 16 136 16L112 16L112 -4.19629e-06L136 -2.09815e-06C149.255 -9.39373e-07 160 10.7452 160 24L160 136C160 149.255 149.255 160 136 160L112 160L112 144Z" fill="url(#paint1_linear_362_18628)"/>
+<path fill-rule="evenodd" clipRule="evenodd" d="M24 16C19.5817 16 16 19.5817 16 24L16 136C16 140.418 19.5817 144 24 144H48V160H24C10.7452 160 0 149.255 0 136L0 24C0 10.7452 10.7452 0 24 0L48 0V16L24 16Z" fill="url(#paint0_linear_362_18628)"/>
+<path fill-rule="evenodd" clipRule="evenodd" d="M112 144L136 144C140.418 144 144 140.418 144 136L144 24C144 19.5817 140.418 16 136 16L112 16L112 -4.19629e-06L136 -2.09815e-06C149.255 -9.39373e-07 160 10.7452 160 24L160 136C160 149.255 149.255 160 136 160L112 160L112 144Z" fill="url(#paint1_linear_362_18628)"/>
 <rect x="48" y="72" width="16" height="16" fill="url(#paint2_linear_362_18628)"/>
 <rect x="72" y="72" width="16" height="16" fill="url(#paint3_linear_362_18628)"/>
 <rect x="96" y="72" width="16" height="16" fill="url(#paint4_linear_362_18628)"/>
