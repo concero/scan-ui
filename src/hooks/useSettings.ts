@@ -1,6 +1,6 @@
-import type { SettingsStore, SettingsState } from '@/stores/settings/types'
+import type { SettingsStore, SettingsState } from '@/stores'
 import { useContext } from 'react'
-import { SettingsContext } from '@/stores/settings/SettingsContext'
+import { SettingsContext } from '@/stores'
 
 export const useSettingsStore = () => {
 	const useStore = useContext(SettingsContext) as SettingsStore | null
