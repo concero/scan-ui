@@ -10,6 +10,8 @@ export const Navigator = (): ReactElement => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/address/:address" element={<Address />} />
+				<Route path="/txHash/:txHash" element={<Address />} />
+				<Route path="/message/:message" element={<Address />} />
 			</Routes>
 		</>
 	)

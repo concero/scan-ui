@@ -35,7 +35,7 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 		try {
 			await navigator.clipboard.writeText('Example debug info text...')
 			setCopied(true)
-			setTimeout(() => setCopied(false), 2000)
+			setTimeout(() => setCopied(false), 1000)
 		} catch (err) {
 			console.error('Failed to copy debug info', err)
 		}
@@ -44,22 +44,17 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 	if (!isOpen) return null
 
 	return createPortal(
-		<div className="support_modal_overlay">
-			<div className="support_modal">
-				{/* Header */}
+		<div className="support_modal_overlay" onClick={onClose}>
+			<div className="support_modal" onClick={e => e.stopPropagation()}>
 				<div className="support_modal_header">
 					<span className="support_modal_title">Contact Support</span>
 					<IconButton variant="secondary" size="m" onClick={onClose} aria-label="Close support modal">
 						<CloseIcon />
 					</IconButton>
 				</div>
-
-				{/* Description */}
 				<span className="support_modal_description">
 					We apologise that you had issues with your transaction. We will do our best to resolve the issue.
 				</span>
-
-				{/* Options */}
 				<SupportOption
 					step={1}
 					text="Copy debug info"
@@ -71,7 +66,7 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 					step={2}
 					text="Drop us a message"
 					buttonLabel="Open Discord"
-					onClick={() => window.open('https://discord.gg/yourserver', '_blank', 'noopener')}
+					onClick={() => window.open('https://discord.gg/lanca', '_blank', 'noopener')}
 				/>
 			</div>
 		</div>,
