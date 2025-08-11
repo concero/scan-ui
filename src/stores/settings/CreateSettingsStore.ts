@@ -10,7 +10,11 @@ export const CreateSettingsStore = () =>
 		persist(
 			set => ({
 				theme: defaultTheme,
-				setTheme: (theme: 'light' | 'dark') => set({ theme }),
+				setTheme: (theme: 'light' | 'dark') => {
+					set({ theme })
+					document.documentElement.setAttribute('data-theme', theme)
+					document.documentElement.style.colorScheme = theme
+				},
 				resetSettings: () => set({ theme: defaultTheme }),
 			}),
 			{

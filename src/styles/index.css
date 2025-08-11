@@ -15,7 +15,7 @@ html {
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 	box-sizing: border-box;
-	background-color: var(--color-gray-light-25);
+	background-color: var(--color-gray-25);
 }
 
 html::-webkit-scrollbar {

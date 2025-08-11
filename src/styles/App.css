@@ -6,6 +6,6 @@
 	max-width: 1920px;
 	width: 100%;
 	overflow-x: hidden;
-	background-color: var(--color-gray-light-25);
+	background-color: var(--color-gray-25);
 	font-family: var(--font-body-medium-family);
 }
