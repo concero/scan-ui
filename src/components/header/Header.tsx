@@ -2,18 +2,24 @@ import type { ReactElement } from 'react'
 import { useState, useMemo } from 'react'
 import { Button } from '@concero/ui-kit'
 import { SearchBar, ThemeToggle } from '../common'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SupportModal } from '../common'
 import './styles.pcss'
 
 const HeaderLogo = (): ReactElement => {
+	const navigate = useNavigate()
+
+	const handleClick = () => {
+		navigate('/')
+	}
+
 	return useMemo(
 		() => (
-			<div className="header_logo">
+			<div className="header_logo" onClick={handleClick} style={{ cursor: 'pointer' }}>
 				<img src="/Concero.svg" alt="Concero" />
 			</div>
 		),
-		[],
+		[handleClick],
 	)
 }
 
