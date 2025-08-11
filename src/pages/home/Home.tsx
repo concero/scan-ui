@@ -1,15 +1,13 @@
-
-
-import type { ReactElement, ImgHTMLAttributes } from 'react';
-import { SearchBar } from '@/components/common';
-import './styles.pcss';
+import type { ReactElement, ImgHTMLAttributes } from 'react'
+import { SearchBar } from '@/components/common'
+import './styles.pcss'
 
 type Illustration = {
-	src: string;
-	alt: string;
-	className: string;
-	props?: Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'className'>;
-};
+	src: string
+	alt: string
+	className: string
+	props?: Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'className'>
+}
 
 const illustrations: Illustration[] = [
 	{ src: '/Home/Flower.svg', alt: 'Flower', className: 'illustration_one' },
@@ -17,8 +15,7 @@ const illustrations: Illustration[] = [
 	{ src: '/Home/Math.svg', alt: 'Math', className: 'illustration_three' },
 	{ src: '/Home/File.svg', alt: 'File', className: 'illustration_four' },
 	{ src: '/Home/Disc.svg', alt: 'Disc', className: 'illustration_five' },
-];
-
+]
 
 export const Home = (): ReactElement => (
 	<section className="home">
@@ -46,4 +43,4 @@ export const Home = (): ReactElement => (
 		</div>
 		<div className="home_blur" />
 	</section>
-);
+)

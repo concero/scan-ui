@@ -1,9 +1,13 @@
 import type { ReactElement } from 'react'
 import { Button } from '@concero/ui-kit'
-import './style.pcss'
 import { ThemeToggle } from '../common'
+import { useLocation } from 'react-router-dom'
+import './style.pcss'
 
 export const Header = (): ReactElement => {
+	const location = useLocation()
+	const isHomePage = location.pathname === '/'
+
 	return (
 		<header className="header">
 			<div className="header_logo">
