@@ -1,11 +1,18 @@
-import type { ReactElement } from 'react'
-import { Input } from '@concero/ui-kit'
-import { SearchIcon } from '@/assets/search-icon'
 
-export const SearchBar = (): ReactElement => {
+import type { ReactElement } from 'react';
+import type { TInputSize } from '@concero/ui-kit/dist/common/Input/Input/Input';
+import { Input } from '@concero/ui-kit';
+import { SearchIcon } from '@/assets/search-icon';
+
+type SearchBarProps = {
+	placeholder?: string;
+	size?: TInputSize;
+};
+
+export const SearchBar = ({ size = 'xl', placeholder = 'Search by Address, Message, Tx Hash' }: SearchBarProps): ReactElement => {
 	return (
 		<div>
-			<Input placeholder="Search by Address, Message, Tx Hash" size="xl" icon={<SearchIcon />} />
+			<Input placeholder={placeholder} size={size} icon={<SearchIcon />} />
 		</div>
-	)
-}
+	);
+};
