@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { Button } from '@concero/ui-kit'
 import { SearchBar, ThemeToggle } from '../common'
 import { useLocation } from 'react-router-dom'
-import './style.pcss'
+import './styles.pcss'
 
 const HeaderLogo = (): ReactElement => {
 	return useMemo(

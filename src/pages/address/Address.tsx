@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import type { Address as AddressType } from 'viem'
 import { useParams } from 'react-router-dom'
 import { Tag } from '@concero/ui-kit'
-import './style.pcss'
+import './styles.pcss'
 
 export const Address = (): ReactElement => {
 	const { address } = useParams<{ address: AddressType }>()
