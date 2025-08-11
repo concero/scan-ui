@@ -1,0 +1,39 @@
+.address {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: var(--space-xl) var(--space-xl) var(--space-xxxxxl) var(--space-xl);
+	width: 100%;
+	height: calc(100vh - var(--header-height));
+	gap: var(--space-xl);
+	background: linear-gradient(
+		180deg,
+		var(--colors-neutral-gray-25, #fcfcfd) 0%,
+		var(--colors-neutral-gray-50, #f3f5f6) 100%
+	);
+	.address_description {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-s);
+		.address_info {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: var(--space-xs);
+			.address_subtitle {
+				font-size: 0.875rem;
+				font-weight: 400;
+				line-height: 1.125rem;
+				color: var(--color-gray-light-600);
+			}
+		}
+	}
+	.address_title {
+		font-size: 2rem;
+		font-weight: 500;
+		line-height: 2.25rem;
+		color: var(--color-gray-light-700);
+		letter-spacing: -0.64px;
+	}
+}
