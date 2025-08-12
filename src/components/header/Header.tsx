@@ -4,10 +4,15 @@ import { Button } from '@concero/ui-kit'
 import { SearchBar, ThemeToggle } from '../common'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { SupportModal } from '../common'
+import { useSettingsStore } from '@/hooks/useSettings'
 import './styles.pcss'
 
 const HeaderLogo = (): ReactElement => {
 	const navigate = useNavigate()
+	const { theme } = useSettingsStore() 
+
+	const isDark = theme === 'dark'
+	const logo = isDark ? 'Logo/Concero-Dark.svg' : 'Logo/Concero-Light.svg'
 
 	const handleClick = () => {
 		navigate('/')
@@ -16,7 +21,7 @@ const HeaderLogo = (): ReactElement => {
 	return useMemo(
 		() => (
 			<div className="header_logo" onClick={handleClick} style={{ cursor: 'pointer' }}>
-				<img src="/Concero.svg" alt="Concero" />
+				<img src={logo} alt="Concero" />
 			</div>
 		),
 		[handleClick],
@@ -41,6 +46,7 @@ const HeaderActions = ({ handleSupportClick }: HeaderActionsProps): ReactElement
 
 export const Header = (): ReactElement => {
 	const [isSupportOpen, setIsSupportOpen] = useState<boolean>(false)
+
 	const location = useLocation()
 	const isHomePage = useMemo(() => location.pathname === '/', [location.pathname])
 
