@@ -1,20 +1,23 @@
-import type { SettingsStore, SettingsState } from '@/stores'
+import type { SettingsState } from '@/stores'
 import { useContext } from 'react'
 import { SettingsContext } from '@/stores'
 
-export const useSettingsStore = () => {
-	const useStore = useContext(SettingsContext) as SettingsStore | null
+export type UseSettingsStoreResult = {
+	theme: SettingsState['theme']
+	setTheme: SettingsState['setTheme']
+	resetSettings: SettingsState['resetSettings']
+}
+
+export const useSettingsStore = (): UseSettingsStoreResult => {
+	const useStore = useContext(SettingsContext)
+
 	if (!useStore) {
-		throw new Error(`You forgot to wrap your component in <SettingsStoreProvider>.`)
+		throw new Error('useSettingsStore must be used inside <SettingsStoreProvider>.')
 	}
 
-	const theme = useStore((state: SettingsState) => state.theme)
-	const setTheme = useStore((state: SettingsState) => state.setTheme)
-	const resetSettings = useStore((state: SettingsState) => state.resetSettings)
-
 	return {
-		theme,
-		setTheme,
-		resetSettings,
+		theme: useStore(state => state.theme),
+		setTheme: useStore(state => state.setTheme),
+		resetSettings: useStore(state => state.resetSettings),
 	}
 }

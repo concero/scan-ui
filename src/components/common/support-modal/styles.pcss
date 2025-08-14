@@ -1,4 +1,4 @@
-@keyframes supportModalOverlayFadeIn {
+@keyframes FadeIn {
 	from {
 		opacity: 0;
 	}
@@ -7,7 +7,7 @@
 	}
 }
 
-@keyframes supportModalOverlayFadeOut {
+@keyframes FadeOut {
 	from {
 		opacity: 1;
 	}
@@ -16,7 +16,7 @@
 	}
 }
 
-@keyframes supportModalContentScaleIn {
+@keyframes ScaleIn {
 	from {
 		opacity: 0;
 		transform: translateY(20px) scale(0.96);
@@ -27,7 +27,7 @@
 	}
 }
 
-@keyframes supportModalContentScaleOut {
+@keyframes ScaleOut {
 	from {
 		opacity: 1;
 		transform: translateY(0) scale(1);
@@ -53,10 +53,10 @@
 	background: rgba(51, 59, 63, 0.5);
 	backdrop-filter: blur(12.5px);
 	z-index: 3;
-	animation: supportModalOverlayFadeIn 0.25s ease forwards;
+	animation: FadeIn 0.25s ease forwards;
 
 	&--closing {
-		animation: supportModalOverlayFadeOut 0.25s ease forwards;
+		animation: FadeOut 0.25s ease forwards;
 	}
 }
 
@@ -73,36 +73,10 @@
 	background: var(--color-gray-25);
 	border-radius: var(--border-radius-large);
 	font-family: var(--font-body-medium-family);
-
-	/* Open animation */
-	animation: supportModalContentScaleIn 0.3s ease forwards;
+	animation: ScaleIn 0.3s ease forwards;
 
 	&--closing {
-		/* Closing animation */
-		animation: supportModalContentScaleOut 0.25s ease forwards;
-	}
-
-	/* ============================= */
-	/*   HEADER                      */
-	/* ============================= */
-	& .support_modal_header {
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-		min-height: 40px;
-		position: relative;
-
-		& .support_modal_title {
-			font-size: 1.125rem;
-			font-weight: 500;
-			color: var(--color-gray-700);
-			line-height: 1.375rem;
-			margin-right: auto;
-			margin-left: auto;
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-		}
+		animation: ScaleOut 0.25s ease forwards;
 	}
 
 	& .support_modal_description {
@@ -111,21 +85,5 @@
 		font-weight: 300;
 		line-height: 1.25rem;
 		text-align: center;
-	}
-
-	& .support_modal_option {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--space-xs);
-		width: 100%;
-
-		& .support_modal_option_text {
-			font-size: 1rem;
-			text-align: center;
-			font-weight: 400;
-			color: var(--color-gray-700);
-			line-height: 1.25rem;
-		}
 	}
 }
