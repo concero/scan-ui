@@ -3,8 +3,21 @@ import { IconButton } from '@concero/ui-kit'
 import { ArrowLeftIcon } from '@/assets'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { Tag } from '@concero/ui-kit'
+import {
+	TransactionSummary,
+	MessageDetails,
+	TransactionDivider,
+	TransactionFinality,
+	TransactionTimestamp,
+} from '@/components/common'
 import './styles.pcss'
+
+export enum TransactionType {
+	Message = 'Message',
+	LBFBridge = 'LBF Bridge',
+	CanonicalBridge = 'Canonical Bridge',
+	IOUBridge = 'IOU Bridge',
+}
 
 const BackNavigation = (): ReactElement => {
 	const navigate = useNavigate()
@@ -33,40 +46,18 @@ export const Transaction = (): ReactElement => {
 			<div className="transaction_content">
 				<span className="transaction_title">Canonical Bridge</span>
 				<div className="transaction_info">
-					<div className="transaction_info_section">
-						<div className="transaction_info_row">
-							<span className="transaction_info_label">Concero message ID</span>
-							<span className="transaction_info_value">{message}</span>
-						</div>
-						<div className="transaction_info_row">
-							<span className="transaction_info_label">Status</span>
-							<div>
-								<Tag size="s" variant="positive">
-									Success
-								</Tag>
-							</div>
-						</div>
-					</div>
-					<div className="transaction_info_divider" />
-					<div className="transaction_info_section">
-						<div className="transaction_info_row">
-							<span className="transaction_info_label">Type</span>
-							<div>
-								<Tag size="s" variant="neutral">
-									Canonical Bridge
-								</Tag>
-							</div>
-						</div>
-						<div className="transaction_info_row">
-							<span className="transaction_info_label">Sender</span>
-							<span className="transaction_info_value">0x1234567890abcdef1234567890abcdef12345678</span>
-						</div>
-						<div className="transaction_info_row">
-							<span className="transaction_info_label">Receiver</span>
-							<span className="transaction_info_value">0xabcdefabcdefabcdefabcdefabcdefabcdefabcd</span>
-						</div>
-					</div>
-					<div className="transaction_info_divider" />
+					<MessageDetails messageId={message} status="Failed" />
+					<TransactionDivider />
+					<TransactionSummary
+						type={TransactionType.LBFBridge}
+						sender="0x1234567890abcdef1234567890abcdef12345678"
+						receiver="0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+					/>
+					<TransactionDivider />
+					<TransactionFinality hasFinality={true} />
+					<TransactionDivider />
+					<TransactionTimestamp date='25 Jul 2025' time='(15:30 UTC)' duration="15 sec." />
+					<TransactionDivider />
 				</div>
 			</div>
 		</section>

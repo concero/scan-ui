@@ -1,0 +1,29 @@
+.transaction_finality {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-s);
+	width: 100%;
+}
+
+.transaction_finality_row {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+	gap: var(--space-m);
+	height: 24px;
+}
+
+.transaction_finality_row > :nth-child(1) {
+	width: 30%;
+}
+
+.transaction_finality_row > :nth-child(2) {
+	width: 70%;
+}
+
+.transaction_finality_label {
+	font-size: 0.875rem;
+	color: var(--color-gray-500);
+	line-height: 1.125rem;
+}
