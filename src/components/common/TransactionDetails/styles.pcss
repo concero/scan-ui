@@ -1,0 +1,28 @@
+.transaction_details {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-s);
+	width: 100%;
+
+	& .transaction_details_row {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		align-items: flex-start;
+		gap: var(--space-m);
+
+		& .transaction_details_label {
+			font-size: 0.875rem;
+			color: var(--color-gray-500);
+			line-height: 1.125rem;
+		}
+	}
+
+	& .transaction_details_row > :nth-child(1) {
+		width: 30%;
+	}
+
+	& .transaction_details_row > :nth-child(2) {
+		width: 70%;
+	}
+}

@@ -3,39 +3,39 @@
 	flex-direction: column;
 	gap: var(--space-s);
 	width: 100%;
-}
 
-.transaction_timestamp_row {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	align-items: center;
-	gap: var(--space-m);
-	height: 24px;
-}
+	& .transaction_timestamp_row {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		align-items: center;
+		gap: var(--space-m);
+		height: 24px;
 
-.transaction_timestamp_row > :nth-child(1) {
-	width: 30%;
-}
+		& > :nth-child(1) {
+			width: 30%;
+		}
 
-.transaction_timestamp_row > :nth-child(2) {
-	width: 70%;
-}
+		& > :nth-child(2) {
+			width: 70%;
+		}
+	}
 
-.transaction_timestamp_label {
-	font-size: 0.875rem;
-	color: var(--color-gray-500);
-	line-height: 1.125rem;
-}
+	& .transaction_timestamp_label {
+		font-size: 0.875rem;
+		color: var(--color-gray-500);
+		line-height: 1.125rem;
+	}
 
-.transaction_timestamp_value {
-	display: flex;
-	gap: var(--space-xs);
-	font-size: 0.875rem;
-	color: var(--color-gray-700);
-	line-height: 1.125rem;
-}
+	& .transaction_timestamp_value {
+		display: flex;
+		gap: var(--space-xs);
+		font-size: 0.875rem;
+		color: var(--color-gray-700);
+		line-height: 1.125rem;
+	}
 
-.transaction_timestamp_time {
-	color: var(--color-gray-600);
+	& .transaction_timestamp_time {
+		color: var(--color-gray-600);
+	}
 }

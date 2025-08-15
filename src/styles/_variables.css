@@ -7,6 +7,7 @@
 	--breakpoint-desktop-max: 1280px;
 	--breakpoint-ultrawide-min: 1281px;
 
+	--border-radius-xsmall: 8px;
 	--border-radius-small: 12px;
 	--border-radius-medium: 16px;
 	--border-radius-large: 24px;

@@ -11,6 +11,27 @@ import {
 	TransactionTimestamp,
 } from '@/components/common'
 import './styles.pcss'
+import { TransactionDetails } from '@/components/common/TransactionDetails'
+
+export const from = {
+	chainLogo: "https://api.concero.io/static/icons/chains/8453.svg",
+	chainName: "Base",
+	chainCurrency: "ETH",
+	chainId: 8453,
+	chainSelector: 153432313,
+	txHash: "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+	gasCost: 0.0021,
+};
+
+export const to = {
+  chainLogo: "https://api.concero.io/static/icons/chains/137.svg",
+  chainName: "Polygon",
+  chainCurrency: "MATIC",
+  chainId: 137,
+  chainSelector: 124542634,
+  txHash: "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  gasCost: 0.0008,
+};
 
 export enum TransactionType {
 	Message = 'Message',
@@ -45,11 +66,11 @@ export const Transaction = (): ReactElement => {
 			{backButton}
 			<div className="transaction_content">
 				<span className="transaction_title">Canonical Bridge</span>
-				<div className="transaction_info">
-					<MessageDetails messageId={message} status="Failed" />
+				<div className="transaction_information">
+					<MessageDetails messageId={message} status="Success" />
 					<TransactionDivider />
 					<TransactionSummary
-						type={TransactionType.LBFBridge}
+						type={TransactionType.CanonicalBridge}
 						sender="0x1234567890abcdef1234567890abcdef12345678"
 						receiver="0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
 					/>
@@ -57,6 +78,8 @@ export const Transaction = (): ReactElement => {
 					<TransactionFinality hasFinality={true} />
 					<TransactionDivider />
 					<TransactionTimestamp date='25 Jul 2025' time='(15:30 UTC)' duration="15 sec." />
+					<TransactionDivider />
+					<TransactionDetails from={from} to={to} />
 					<TransactionDivider />
 				</div>
 			</div>

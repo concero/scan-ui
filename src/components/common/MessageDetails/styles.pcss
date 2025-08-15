@@ -3,33 +3,33 @@
 	flex-direction: column;
 	gap: var(--space-s);
 	width: 100%;
-}
 
-.message_details_row {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	align-items: center;
-	gap: var(--space-m);
-	height: 24px;
-}
+	& .message_details_row {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		align-items: center;
+		gap: var(--space-m);
+		height: 24px;
 
-.message_details_row > :nth-child(1) {
-	width: 30%;
-}
+		& > :nth-child(1) {
+			width: 30%;
+		}
 
-.message_details_row > :nth-child(2) {
-	width: 70%;
-}
+		& > :nth-child(2) {
+			width: 70%;
+		}
+	}
 
-.message_details_label {
-	font-size: 0.875rem;
-	color: var(--color-gray-500);
-	line-height: 1.125rem;
-}
+	& .message_details_label {
+		font-size: 0.875rem;
+		color: var(--color-gray-500);
+		line-height: 1.125rem;
+	}
 
-.message_details_value {
-	font-size: 0.875rem;
-	color: var(--color-gray-700);
-	line-height: 1.125rem;
+	& .message_details_value {
+		font-size: 0.875rem;
+		color: var(--color-gray-700);
+		line-height: 1.125rem;
+	}
 }

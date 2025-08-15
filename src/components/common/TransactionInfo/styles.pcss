@@ -1,0 +1,57 @@
+.transaction_info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: var(--space-s);
+	width: 100%;
+	gap: var(--space-s);
+	border-radius: var(--border-radius-medium);
+	background: var(--color-gray-50);
+
+	& .transaction_info_row {
+		display: flex;
+		padding: calc(var(--space-xxs) - 2px) 0px;
+		gap: var(--space-s);
+		align-items: flex-start;
+		height: 100%;
+		width: 100%;
+
+		& > :nth-child(1) {
+			width: 20%;
+		}
+
+		& > :nth-child(2) {
+			width: 80%;
+		}
+
+		&.hash_row > :nth-child(2) {
+			width: 70%;
+			word-break: break-all;
+			white-space: normal;
+		}
+	}
+
+	& .transaction_info_value {
+		display: flex;
+		gap: var(--space-xs);
+		font-size: 0.875rem;
+		color: var(--color-gray-700);
+		line-height: 1.125rem;
+	}
+
+	& .transaction_info_currency {
+		color: var(--color-gray-600);
+	}
+
+	& .transaction_info_chain {
+		display: flex;
+		gap: var(--space-xs);
+		align-items: center;
+	}
+
+	& .transaction_info_chain_logo {
+		width: 24px;
+		height: 24px;
+		border-radius: var(--border-radius-xsmall);
+	}
+}
