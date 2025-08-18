@@ -8,89 +8,89 @@ import { ConnectionStep } from './steps'
 import './styles.pcss'
 
 type TransactionModalProps = {
-  readonly isOpen: boolean
-  readonly onClose: () => void
+	readonly isOpen: boolean
+	readonly onClose: () => void
 }
 
 const StepConfirmConnection = ({ onContinue }: { onContinue: () => void }) => (
-  <div>
-    <p>Wallet connected!</p>
-    <button onClick={onContinue}>Continue</button>
-  </div>
+	<div>
+		<p>Wallet connected!</p>
+		<button onClick={onContinue}>Continue</button>
+	</div>
 )
 
 const StepEnterGasLimit = ({
-  gasLimit,
-  onChange,
-  onSubmit,
+	gasLimit,
+	onChange,
+	onSubmit,
 }: {
-  gasLimit: string
-  onChange: (val: string) => void
-  onSubmit: () => void
+	gasLimit: string
+	onChange: (val: string) => void
+	onSubmit: () => void
 }) => (
-  <div>
-    <label>
-      DST Gas Limit (optional):
-      <input
-        type="text"
-        value={gasLimit}
-        onChange={e => onChange(e.target.value)}
-        placeholder="Enter gas limit"
-      />
-    </label>
-    <button onClick={onSubmit}>Retry</button>
-  </div>
+	<div>
+		<label>
+			DST Gas Limit (optional):
+			<input
+				type="text"
+				value={gasLimit}
+				onChange={e => onChange(e.target.value)}
+				placeholder="Enter gas limit"
+			/>
+		</label>
+		<button onClick={onSubmit}>Retry</button>
+	</div>
 )
 
 export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): ReactElement | null => {
-  const [gasLimit, setGasLimit] = useState<string>('')
+	const [gasLimit, setGasLimit] = useState<string>('')
 
-  const steps: Step[] = [
-    {
-      component: <ConnectionStep />,
-    },
-    {
-      component: <StepConfirmConnection onContinue={() => stepApi.next()} />,
-    },
-    {
-      component: (
-        <StepEnterGasLimit
-          gasLimit={gasLimit}
-          onChange={setGasLimit}
-          onSubmit={() => {
-            console.log('Retry with gasLimit:', gasLimit)
-            onClose()
-          }}
-        />
-      ),
-    },
-  ]
+	const steps: Step[] = [
+		{
+			component: <ConnectionStep />,
+		},
+		{
+			component: <StepConfirmConnection onContinue={() => stepApi.next()} />,
+		},
+		{
+			component: (
+				<StepEnterGasLimit
+					gasLimit={gasLimit}
+					onChange={setGasLimit}
+					onSubmit={() => {
+						console.log('Retry with gasLimit:', gasLimit)
+						onClose()
+					}}
+				/>
+			),
+		},
+	]
 
-  const stepApi = useSteps(steps)
+	const stepApi = useSteps(steps)
 
-  const handleDialogClick = (e: MouseEvent<HTMLDivElement>): void => {
-    e.stopPropagation()
-  }
+	const handleDialogClick = (e: MouseEvent<HTMLDivElement>): void => {
+		e.stopPropagation()
+	}
 
-  if (!isOpen) return null
+	if (!isOpen) return null
 
-  return createPortal(
-    <div className="tx_modal_overlay" onClick={onClose} role="presentation">
-      <div className="tx_modal" onClick={handleDialogClick} role="dialog" aria-modal="true">
-        <ModalHeader title="Retry Transaction" onClose={onClose} />
-        <div className="tx_modal_step_container">{stepApi.currentStep.component}</div>
-        <div className="tx_modal_nav">
-          <button onClick={stepApi.back} disabled={stepApi.isFirst}>
-            Back
-          </button>
-          {!stepApi.isLast && (
-            <button onClick={stepApi.next} disabled={false /* add validations as needed */}>
-              Next
-            </button>
-          )}
-        </div>
-      </div>
-    </div>,
-    document.body,
-  )
+	return createPortal(
+		<div className="tx_modal_overlay" onClick={onClose} role="presentation">
+			<div className="tx_modal" onClick={handleDialogClick} role="dialog" aria-modal="true">
+				<ModalHeader title="Retry Transaction" onClose={onClose} />
+				<div className="tx_modal_step_container">{stepApi.currentStep.component}</div>
+				<div className="tx_modal_nav">
+					<button onClick={stepApi.back} disabled={stepApi.isFirst}>
+						Back
+					</button>
+					{!stepApi.isLast && (
+						<button onClick={stepApi.next} disabled={false /* add validations as needed */}>
+							Next
+						</button>
+					)}
+				</div>
+			</div>
+		</div>,
+		document.body,
+	)
 }

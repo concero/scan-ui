@@ -4,11 +4,11 @@ import type { StoreApi } from 'zustand'
 export type ModalId = string
 
 export type ModalsStateSlice = {
-  modals: Record<ModalId, boolean>
+	modals: Record<ModalId, boolean>
 }
 
 export type ModalsActions = {
-  toggleModal: (id: ModalId) => void
+	toggleModal: (id: ModalId) => void
 }
 
 export type ModalsState = ModalsStateSlice & ModalsActions

@@ -68,7 +68,7 @@ export const Transaction = (): ReactElement => {
 			<div className="transaction_content">
 				<span className="transaction_title">Canonical Bridge</span>
 				<div className="transaction_information">
-					<MessageDetails messageId={message} status="Failed" reason='0xafdfsd'/>
+					<MessageDetails messageId={message} status="Failed" reason="0xafdfsd" />
 					<TransactionDivider />
 					<TransactionSummary
 						type={TransactionType.IOUBridge}
