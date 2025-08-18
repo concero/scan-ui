@@ -1,6 +1,6 @@
 import { memo, useCallback, useState, type ReactElement } from 'react'
 import { Button, IconButton } from '@concero/ui-kit'
-import { useClipboard } from '@/hooks'
+import { useClipboard, useModalsStore } from '@/hooks'
 import { PointerUpIcon, WarningIcon } from '@/assets'
 import './styles.pcss'
 
@@ -74,6 +74,7 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 	isExpandable = true,
 }: TransactionExecutionInfoProps): ReactElement {
 	const { copy, copied } = useClipboard()
+  const { toggleModal } = useModalsStore()
 	const [expanded, setExpanded] = useState<boolean>(!isExpandable)
 
 	const handleCopy = useCallback(() => copy(payload), [copy, payload])
@@ -110,7 +111,7 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 				/>
 				<div className="tx-actions">
 					{hasRetry && (
-						<Button size="m" variant="secondary_color" onClick={() => {}}>
+						<Button size="m" variant="secondary_color" onClick={() => toggleModal('concero-transaction-modal')}>
 							Retry Transaction
 						</Button>
 					)}
