@@ -2,9 +2,9 @@ import type { ReactElement } from 'react'
 import './styles.pcss'
 
 type TransactionTimestampProps = {
-    date: string
+	date: string
 	time: string
-    duration: string
+	duration: string
 }
 
 export const TransactionTimestamp = ({ date, time, duration }: TransactionTimestampProps): ReactElement => {
@@ -12,7 +12,10 @@ export const TransactionTimestamp = ({ date, time, duration }: TransactionTimest
 		<div className="transaction_timestamp">
 			<div className="transaction_timestamp_row">
 				<span className="transaction_timestamp_label">Timestamp</span>
-				<span className="transaction_timestamp_value">{date}<span className='transaction_timestamp_time'>{time}</span></span>
+				<span className="transaction_timestamp_value">
+					{date}
+					<span className="transaction_timestamp_time">{time}</span>
+				</span>
 			</div>
 			<div className="transaction_timestamp_row">
 				<span className="transaction_timestamp_label">Duration</span>
