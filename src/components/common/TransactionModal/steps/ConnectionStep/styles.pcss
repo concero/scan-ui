@@ -1,0 +1,40 @@
+.connection_step {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	gap: var(--space-m);
+
+	& .connection_step_img {
+		width: 160px;
+		height: 160px;
+	}
+
+	& .connection_step_description {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: var(--space-xxs);
+		width: 100%;
+
+		& .connection_step_title {
+			font-size: 1.5rem;
+			font-weight: 500;
+			color: var(--color-gray-700);
+			line-height: 1.25rem;
+		}
+
+		& .connection_step_subtitle {
+			font-size: 1rem;
+			font-weight: 300;
+			color: var(--color-gray-600);
+			line-height: 1.25rem;
+		}
+	}
+
+	& .connection_step_action {
+		display: flex;
+		width: 100%;
+	}
+}

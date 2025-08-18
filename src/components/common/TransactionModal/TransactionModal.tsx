@@ -4,19 +4,13 @@ import { useSteps } from '@/hooks'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ModalHeader } from '../ModalHeader'
+import { ConnectionStep } from './steps'
 import './styles.pcss'
 
 type TransactionModalProps = {
   readonly isOpen: boolean
   readonly onClose: () => void
 }
-
-const StepConnectWallet = ({ onConnect }: { onConnect: () => void }) => (
-  <div>
-    <p>Connect your wallet to continue.</p>
-    <button onClick={onConnect}>Connect Wallet</button>
-  </div>
-)
 
 const StepConfirmConnection = ({ onContinue }: { onContinue: () => void }) => (
   <div>
@@ -53,7 +47,7 @@ export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): Re
 
   const steps: Step[] = [
     {
-      component: <StepConnectWallet onConnect={() => stepApi.next()} />,
+      component: <ConnectionStep />,
     },
     {
       component: <StepConfirmConnection onContinue={() => stepApi.next()} />,
