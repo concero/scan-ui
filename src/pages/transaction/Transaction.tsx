@@ -9,6 +9,7 @@ import {
 	TransactionDivider,
 	TransactionFinality,
 	TransactionTimestamp,
+	TransactionExecutionInfo,
 } from '@/components/common'
 import './styles.pcss'
 import { TransactionDetails } from '@/components/common/TransactionDetails'
@@ -81,6 +82,7 @@ export const Transaction = (): ReactElement => {
 					<TransactionDivider />
 					<TransactionDetails from={from} to={to} />
 					<TransactionDivider />
+					<TransactionExecutionInfo payload={'0x29bb29b90000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000af88d065e77c8cc2239327c5edb3a432268e5831000000000000000000000000dddd'} gasLimit={2000000} fees={0.000021569012094} dstCurrency={'ETH'} feeCurrency={'MATIC'} />
 				</div>
 			</div>
 		</section>
