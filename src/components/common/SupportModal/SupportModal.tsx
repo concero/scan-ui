@@ -1,8 +1,8 @@
 import type { ReactElement, MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
 import { CopyIcon } from '@/assets'
-import { SupportOption } from './support-option'
-import { SupportModalHeader } from './support-modal-header'
+import { SupportOption } from './SupportOption'
+import { ModalHeader } from '../ModalHeader'
 import { useClipboard } from '@/hooks'
 import { links } from '@/configuration'
 import './styles.pcss'
@@ -50,7 +50,7 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 	return createPortal(
 		<div className="support_modal_overlay" onClick={onClose} role="presentation">
 			<div className="support_modal" onClick={handleDialogClick} role="dialog" aria-modal="true">
-				<SupportModalHeader onClose={onClose} />
+				<ModalHeader title="Contact Support" onClose={onClose} />
 
 				<span className="support_modal_description">
 					We apologise that you had issues with your transaction. We will do our best to resolve the issue.
