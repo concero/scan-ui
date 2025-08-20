@@ -1,10 +1,25 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { Button } from '@concero/ui-kit'
+import { useAccount } from 'wagmi'
+import { useConnect } from 'wagmi'
 import './styles.pcss'
 
-export const ConnectionStep = (): ReactElement => {
+type ConnectionStepProps = {
+  onConnected: () => void
+}
+
+export const ConnectionStep = ({ onConnected }: ConnectionStepProps): ReactElement => {
+	const { connect, connectors } = useConnect()
+	const { isConnected, isConnecting } = useAccount()
+
+    useEffect(() => {
+        if (isConnected) {
+            onConnected()
+        }
+    }, [isConnected, onConnected])
+
 	return (
-		<section className="connection_step">
+		<div className="connection_step">
 			<img
 				src="/Transaction/Wallet.svg"
 				alt="Wallet Icon"
@@ -21,10 +36,16 @@ export const ConnectionStep = (): ReactElement => {
 				</span>
 			</div>
 			<div className="connection_step_action">
-				<Button variant="primary" size="l" isFull>
+				<Button
+					variant="primary"
+					size="l"
+					isFull
+					isLoading={isConnecting}
+					onClick={() => connect({ connector: connectors[0] })}
+				>
 					Connect Wallet
 				</Button>
 			</div>
-		</section>
+		</div>
 	)
 }

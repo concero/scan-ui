@@ -1,2 +1,1 @@
-export * from './ConnectionStep'
 export * from './VerificationStep'
