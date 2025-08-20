@@ -5,18 +5,18 @@ import { useConnect } from 'wagmi'
 import './styles.pcss'
 
 type ConnectionStepProps = {
-  onConnected: () => void
+	onConnected: () => void
 }
 
 export const ConnectionStep = ({ onConnected }: ConnectionStepProps): ReactElement => {
 	const { connect, connectors } = useConnect()
 	const { isConnected, isConnecting } = useAccount()
 
-    useEffect(() => {
-        if (isConnected) {
-            onConnected()
-        }
-    }, [isConnected, onConnected])
+	useEffect(() => {
+		if (isConnected) {
+			onConnected()
+		}
+	}, [isConnected, onConnected])
 
 	return (
 		<div className="connection_step">

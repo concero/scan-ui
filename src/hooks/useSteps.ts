@@ -42,7 +42,16 @@ export function useSteps<T = any>(steps: Step<T>[]) {
 	}, [])
 
 	const currentStep = steps[stepIndex]
-	console.log('[useSteps] render: stepIndex', stepIndex, 'stepCount', stepCount, 'isFirst', stepIndex === 0, 'isLast', stepIndex === stepCount - 1)
+	console.log(
+		'[useSteps] render: stepIndex',
+		stepIndex,
+		'stepCount',
+		stepCount,
+		'isFirst',
+		stepIndex === 0,
+		'isLast',
+		stepIndex === stepCount - 1,
+	)
 
 	return {
 		stepIndex,

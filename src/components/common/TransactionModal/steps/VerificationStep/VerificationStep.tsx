@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import { zeroAddress } from 'viem'
 import { Button } from '@concero/ui-kit'
 import { useEffect } from 'react'
-import { useAccount } from 'wagmi'
+import { useAccount, useDisconnect } from 'wagmi'
 import { blo } from 'blo'
 import './styles.pcss'
 
@@ -12,6 +12,7 @@ type VerificationStepProps = {
 }
 
 export const VerificationStep = ({ onVerified, onDisconnected }: VerificationStepProps): ReactElement => {
+	const { disconnect } = useDisconnect()
 	const { address, isConnected, isDisconnected } = useAccount()
 	const identicon = blo(address ?? zeroAddress)
 
@@ -23,29 +24,29 @@ export const VerificationStep = ({ onVerified, onDisconnected }: VerificationSte
 
 	return (
 		<>
-		<div className="verification_step">
-			<div className="verification_step_container">
-				<span className="verification_step_title">Connected Wallet</span>
-				<div className="verification_step_content">
-					<div className="verification_step_info">
-						{address && (
-							<>
-								<img src={identicon} alt="Wallet Identicon" className="verification_step_icon" />
-								<span className="verification_step_address">
-									{address.slice(0, 7)}...{address.slice(-6)}
-								</span>
-							</>
-						)}
+			<div className="verification_step">
+				<div className="verification_step_container">
+					<span className="verification_step_title">Connected Wallet</span>
+					<div className="verification_step_content">
+						<div className="verification_step_info">
+							{address && (
+								<>
+									<img src={identicon} alt="Wallet Identicon" className="verification_step_icon" />
+									<span className="verification_step_address">
+										{address.slice(0, 7)}...{address.slice(-6)}
+									</span>
+								</>
+							)}
+						</div>
+						<Button variant="secondary" size="s" onClick={() => disconnect()}>
+							Disconnect
+						</Button>
 					</div>
-					<Button variant="secondary" size="s" onClick={onDisconnected}>
-						Disconnect
-					</Button>
 				</div>
+				<Button isFull size="l" onClick={onVerified}>
+					Continue
+				</Button>
 			</div>
-			<Button isFull size="l" onClick={onVerified}>
-				Continue
-			</Button>
-		</div>
 		</>
 	)
 }

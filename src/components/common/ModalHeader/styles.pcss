@@ -1,9 +1,23 @@
 .modal_header {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	min-height: 40px;
+	justify-content: space-between;
 	position: relative;
+	height: 40px;
+
+	& .modal_header_button,
+	& .modal_header_placeholder {
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	& .modal_header_placeholder {
+		visibility: hidden;
+	}
 
 	& .modal_title {
 		font-size: 1.125rem;
