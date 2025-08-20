@@ -1,8 +1,6 @@
-import { useMemo, type ReactElement } from 'react'
+import { useParams } from 'react-router-dom'
 import { IconButton } from '@concero/ui-kit'
 import { ArrowLeftIcon } from '@/assets'
-import { useNavigate } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 import {
 	TransactionSummary,
 	MessageDetails,
@@ -10,9 +8,10 @@ import {
 	TransactionFinality,
 	TransactionTimestamp,
 	TransactionExecutionInfo,
+	TransactionDetails,
 } from '@/components/common'
 import './styles.pcss'
-import { TransactionDetails } from '@/components/common/TransactionDetails'
+import { useNavigation } from '@/hooks'
 
 export const from = {
 	chainLogo: 'https://api.concero.io/static/icons/chains/8453.svg',
@@ -41,58 +40,49 @@ export enum TransactionType {
 	IOUBridge = 'IOU Bridge',
 }
 
-const BackNavigation = (): ReactElement => {
-	const navigate = useNavigate()
-	const handleBack = (): void => {
-		if (window.history.length > 1 && document.referrer.startsWith(window.location.origin)) {
-			navigate(-1)
-		} else {
-			navigate('/')
-		}
-	}
+const TransactionContent = ({ message }: { message?: string }) => (
+	<div className="transaction_content">
+		<span className="transaction_title">Canonical Bridge</span>
+		<div className="transaction_information">
+			<MessageDetails messageId={message} status="Failed" reason="0xafdfsd" />
 
-	return (
-		<IconButton size="m" variant="secondary" onClick={handleBack} className="back_button">
-			<ArrowLeftIcon />
-		</IconButton>
-	)
-}
+			<TransactionDivider />
+			<TransactionSummary
+				type={TransactionType.IOUBridge}
+				sender="0x1234567890abcdef1234567890abcdef12345678"
+				receiver="0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+			/>
 
-export const Transaction = (): ReactElement => {
-	const { message } = useParams()
-	const backButton = useMemo(() => <BackNavigation />, [])
+			<TransactionDivider />
+			<TransactionFinality hasFinality />
 
+			<TransactionDivider />
+			<TransactionTimestamp date="25 Jul 2025" time="(15:30 UTC)" duration="15 sec." />
+
+			<TransactionDivider />
+			<TransactionDetails from={from} to={to} />
+
+			<TransactionDivider />
+			<TransactionExecutionInfo
+				payload="0x29bb29b90000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000af88d065e77c8cc2239327c5edb3a432268e5831000000000000000000000000dddd"
+				gasLimit={2_000_000}
+				fees={0.000021569012094}
+				dstCurrency="ETH"
+				feeCurrency="MATIC"
+			/>
+		</div>
+	</div>
+)
+
+export const Transaction = () => {
+	const { message } = useParams<{ message?: string }>()
+	const { back } = useNavigation()
 	return (
 		<section className="transaction">
-			{backButton}
-			<div className="transaction_content">
-				<span className="transaction_title">Canonical Bridge</span>
-				<div className="transaction_information">
-					<MessageDetails messageId={message} status="Failed" reason="0xafdfsd" />
-					<TransactionDivider />
-					<TransactionSummary
-						type={TransactionType.IOUBridge}
-						sender="0x1234567890abcdef1234567890abcdef12345678"
-						receiver="0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
-					/>
-					<TransactionDivider />
-					<TransactionFinality hasFinality={true} />
-					<TransactionDivider />
-					<TransactionTimestamp date="25 Jul 2025" time="(15:30 UTC)" duration="15 sec." />
-					<TransactionDivider />
-					<TransactionDetails from={from} to={to} />
-					<TransactionDivider />
-					<TransactionExecutionInfo
-						payload={
-							'0x29bb29b90000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000af88d065e77c8cc2239327c5edb3a432268e5831000000000000000000000000dddd'
-						}
-						gasLimit={2000000}
-						fees={0.000021569012094}
-						dstCurrency={'ETH'}
-						feeCurrency={'MATIC'}
-					/>
-				</div>
-			</div>
+			<IconButton size="m" variant="secondary" onClick={back} className="back_button">
+				<ArrowLeftIcon />
+			</IconButton>
+			<TransactionContent message={message} />
 		</section>
 	)
 }
