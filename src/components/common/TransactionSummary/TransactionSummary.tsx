@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import type { Hex } from 'viem'
-import { Tag } from '@concero/ui-kit'
+import { TransactionLabel } from '../TransactionLabel/TransactionLabel'
 import { TransactionType } from '@/pages'
 import './styles.pcss'
 
@@ -15,11 +15,7 @@ export const TransactionSummary = ({ type, sender, receiver }: TransactionSummar
 		<div className="transaction_summary">
 			<div className="transaction_summary_row">
 				<span className="transaction_summary_label">Type</span>
-				<div>
-					<Tag size="s" variant="neutral">
-						{type}
-					</Tag>
-				</div>
+				<TransactionLabel size='s' type={type} />
 			</div>
 
 			{type !== TransactionType.Message && (
