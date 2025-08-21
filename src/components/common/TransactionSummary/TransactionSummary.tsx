@@ -15,7 +15,7 @@ export const TransactionSummary = ({ type, sender, receiver }: TransactionSummar
 		<div className="transaction_summary">
 			<div className="transaction_summary_row">
 				<span className="transaction_summary_label">Type</span>
-				<TransactionLabel size='s' type={type} />
+				<TransactionLabel size="s" type={type} />
 			</div>
 
 			{type !== TransactionType.Message && (
