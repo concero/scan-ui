@@ -1,14 +1,7 @@
 import type { ReactElement } from 'react'
-import { Tag } from '@concero/ui-kit'
+import type { MessageStatus } from '../StatusLabel'
+import { StatusLabel } from '../StatusLabel'
 import './styles.pcss'
-
-type MessageStatus = 'Pending' | 'Success' | 'Failed'
-
-const variant: Record<MessageStatus, 'neutral' | 'positive' | 'negative'> = {
-	Pending: 'neutral',
-	Success: 'positive',
-	Failed: 'negative',
-}
 
 type MessageDetailsProps = {
 	readonly messageId: string | undefined
@@ -28,11 +21,7 @@ export const MessageDetails = ({ messageId, status, reason }: MessageDetailsProp
 
 			<div className="message_details_row">
 				<span className="message_details_label">Status</span>
-				<div>
-					<Tag size="s" variant={variant[status]}>
-						{status}
-					</Tag>
-				</div>
+				<StatusLabel status={status} size="s" />
 			</div>
 
 			{reason && (
