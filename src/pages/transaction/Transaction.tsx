@@ -44,17 +44,17 @@ const TransactionContent = ({ message }: { message?: string }) => (
 	<div className="transaction_content">
 		<span className="transaction_title">Canonical Bridge</span>
 		<div className="transaction_information">
-			<MessageDetails messageId={message} status="Failed" reason="0xafdfsd" />
+			<MessageDetails messageId={message} status="Success" reason="0xafdfsd" />
 
 			<TransactionDivider />
 			<TransactionSummary
-				type={TransactionType.IOUBridge}
+				type={TransactionType.CanonicalBridge}
 				sender="0x1234567890abcdef1234567890abcdef12345678"
 				receiver="0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
 			/>
 
 			<TransactionDivider />
-			<TransactionFinality hasFinality />
+			<TransactionFinality hasFinality={false} />
 
 			<TransactionDivider />
 			<TransactionTimestamp date="25 Jul 2025" time="(15:30 UTC)" duration="15 sec." />

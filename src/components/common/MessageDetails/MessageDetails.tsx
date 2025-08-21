@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react'
-import type { MessageStatus } from '../StatusLabel'
+import type { Status } from '../StatusLabel'
 import { StatusLabel } from '../StatusLabel'
 import './styles.pcss'
 
 type MessageDetailsProps = {
 	readonly messageId: string | undefined
-	readonly status: MessageStatus
+	readonly status: Status
 	readonly reason?: string
 }
 
