@@ -1,0 +1,37 @@
+.message_data {
+	font-size: 0.875rem;
+	color: var(--color-accent-600);
+	line-height: 1.125rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 12rem;
+}
+
+.time_data {
+	font-size: 0.875rem;
+	color: var(--color-gray-700);
+	line-height: 1.125rem;
+}
+
+.direction_data {
+	display: flex;
+	height: 24px;
+	align-items: center;
+	gap: var(--space-xs);
+
+	& .direction_data_img {
+		width: 24px;
+		height: 24px;
+		border-radius: var(--border-radius-xsmall);
+	}
+
+	& .direction_data_address {
+		font-size: 0.875rem;
+		color: var(--color-gray-700);
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		line-height: 1.125rem;
+	}
+}
