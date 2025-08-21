@@ -2,6 +2,7 @@ import type { ReactElement } from 'react'
 import type { Address as AddressType } from 'viem'
 import { useParams } from 'react-router-dom'
 import { Tag } from '@concero/ui-kit'
+import { ButtonGroup } from '@/components/common'
 import './styles.pcss'
 
 export const Address = (): ReactElement => {
@@ -15,8 +16,9 @@ export const Address = (): ReactElement => {
 						Mainnet
 					</Tag>
 				</div>
+				<span className="address_title">{address}</span>
 			</div>
-			<span className="address_title">{address}</span>
+			<ButtonGroup labels={['Outgoing', 'Incoming']}/>
 		</section>
 	)
 }
