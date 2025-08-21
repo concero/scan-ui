@@ -1,0 +1,25 @@
+.data_table_heading {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+
+	& .data_table_heading_container {
+		display: grid;
+		max-width: 1184px;
+		width: 100%;
+		grid-template-columns: repeat(6, 1fr);
+		height: 50px;
+		align-items: center;
+		border-bottom: 1px solid var(--color-gray-100);
+	}
+
+	& .data_table_head {
+		display: flex;
+		align-items: center;
+		font-weight: 400;
+		color: var(--color-gray-500);
+		font-size: 0.875rem;
+		line-height: 1.125rem;
+		padding: var(--space-m) var(--space-m) var(--space-l) var(--space-m);
+	}
+}

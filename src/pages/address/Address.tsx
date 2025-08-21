@@ -1,12 +1,11 @@
 import type { ReactElement } from 'react'
-import type { Address as AddressType } from 'viem'
 import { useParams } from 'react-router-dom'
 import { Tag } from '@concero/ui-kit'
-import { ButtonGroup } from '@/components/common'
+import { ButtonGroup, DataTable } from '@/components/common'
 import './styles.pcss'
 
 export const Address = (): ReactElement => {
-	const { address } = useParams<{ address: AddressType }>()
+	const { address } = useParams<{ address: string }>()
 	return (
 		<section className="address">
 			<div className="address_description">
@@ -18,7 +17,8 @@ export const Address = (): ReactElement => {
 				</div>
 				<span className="address_title">{address}</span>
 			</div>
-			<ButtonGroup labels={['Outgoing', 'Incoming']}/>
+			<ButtonGroup labels={['Outgoing', 'Incoming']} />
+			<DataTable />
 		</section>
 	)
 }
