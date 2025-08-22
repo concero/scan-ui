@@ -1,5 +1,5 @@
 import type { ReactElement, ImgHTMLAttributes } from 'react'
-import { SearchBar } from '@/components/common'
+import { HomeContent } from './HomeContent'
 import './styles.pcss'
 
 type Illustration = {
@@ -19,15 +19,7 @@ const illustrations: Illustration[] = [
 
 export const Home = (): ReactElement => (
 	<section className="home">
-		<div className="home_content">
-			<div className="home_description">
-				<span className="home_subtitle">Welcome to</span>
-				<span className="home_title">Concero Scan</span>
-			</div>
-			<div className="home_search">
-				<SearchBar />
-			</div>
-		</div>
+		<HomeContent />
 		<div className="home_illustrations">
 			{illustrations.map(({ src, alt, className, props }) => (
 				<img

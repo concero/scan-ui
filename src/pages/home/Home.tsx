@@ -1,46 +1,18 @@
-import type { ReactElement, ImgHTMLAttributes } from 'react'
-import { SearchBar } from '@/components/common'
-import './styles.pcss'
+import type { FC, ReactElement } from 'react'
+import { MetaTags } from '@/components/common/MetaTags/MetaTags'
+import { Home } from '@/components'
 
-type Illustration = {
-	src: string
-	alt: string
-	className: string
-	props?: Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'className'>
+const META_TITLE = 'Concero | Scan'
+const META_DESCRIPTION =
+	'Track and verify Concero transactions effortlessly with Concero Scan. A fast, secure, and transparent tool designed exclusively for monitoring transactions routed through Concero’s cross-chain infrastructure'
+
+export const HomePage: FC = (): ReactElement => {
+	return (
+		<>
+			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
+			<main>
+				<Home />
+			</main>
+		</>
+	)
 }
-
-const illustrations: Illustration[] = [
-	{ src: '/Home/Flower.svg', alt: 'Flower', className: 'illustration_one' },
-	{ src: '/Home/Code.svg', alt: 'Code', className: 'illustration_two' },
-	{ src: '/Home/Math.svg', alt: 'Math', className: 'illustration_three' },
-	{ src: '/Home/File.svg', alt: 'File', className: 'illustration_four' },
-	{ src: '/Home/Disc.svg', alt: 'Disc', className: 'illustration_five' },
-]
-
-export const Home = (): ReactElement => (
-	<section className="home">
-		<div className="home_content">
-			<div className="home_description">
-				<span className="home_subtitle">Welcome to</span>
-				<span className="home_title">Concero Scan</span>
-			</div>
-			<div className="home_search">
-				<SearchBar />
-			</div>
-		</div>
-		<div className="home_illustrations">
-			{illustrations.map(({ src, alt, className, props }) => (
-				<img
-					key={className}
-					src={src}
-					alt={alt}
-					className={`home_illustration ${className}`}
-					draggable={false}
-					loading="lazy"
-					{...props}
-				/>
-			))}
-		</div>
-		<div className="home_blur" />
-	</section>
-)
