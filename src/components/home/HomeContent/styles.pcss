@@ -1,7 +1,7 @@
 .home_content {
 	position: absolute;
-	bottom: 50%;
-	left: 0;
+	top: 40%;
+	transform: translateY(-50%);
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -37,6 +37,9 @@
 }
 
 @media (min-width: 1025px) and (max-width: 1920px) {
+	.home_content {
+		top: 40%;
+	}
 	.home_content .home_search {
 		width: 100%;
 		max-width: 395px;
@@ -44,6 +47,9 @@
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
+	.home_content {
+		top: 30%;
+	}
 	.home_content .home_search {
 		width: 100%;
 		max-width: 395px;
@@ -53,6 +59,7 @@
 @media (max-width: 640px) {
 	.home_content {
 		padding: 0px var(--space-m);
+		top: 35%;
 	}
 	.home_content .home_description .home_title {
 		font-size: 2rem;
