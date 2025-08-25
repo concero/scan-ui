@@ -1,5 +1,5 @@
 .desktop_visuals {
-	position: absolute;
+	position: relative;
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -17,8 +17,8 @@
 	}
 
 	& .visual_one {
-		width: clamp(180px, 11.45vw, 270.515px);
-		height: clamp(180px, 11.95vw, 277.088px);
+		width: clamp(180px, 11.55%, 270px);
+		height: auto;
 		left: 2.5%;
 		bottom: 20%;
 		--illustration-rotate: -14.66deg;
@@ -28,8 +28,8 @@
 		}
 	}
 	& .visual_two {
-		width: clamp(192px, 13.3vw, 288px);
-		height: clamp(160px, 10.7vw, 246.747px);
+		width: clamp(192px, 13.3%, 288px);
+		height: auto;
 		left: 21%;
 		bottom: 9%;
 		--illustration-rotate: 10deg;
@@ -39,20 +39,19 @@
 		}
 	}
 	& .visual_three {
-		width: clamp(160px, 12.5vw, 240px);
-		height: clamp(160px, 12.85vw, 246.747px);
-		left: 44%;
+		width: clamp(160px, 13%, 240px);
+		height: auto;
+		position: absolute;
+		left: 43.5%;
 		bottom: 9%;
+		transform: translateX(-50%);
 		--illustration-rotate: 0deg;
 		animation-delay: 0.5s;
-		&:hover {
-			--illustration-rotate: 0deg;
-		}
 	}
 
 	& .visual_four {
-		width: clamp(160px, 10.45vw, 240px);
-		height: clamp(160px, 11.21vw, 246.747px);
+		width: clamp(160px, 12.8%, 240px);
+		height: auto;
 		left: 67%;
 		bottom: 9%;
 		--illustration-rotate: -10deg;
@@ -62,8 +61,8 @@
 		}
 	}
 	& .visual_five {
-		width: clamp(180px, 11.45vw, 270.515px);
-		height: clamp(180px, 11.95vw, 277.088px);
+		width: clamp(180px, 12.15%, 270px);
+		height: auto;
 		right: 2.5%;
 		bottom: 20%;
 		--illustration-rotate: 10deg;
