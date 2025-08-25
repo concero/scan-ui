@@ -14,7 +14,7 @@ type VerificationStepProps = {
 	onDisconnected: () => void
 }
 
-export const 	VerificationStep = ({ onVerified, onDisconnected }: VerificationStepProps): ReactElement => {
+export const VerificationStep = ({ onVerified, onDisconnected }: VerificationStepProps): ReactElement => {
 	const { value, onChange } = useInput<number>({
 		defaultValue: 2000000,
 		debounceMs: 300,

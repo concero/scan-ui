@@ -35,7 +35,7 @@ export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): Re
 			component: <VerificationStep onVerified={() => stepApi.next()} onDisconnected={() => stepApi.back()} />,
 		},
 		{
-			component: <ExecutionStep  onDisconnected={() => stepApi.reset()} onBack={() => stepApi.back()} />,
+			component: <ExecutionStep onDisconnected={() => stepApi.reset()} onBack={() => stepApi.back()} />,
 		},
 	])
 
