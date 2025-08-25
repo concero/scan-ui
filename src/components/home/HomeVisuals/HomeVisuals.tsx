@@ -2,6 +2,7 @@ import type { ReactElement, ImgHTMLAttributes } from 'react'
 import { useIsDesktop, useIsTablet, useIsMobile, useIsUltrawide } from '@/hooks'
 import { DesktopVisuals } from './DesktopVisuals'
 import { TabletVisuals } from './TabletVisuals'
+import { MobileVisuals } from './MobileVisuals/MobileVisuals'
 import './styles.pcss'
 
 export type Visual = {
@@ -10,8 +11,6 @@ export type Visual = {
 	className: string
 	props?: Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'className'>
 }
-
-const MobileVisuals = (): ReactElement => <div className="visuals"></div>
 
 export const HomeVisuals = (): ReactElement => {
 	const isUltrawide: boolean = useIsUltrawide()
