@@ -11,12 +11,12 @@ import { HeaderBurger } from '../HeaderBurger'
 import './styles.pcss'
 
 type HeaderActionsProps = {
+	readonly isBurgerOpen: boolean
+	readonly setBurgerOpen: (value: boolean | ((prevState: boolean) => boolean)) => void
 	readonly handleClick: MouseEventHandler<HTMLButtonElement>
 }
 
-export const HeaderActions = ({ handleClick }: HeaderActionsProps): ReactElement => {
-	const [isBurgerOpen, setBurgerOpen] = useState<boolean>(false)
-
+export const HeaderActions = ({ handleClick, isBurgerOpen, setBurgerOpen }: HeaderActionsProps): ReactElement => {
 	const isTablet: boolean = useIsTablet()
 	const isMobile: boolean = useIsMobile()
 	const isBurger: boolean = isMobile || isTablet
