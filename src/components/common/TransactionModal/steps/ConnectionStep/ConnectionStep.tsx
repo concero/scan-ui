@@ -1,5 +1,6 @@
 import { ReactElement, useEffect } from 'react'
 import { Button } from '@concero/ui-kit'
+import { Alert } from '@concero/ui-kit'
 import { useAccount } from 'wagmi'
 import { useConnect } from 'wagmi'
 import './styles.pcss'
@@ -9,7 +10,7 @@ type ConnectionStepProps = {
 }
 
 export const ConnectionStep = ({ onConnected }: ConnectionStepProps): ReactElement => {
-	const { connect, connectors } = useConnect()
+	const { connect, connectors, error } = useConnect()
 	const { isConnected, isConnecting } = useAccount()
 
 	useEffect(() => {
@@ -35,6 +36,14 @@ export const ConnectionStep = ({ onConnected }: ConnectionStepProps): ReactEleme
 					To retry the transaction, we need to verify it’s really you.
 				</span>
 			</div>
+			{error && (
+				<Alert
+					type="negative"
+					title="Connection Failed"
+					description="Please, try again"
+					className="connection_step_error"
+				/>
+			)}
 			<div className="connection_step_action">
 				<Button
 					variant="primary"

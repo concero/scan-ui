@@ -55,27 +55,27 @@
 	z-index: 3;
 	animation: FadeIn 0.25s ease forwards;
 
-	&--closing {
-		animation: FadeOut 0.25s ease forwards;
+	& .tx_modal {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		max-width: 394px;
+		margin: 0 auto;
+		width: 100%;
+		padding: var(--space-m);
+		gap: var(--space-m);
+		flex-shrink: 0;
+		background: var(--color-gray-25);
+		border-radius: var(--border-radius-large);
+		font-family: var(--font-body-medium-family);
+		animation: ScaleIn 0.3s ease forwards;
+
+		&--closing {
+			animation: ScaleOut 0.25s ease forwards;
+		}
 	}
 }
 
-.tx_modal {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	max-width: 394px;
-	margin: 0 auto;
-	width: 100%;
-	padding: var(--space-m);
-	gap: var(--space-m);
-	flex-shrink: 0;
-	background: var(--color-gray-25);
-	border-radius: var(--border-radius-large);
-	font-family: var(--font-body-medium-family);
-	animation: ScaleIn 0.3s ease forwards;
-
-	&--closing {
-		animation: ScaleOut 0.25s ease forwards;
-	}
+.tx_modal_overlay_center {
+	align-items: center;
 }

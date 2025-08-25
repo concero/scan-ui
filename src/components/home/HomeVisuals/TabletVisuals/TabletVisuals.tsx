@@ -4,30 +4,30 @@ import { useSettingsStore } from '@/hooks'
 import './styles.pcss'
 
 const visuals: Visual[] = [
-    { src: 'visual_one.webp', alt: 'Flower', className: 'visual_one' },
-    { src: 'visual_two.webp', alt: 'Code', className: 'visual_two' },
-    { src: 'visual_three.webp', alt: 'Math', className: 'visual_three' },
-    { src: 'visual_four.webp', alt: 'File', className: 'visual_four' },
-    { src: 'visual_five.webp', alt: 'Disc', className: 'visual_five' },
+	{ src: 'visual_one.webp', alt: 'Flower', className: 'visual_one' },
+	{ src: 'visual_two.webp', alt: 'Code', className: 'visual_two' },
+	{ src: 'visual_three.webp', alt: 'Math', className: 'visual_three' },
+	{ src: 'visual_four.webp', alt: 'File', className: 'visual_four' },
+	{ src: 'visual_five.webp', alt: 'Disc', className: 'visual_five' },
 ]
 
 export const TabletVisuals = (): ReactElement => {
-    const { theme } = useSettingsStore()
-    const basePath = theme === 'light' ? '/Home/Light/' : '/Home/Dark/'
+	const { theme } = useSettingsStore()
+	const basePath = theme === 'light' ? '/Home/Light/' : '/Home/Dark/'
 
-    return (
-        <div className="tablet_visuals" data-theme={theme}>
-            {visuals.map(({ src, alt, className, props }) => (
-                <img
-                    key={className}
-                    src={`${basePath}${src}`}
-                    alt={alt}
-                    className={`tablet_visual ${className}`}
-                    draggable={false}
-                    loading="lazy"
-                    {...props}
-                />
-            ))}
-        </div>
-    )
+	return (
+		<div className="tablet_visuals" data-theme={theme}>
+			{visuals.map(({ src, alt, className, props }) => (
+				<img
+					key={className}
+					src={`${basePath}${src}`}
+					alt={alt}
+					className={`tablet_visual ${className}`}
+					draggable={false}
+					loading="lazy"
+					{...props}
+				/>
+			))}
+		</div>
+	)
 }

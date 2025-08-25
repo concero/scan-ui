@@ -13,7 +13,8 @@
 		& .verification_step_title {
 			font-size: 0.875rem;
 			line-height: 1.125rem;
-			color: var(--color-gray-600);
+			font-weight: 500;
+			color: var(--color-gray-700);
 		}
 
 		& .verification_step_content {
@@ -42,6 +43,19 @@
 				color: var(--color-gray-700);
 				line-height: 1.25rem;
 			}
+		}
+	}
+
+	& .verification_step_sublabel {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-xxs);
+		width: 100%;
+
+		& .verification_step_sublabel_text {
+			font-size: 0.875rem;
+			line-height: 1.125rem;
+			color: var(--color-gray-600);
 		}
 	}
 }
