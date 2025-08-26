@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import type { Hex } from 'viem'
 import { TransactionLabel } from '../TransactionLabel/TransactionLabel'
-import { TransactionType } from '@/pages'
+import { TransactionType } from '@/components/transaction'
 import './styles.pcss'
 
 type TransactionSummaryProps = {

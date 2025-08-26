@@ -1,11 +1,19 @@
 import { ReactElement } from 'react'
 import { useMemo } from 'react'
 import { MessageDetails } from '../common'
+import './styles.pcss'
 
 export enum Status {
 	Pending = 'pending',
 	Success = 'success',
 	Canceled = 'canceled',
+}
+
+export enum TransactionType {
+	Message = 'Message',
+	LBFBridge = 'LBF Bridge',
+	CanonicalBridge = 'Canonical Bridge',
+	IOUBridge = 'IOU Bridge',
 }
 
 type TransactionData = {

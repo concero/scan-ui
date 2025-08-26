@@ -3,8 +3,9 @@ import type { Column } from '../TableRow'
 import { Table } from '../Table'
 import { TimeData, DirectionData, MessageData } from './Data/Data'
 import { TransactionLabel } from '../TransactionLabel'
-import { TransactionType } from '@/pages'
-import { Status, StatusLabel } from '../StatusLabel'
+import { TransactionType } from '@/components/transaction'
+import { StatusLabel } from '../StatusLabel'
+import { Status } from '@/components/transaction'
 import './styles.pcss'
 
 type DirectionInfo = {

@@ -2,8 +2,8 @@ import type { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import { Tag } from '@concero/ui-kit'
 import { ButtonGroup, DataTable } from '@/components/common'
-import { Status } from '@/components/common'
-import { TransactionType } from '../tx'
+import { Status } from '@/components'
+import { TransactionType } from '@/components'
 import './styles.pcss'
 
 const data = [

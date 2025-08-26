@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
-import type { TransactionType } from '@/pages'
 import type { TTagSize } from '@concero/ui-kit'
+import { TransactionType } from '@/components/transaction'
 import { Tag } from '@concero/ui-kit'
 
 type TransactionLabelProps = {
