@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Tag } from '@concero/ui-kit'
 import { ButtonGroup, DataTable } from '@/components/common'
 import { Status } from '@/components/common'
-import { TransactionType } from '../transaction'
+import { TransactionType } from '../tx'
 import './styles.pcss'
 
 const data = [

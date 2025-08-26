@@ -1,13 +1,12 @@
 import type { ReactElement } from 'react'
 import type { TTagSize } from '@concero/ui-kit'
+import { Status } from '@/components/transaction'
 import { Tag } from '@concero/ui-kit'
 
-export type Status = 'Pending' | 'Success' | 'Failed'
-
 const variant: Record<Status, 'neutral' | 'positive' | 'negative'> = {
-	Pending: 'neutral',
-	Success: 'positive',
-	Failed: 'negative',
+	[Status.Pending]: 'neutral',
+	[Status.Success]: 'positive',
+	[Status.Canceled]: 'neutral',
 }
 
 type StatusLabelProps = {
@@ -19,7 +18,7 @@ export const StatusLabel = ({ status, size }: StatusLabelProps): ReactElement =>
 	return (
 		<div>
 			<Tag variant={variant[status]} size={size}>
-				{status}
+				{status.charAt(0).toUpperCase() + status.slice(1)}
 			</Tag>
 		</div>
 	)
