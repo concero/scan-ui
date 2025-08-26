@@ -8,47 +8,47 @@ import { useMemo, useState, useEffect } from 'react'
 import './styles.pcss'
 
 export const Header = (): ReactElement => {
-    const [isBurgerOpen, setBurgerOpen] = useState<boolean>(false)
-    const isMobile: boolean = useIsMobile()
-    const isTablet: boolean = useIsTablet()
-    const { toggleModal } = useModalsStore()
+	const [isBurgerOpen, setBurgerOpen] = useState<boolean>(false)
+	const isMobile: boolean = useIsMobile()
+	const isTablet: boolean = useIsTablet()
+	const { toggleModal } = useModalsStore()
 
-    const location = useLocation()
-    const isHomePage: boolean = location.pathname === '/'
+	const location = useLocation()
+	const isHomePage: boolean = location.pathname === '/'
 
-    useEffect(() => {
-        setBurgerOpen(false)
-    }, [isMobile, isTablet]) 
+	useEffect(() => {
+		setBurgerOpen(false)
+	}, [isMobile, isTablet])
 
-    const search: ReactElement | null = useMemo(() => {
-        if (isHomePage || (!isHomePage && (isBurgerOpen || isMobile))) return null
+	const search: ReactElement | null = useMemo(() => {
+		if (isHomePage || (!isHomePage && (isBurgerOpen || isMobile))) return null
 
-        return (
-            <div className="header_search">
-                <SearchBar size="m" placeholder="Contract Address, Message, Tx Hash" />
-            </div>
-        )
-    }, [isHomePage, isBurgerOpen, isMobile])
+		return (
+			<div className="header_search">
+				<SearchBar size="m" placeholder="Contract Address, Message, Tx Hash" />
+			</div>
+		)
+	}, [isHomePage, isBurgerOpen, isMobile])
 
-    const logo = useMemo(() => {
-        return <HeaderLogo />
-    }, [])
+	const logo = useMemo(() => {
+		return <HeaderLogo />
+	}, [])
 
-    const actions = useMemo(() => {
-        return (
-            <HeaderActions
-                isBurgerOpen={isBurgerOpen}
-                setBurgerOpen={setBurgerOpen}
-                handleClick={() => toggleModal('concero-support-modal')}
-            />
-        )
-    }, [toggleModal, isBurgerOpen, setBurgerOpen])
+	const actions = useMemo(() => {
+		return (
+			<HeaderActions
+				isBurgerOpen={isBurgerOpen}
+				setBurgerOpen={setBurgerOpen}
+				handleClick={() => toggleModal('concero-support-modal')}
+			/>
+		)
+	}, [toggleModal, isBurgerOpen, setBurgerOpen])
 
-    return (
-        <header className="header">
-            {logo}
-            {search}
-            {actions}
-        </header>
-    )
+	return (
+		<header className="header">
+			{logo}
+			{search}
+			{actions}
+		</header>
+	)
 }

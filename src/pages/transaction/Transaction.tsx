@@ -12,6 +12,7 @@ import {
 } from '@/components/common'
 import './styles.pcss'
 import { useNavigation } from '@/hooks'
+import { NotFound } from '@/components/common'
 
 export const from = {
 	chainLogo: 'https://api.concero.io/static/icons/chains/8453.svg',
@@ -77,6 +78,13 @@ const TransactionContent = ({ message }: { message?: string }) => (
 export const Transaction = () => {
 	const { message } = useParams<{ message?: string }>()
 	const { back } = useNavigation()
+
+	const notFound = true
+
+	if (notFound) {
+		return <NotFound resource="Transaction" />
+	}
+
 	return (
 		<section className="transaction">
 			<IconButton size="m" variant="secondary" onClick={back} className="back_button">
