@@ -21,7 +21,7 @@ export const Header = (): ReactElement => {
 	}, [isMobile, isTablet])
 
 	const search: ReactElement | null = useMemo(() => {
-		if (isHomePage || (!isHomePage && (isBurgerOpen || isMobile))) return null
+		if (isHomePage || (!isHomePage && ((isBurgerOpen && !isTablet) || isMobile))) return null
 
 		return (
 			<div className="header_search">
