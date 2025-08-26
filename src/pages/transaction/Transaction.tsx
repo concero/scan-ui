@@ -2,6 +2,7 @@ import type { FC, ReactElement } from 'react'
 import { MetaTags } from '@/components/common'
 import { useState, useEffect } from 'react'
 import { Status, Transaction } from '@/components'
+import { TransactionType } from '@/components'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -10,7 +11,8 @@ const META_DESCRIPTION =
 const data = {
 	messageId: '0x4231f887251b9d0b4923262d55783dafdb6bb63590a2a34243f3c9e038544791',
 	status: Status.Success,
-	reason: '0xf3dte',
+	reason: '0x019218x89121',
+	type: TransactionType.CanonicalBridge,
 	sender: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
 	receiver: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
 }

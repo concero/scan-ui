@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import { useMemo } from 'react'
 import { MessageDetails } from '../common'
+import { TransactionSummary } from '../common'
 import './styles.pcss'
 
 export enum Status {
@@ -19,6 +20,7 @@ export enum TransactionType {
 type TransactionData = {
 	messageId: string
 	status: Status
+	type: TransactionType
 	sender: string
 	receiver: string
 	reason?: string

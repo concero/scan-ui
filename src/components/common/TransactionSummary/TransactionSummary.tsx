@@ -1,13 +1,12 @@
 import type { ReactElement } from 'react'
-import type { Hex } from 'viem'
 import { TransactionLabel } from '../TransactionLabel/TransactionLabel'
 import { TransactionType } from '@/components/transaction'
 import './styles.pcss'
 
 type TransactionSummaryProps = {
 	readonly type: TransactionType
-	readonly sender: Hex
-	readonly receiver: Hex
+	readonly sender: string
+	readonly receiver: string
 }
 
 export const TransactionSummary = ({ type, sender, receiver }: TransactionSummaryProps): ReactElement => {
