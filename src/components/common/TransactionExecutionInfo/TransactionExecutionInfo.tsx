@@ -70,8 +70,8 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
   fees,
   dstCurrency,
   feeCurrency,
-  hasRetry = true,
-  isExpandable = true,
+  hasRetry = false,
+  isExpandable = false,
 }: TransactionExecutionInfoProps): ReactElement {
   const { copy, copied } = useClipboard()
   const { toggleModal } = useModalsStore()
@@ -115,15 +115,17 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
         />
         <div className="tx_actions">
           {hasRetry && (
-            <Button
-              size="m"
-              variant="secondary_color"
-              onClick={() => toggleModal('concero-transaction-modal')}
-            >
-              Retry Transaction
-            </Button>
+			<>
+				<Button
+				size="m"
+				variant="secondary_color"
+				onClick={() => toggleModal('concero-transaction-modal')}
+				>
+				Retry Transaction
+				</Button>
+				<ExecutionWarning />
+			</>
           )}
-          <ExecutionWarning />
         </div>
       </div>
     </div>
