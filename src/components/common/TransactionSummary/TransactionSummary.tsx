@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { TransactionLabel } from '../TransactionLabel/TransactionLabel'
 import { TransactionType } from '@/components/transaction'
-import { Skeleton } from '../Skeleton'
+import { InfoRow } from '../InfoRow'
 import './styles.pcss'
 
 type TransactionSummaryProps = {
@@ -12,38 +12,21 @@ type TransactionSummaryProps = {
 }
 
 export const TransactionSummary = ({ loading, type, sender, receiver }: TransactionSummaryProps): ReactElement => {
+	const isMessageType = type === TransactionType.Message
+
 	return (
 		<div className="transaction_summary">
-			<div className="transaction_summary_row">
-				<span className="transaction_summary_label">
-					{loading ? <Skeleton width={120} height={24} /> : 'Type'}
-				</span>
+			<InfoRow
+				label="Type"
+				value={<TransactionLabel size="s" type={type} />}
+				loading={loading}
+				copyable={false}
+			/>
 
-				<span className="transaction_summary_value">
-					{loading ? <Skeleton width={'100%'} height={24} /> : <TransactionLabel size="s" type={type} />}
-				</span>
-			</div>
-
-			{type !== TransactionType.Message && (
+			{!isMessageType && (
 				<>
-					<div className="transaction_summary_row">
-						<span className="transaction_summary_label">
-							{loading ? <Skeleton width={120} height={24} /> : 'Sender'}
-						</span>
-
-						<span className="transaction_summary_value">
-							{loading ? <Skeleton width={'100%'} height={24} /> : sender}
-						</span>
-					</div>
-					<div className="transaction_summary_row">
-						<span className="transaction_summary_label">
-							{loading ? <Skeleton width={120} height={24} /> : 'Receiver'}
-						</span>
-
-						<span className="transaction_summary_value">
-							{loading ? <Skeleton width={'100%'} height={24} /> : receiver}
-						</span>
-					</div>
+					<InfoRow label="Sender" value={sender} loading={loading} copyable={true} />
+					<InfoRow label="Receiver" value={receiver} loading={loading} copyable={true} />
 				</>
 			)}
 		</div>

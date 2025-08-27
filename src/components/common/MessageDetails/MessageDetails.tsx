@@ -13,18 +13,22 @@ type MessageDetailsProps = {
 
 export const MessageDetails = ({ loading, messageId, status, reason }: MessageDetailsProps): ReactElement | null => {
 	const rows = [
-		{ label: 'Concero message ID', value: messageId },
-		{ label: 'Status', value: <StatusLabel status={status} size="s" /> },
+		{ label: 'Concero message ID', value: messageId, copyable: true },
+		{ label: 'Status', value: <StatusLabel status={status} size="s" />, copyable: false },
 	]
 
 	if (reason) {
-		rows.push({ label: 'Reason', value: reason })
+		rows.push({ label: 'Reason', value: reason, copyable: true })
+	}
+
+	if (rows.length === 0) {
+		return null
 	}
 
 	return (
 		<div className="message_details">
-			{rows.map(({ label, value }) => (
-				<InfoRow key={label} label={label} value={value} loading={loading} />
+			{rows.map(({ label, value, copyable }) => (
+				<InfoRow key={label} label={label} value={value} loading={loading} copyable={copyable} />
 			))}
 		</div>
 	)
