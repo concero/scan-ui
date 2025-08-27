@@ -52,7 +52,7 @@ export const InfoRow = ({
   return (
     <div className={`info_row ${wrapped ? 'info_row_wrapped' : ''}`} ref={valueRef}>
       <div className="info_row_label">
-        {loading ? <Skeleton width={120} height={18} /> : label}
+        {loading ? <Skeleton width={'100%'} height={18} /> : label}
       </div>
 
       <div

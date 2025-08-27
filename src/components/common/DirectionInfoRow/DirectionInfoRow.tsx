@@ -52,7 +52,7 @@ export const DirectionInfoRow = ({
   return (
     <div className={`dir_info_row ${wrapped ? 'dir_info_row_wrapped' : ''}`} ref={valueRef}>
       <div className="dir_info_label">
-        {loading ? <Skeleton width={120} height={18} /> : label}
+        {loading ? <Skeleton width={'100%'} height={18} /> : label}
       </div>
 
       <div
