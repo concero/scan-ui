@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react'
 import { Chain, Status, TransactionType } from '@/components'
 import { MetaTags } from '@/components/common'
 import { useState, useEffect } from 'react'
-import { Transaction, Direction } from '@/components'
+import { Transaction, Direction, Token } from '@/components'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -16,6 +16,22 @@ const fromChain: Chain = {
 	currency: 'ETH',
 }
 
+const fromToken: Token = {
+	name: 'Ethereum',
+	symbol: 'ETH',
+	usd: 4000,
+	amount: 0.5,
+	logo: 'https://api.concero.io/static/icons/chains/1.svg',
+}
+
+const toToken: Token = {
+	name: 'Ethereum',
+	symbol: 'ETH',
+	usd: 4000,
+	amount: 0.5,
+	logo: 'https://api.concero.io/static/icons/chains/1.svg',
+}
+
 const toChain: Chain = {
 	id: 137,
 	name: 'Polygon',
@@ -25,12 +41,14 @@ const toChain: Chain = {
 }
 
 const from: Direction = {
+	token: fromToken,
 	chain: fromChain,
 	hash: '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
 	gas: 0.0021,
 }
 
 const to: Direction = {
+	token: toToken,
 	chain: toChain,
 	hash: '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
 	gas: 0.0008,

@@ -1,54 +1,68 @@
-import type { ReactElement, ReactNode } from 'react'
-import type { TransactionDirection } from '../TransactionDetails'
+import type { ReactElement } from 'react'
+import type { Direction } from '@/components/transaction'
+import { Skeleton } from '../Skeleton'
 import './styles.pcss'
 
-type TransactionInfoRowProps = {
-	label: string
-	value: ReactNode
-	className?: string
-}
-
-const TransactionInfoRow = ({ label, value, className = '' }: TransactionInfoRowProps): ReactElement => (
-	<div className={`transaction_info_row${className ? ` ${className}` : ''}`}>
-		<span className="transaction_info_label">{label}</span>
-		{typeof value === 'string' || typeof value === 'number' ? (
-			<span className="transaction_info_value">{value}</span>
-		) : (
-			value
-		)}
-	</div>
-)
-
 type TransactionInfoProps = {
-	details: TransactionDirection
+	details: Direction
+	loading: boolean
 }
 
-export const TransactionInfo = ({ details }: TransactionInfoProps): ReactElement => {
-	const { chainLogo, chainName, chainId, chainSelector, txHash, gasCost, chainCurrency } = details
+export const TransactionInfo = ({ details, loading }: TransactionInfoProps): ReactElement => {
+	const { chain, hash, gas } = details
 
 	return (
 		<div className="transaction_info">
-			<TransactionInfoRow
-				label="Chain"
-				value={
+			<div className="transaction_info_row">
+				<span className="transaction_info_label">
+					{loading ? <Skeleton width={70} height={16} /> : 'Chain'}
+				</span>
+				{loading ? (
+					<Skeleton width="100%" height={20} />
+				) : (
 					<div className="transaction_info_chain">
-						<img src={chainLogo} alt={chainName} className="transaction_info_chain_logo" />
-						<span className="transaction_info_value">{chainName}</span>
+						<img src={chain.logo} alt={chain.name} className="transaction_info_chain_logo" />
+						<span className="transaction_info_value">{chain.currency}</span>
 					</div>
-				}
-			/>
-			<TransactionInfoRow label="Chain ID" value={chainId} />
-			<TransactionInfoRow label="Selector" value={chainSelector} />
-			<TransactionInfoRow label="TX Hash" value={txHash} className="hash_row" />
-			<TransactionInfoRow
-				label="Gas Fee"
-				value={
-					<span className="transaction_info_value">
-						{gasCost}
-						<span className="transaction_info_currency">{chainCurrency}</span>
-					</span>
-				}
-			/>
+				)}
+			</div>
+			<div className="transaction_info_row">
+				<span className="transaction_info_label">
+					{loading ? <Skeleton width={90} height={16} /> : 'Chain ID'}
+				</span>
+				<span className="transaction_info_value">
+					{loading ? <Skeleton width={60} height={16} /> : chain.id}
+				</span>
+			</div>
+			<div className="transaction_info_row">
+				<span className="transaction_info_label">
+					{loading ? <Skeleton width={80} height={16} /> : 'Selector'}
+				</span>
+				<span className="transaction_info_value">
+					{loading ? <Skeleton width={80} height={16} /> : chain.selector}
+				</span>
+			</div>
+			<div className="transaction_info_row hash_row">
+				<span className="transaction_info_label">
+					{loading ? <Skeleton width={70} height={16} /> : 'TX Hash'}
+				</span>
+				<span className="transaction_info_value">{loading ? <Skeleton width="100%" height={16} /> : hash}</span>
+			</div>
+			<div className="transaction_info_row">
+				<span className="transaction_info_label">
+					{loading ? <Skeleton width={80} height={16} /> : 'Gas Fee'}
+				</span>
+				<span className="transaction_info_value">
+					{loading ? (
+						<Skeleton width={100} height={16} />
+					) : (
+						<>
+							{gas}
+							<span className="transaction_info_currency">{` ${chain.currency}`}</span>
+						</>
+					)}
+				</span>
+			</div>
 		</div>
 	)
 }

@@ -19,7 +19,16 @@ export type Chain = {
 	currency: string
 }
 
+export type Token = {
+	name: string
+	symbol: string
+	amount: number
+	usd: number
+	logo: string
+}
+
 export type Direction = {
+	token: Token
 	chain: Chain
 	hash: string
 	gas: number

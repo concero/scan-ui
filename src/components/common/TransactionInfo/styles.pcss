@@ -12,8 +12,8 @@
 		display: flex;
 		padding: calc(var(--space-xxs) - 2px) 0px;
 		gap: var(--space-s);
-		align-items: flex-start;
-		height: 100%;
+		align-items: center;
+		min-height: 22px;
 		width: 100%;
 
 		& > :nth-child(1) {
@@ -26,17 +26,24 @@
 
 		&.hash_row > :nth-child(2) {
 			width: 70%;
-			word-break: break-all;
-			white-space: normal;
 		}
 	}
 
+	& .transaction_info_label {
+		font-size: 0.875rem;
+		color: var(--color-gray-500);
+		font-weight: 400;
+	}
+
 	& .transaction_info_value {
-		display: flex;
+		display: block;
 		gap: var(--space-xs);
 		font-size: 0.875rem;
 		color: var(--color-gray-700);
 		line-height: 1.125rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
 	& .transaction_info_currency {
@@ -50,8 +57,8 @@
 	}
 
 	& .transaction_info_chain_logo {
-		width: 24px;
-		height: 24px;
+		width: 22px;
+		height: 22px;
 		border-radius: var(--border-radius-xsmall);
 	}
 }

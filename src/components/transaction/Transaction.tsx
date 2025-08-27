@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import type { TransactionData } from './types'
 import { useMemo } from 'react'
-import { MessageDetails, TransactionTimestamp } from '../common'
+import { MessageDetails, TransactionDetails, TransactionTimestamp } from '../common'
 import { TransactionSummary } from '../common'
 import { TransactionFinality } from '../common'
 import './styles.pcss'
@@ -30,7 +30,9 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 		return <TransactionTimestamp timestamp={data.timestamp} duration={data.duration} loading={loading} />
 	}, [data, loading])
 
-	const details = useMemo(() => {}, [])
+	const details = useMemo(() => {
+		return <TransactionDetails from={data.from} to={data.to} loading={loading} />
+	}, [data, loading])
 
 	return (
 		<div className="transaction">
@@ -43,6 +45,7 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 				{divider}
 				{time}
 				{divider}
+				{details}
 			</div>
 		</div>
 	)
