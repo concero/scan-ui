@@ -44,19 +44,20 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
+	}
 
-		& .transaction_info_value_container {
-			display: flex;
-			align-items: center;
-			gap: var(--space-xs);
-		}
+	& .transaction_info_value_container {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
 	}
 
 	& .transaction_info_currency {
 		color: var(--color-gray-600);
 	}
 
-	& .transaction_info_chain {
+	& .transaction_info_chain,
+	.transaction_info_token {
 		display: flex;
 		gap: var(--space-xs);
 		align-items: center;
@@ -66,5 +67,11 @@
 		width: 22px;
 		height: 22px;
 		border-radius: var(--border-radius-xsmall);
+	}
+
+	& .transaction_info_token_logo {
+		width: 22px;
+		height: 22px;
+		border-radius: var(--border-radius-medium);
 	}
 }

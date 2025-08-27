@@ -27,8 +27,8 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
     {
       label: 'Token',
       value: (
-        <div className="transaction_info_chain">
-          <img src={token.logo} alt={token.name} className="transaction_info_chain_logo" />
+        <div className="transaction_info_token">
+          <img src={token.logo} alt={token.name} className="transaction_info_token_logo" />
           <span className="transaction_info_value">{token.name}</span>
         </div>
       ),

@@ -7,7 +7,7 @@
 	min-height: 26px;
 
 	& > :nth-child(1) {
-		width: 30%;
+		width: 27%;
 		min-width: 0;
 	}
 
@@ -15,20 +15,9 @@
 		display: flex;
 		align-items: center;
 		gap: var(--space-xs);
-		width: 70%;
+		width: 73%;
 		cursor: pointer;
 		min-width: 0;
-
-		& .info_row_copy {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 15px;
-			height: 15px;
-			flex-shrink: 0;
-			opacity: 1;
-			transition: opacity 0.5s ease;
-		}
 	}
 
 	& .info_row_label {
@@ -43,24 +32,33 @@
 		font-size: 0.875rem;
 		color: var(--color-gray-700);
 		line-height: 1.125rem;
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 		gap: var(--space-xs);
 		min-width: 0;
 	}
 
 	& .info_row_value_text {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		max-width: 100%;
-		display: inline-block;
+		white-space: normal;
+		overflow-wrap: anywhere;
+		flex-grow: 0;
 		flex-shrink: 1;
+		max-width: calc(100% - 32px - 8px);
 		min-width: 0;
+		display: inline-block;
 	}
 
 	& .info_row_value.no_copy {
 		cursor: default;
+	}
+
+	& .info_row_copy {
+		width: 24px;
+		height: 24px;
+		flex-shrink: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 }
 
@@ -117,6 +115,11 @@
 			text-overflow: ellipsis;
 			max-width: 100%;
 			display: inline-block;
+		}
+
+		& .info_row_copy {
+			width: 24px;
+			height: 24px;
 		}
 	}
 }
