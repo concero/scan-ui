@@ -15,6 +15,9 @@ const data = {
 	type: TransactionType.CanonicalBridge,
 	sender: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
 	receiver: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
+	finality: true,
+	timestamp: 1696114800,
+	duration: 12
 }
 
 export const TransactionPage: FC = (): ReactElement => {

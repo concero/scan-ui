@@ -10,7 +10,7 @@
 		width: 100%;
 		align-items: center;
 		gap: var(--space-m);
-		height: 24px;
+		min-height: 24px;
 
 		& > :nth-child(1) {
 			width: 30%;
@@ -37,5 +37,23 @@
 
 	& .transaction_timestamp_time {
 		color: var(--color-gray-600);
+	}
+}
+
+@media (max-width: 640px) {
+	.transaction_timestamp .transaction_timestamp_row {
+		flex-direction: column;
+		gap: var(--space-xs);
+
+		& > :nth-child(1),
+		& > :nth-child(2) {
+			width: 100%;
+		}
+	}
+
+	.transaction_timestamp .transaction_timestamp_value {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 }
