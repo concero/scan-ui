@@ -1,104 +1,74 @@
 import type { ReactElement } from 'react'
 import type { Direction } from '@/components/transaction'
-import { Skeleton } from '../Skeleton'
+import { DirectionInfoRow } from '../DirectionInfoRow'
 import './styles.pcss'
 
 type TransactionInfoProps = {
-	details: Direction
-	loading: boolean
+  details: Direction
+  loading: boolean
 }
 
 export const TransactionInfo = ({ details, loading }: TransactionInfoProps): ReactElement => {
-	const { chain, token, address, hash, gas } = details
+  const { chain, token, address, hash, gas } = details
 
-	return (
-		<div className="transaction_info">
-			<div className="transaction_info_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={70} height={16} /> : 'Chain'}
-				</span>
-				{loading ? (
-					<Skeleton width="100%" height={20} />
-				) : (
-					<div className="transaction_info_chain">
-						<img src={chain.logo} alt={chain.name} className="transaction_info_chain_logo" />
-						<span className="transaction_info_value">{chain.name}</span>
-					</div>
-				)}
-			</div>
-			<div className="transaction_info_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={90} height={16} /> : 'Chain ID'}
-				</span>
-				<span className="transaction_info_value">
-					{loading ? <Skeleton width={60} height={16} /> : chain.id}
-				</span>
-			</div>
-			<div className="transaction_info_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={80} height={16} /> : 'Selector'}
-				</span>
-				<span className="transaction_info_value">
-					{loading ? <Skeleton width={80} height={16} /> : chain.selector}
-				</span>
-			</div>
-			<div className="transaction_info_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={70} height={16} /> : 'Token'}
-				</span>
-				{loading ? (
-					<Skeleton width="100%" height={20} />
-				) : (
-					<div className="transaction_info_chain">
-						<img src={token.logo} alt={token.name} className="transaction_info_chain_logo" />
-						<span className="transaction_info_value">{token.name}</span>
-					</div>
-				)}
-			</div>
-			<div className="transaction_info_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={80} height={16} /> : 'Amount'}
-				</span>
-				<span className="transaction_info_value">
-					{loading ? (
-						<Skeleton width={100} height={16} />
-					) : (
-						<div className="transaction_info_value_container">
-							{token.amount}
-							<span className="transaction_info_currency">{token.symbol}</span>
-						</div>
-					)}
-				</span>
-			</div>
-			<div className="transaction_info_row hash_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={70} height={16} /> : 'Wallet address'}
-				</span>
-				<span className="transaction_info_value">
-					{loading ? <Skeleton width="100%" height={16} /> : address}
-				</span>
-			</div>
-			<div className="transaction_info_row hash_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={70} height={16} /> : 'TX Hash'}
-				</span>
-				<span className="transaction_info_value">{loading ? <Skeleton width="100%" height={16} /> : hash}</span>
-			</div>
-			<div className="transaction_info_row">
-				<span className="transaction_info_label">
-					{loading ? <Skeleton width={80} height={16} /> : 'Gas Fee'}
-				</span>
-				<span className="transaction_info_value">
-					{loading ? (
-						<Skeleton width={100} height={16} />
-					) : (
-						<div className="transaction_info_value_container">
-							{gas}
-							<span className="transaction_info_currency">{chain.currency}</span>
-						</div>
-					)}
-				</span>
-			</div>
-		</div>
-	)
+  const rows = [
+    {
+      label: 'Chain',
+      value: (
+        <div className="transaction_info_chain">
+          <img src={chain.logo} alt={chain.name} className="transaction_info_chain_logo" />
+          <span className="transaction_info_value">{chain.name}</span>
+        </div>
+      ),
+      copyable: false,
+    },
+    { label: 'Chain ID', value: chain.id, copyable: true },
+    { label: 'Selector', value: chain.selector, copyable: true },
+    {
+      label: 'Token',
+      value: (
+        <div className="transaction_info_chain">
+          <img src={token.logo} alt={token.name} className="transaction_info_chain_logo" />
+          <span className="transaction_info_value">{token.name}</span>
+        </div>
+      ),
+      copyable: true,
+    },
+    {
+      label: 'Amount',
+      value: (
+        <div className="transaction_info_value_container">
+          {token.amount}
+          <span className="transaction_info_currency">{token.symbol}</span>
+        </div>
+      ),
+      copyable: false,
+    },
+    { label: 'Wallet address', value: address, copyable: true },
+    { label: 'Tx Hash', value: hash, copyable: true },
+    {
+      label: 'Gas Fee',
+      value: (
+        <div className="transaction_info_value_container">
+          {gas}
+          <span className="transaction_info_currency">{chain.currency}</span>
+        </div>
+      ),
+      copyable: false,
+    },
+  ]
+
+  return (
+    <div className="transaction_info">
+      {rows.map(({ label, value, copyable }) => (
+        <DirectionInfoRow
+          key={label}
+          label={label}
+          value={value}
+          loading={loading}
+          copyable={copyable}
+        />
+      ))}
+    </div>
+  )
 }

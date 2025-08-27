@@ -4,19 +4,19 @@ import { CopyIcon } from '@/assets'
 import { useClipboard } from '@/hooks'
 import './styles.pcss'
 
-type InfoRowProps = {
+type DirectionInfoRowProps = {
   readonly label: string
   readonly value: ReactElement | string | number | null | undefined
   readonly copyable?: boolean
   readonly loading: boolean
 }
 
-export const InfoRow = ({
+export const DirectionInfoRow = ({
   label,
   value,
   loading,
   copyable = true,
-}: InfoRowProps): ReactElement => {
+}: DirectionInfoRowProps): ReactElement => {
   const { copy } = useClipboard()
   const valueRef = useRef<HTMLDivElement>(null)
   const [wrapped, setWrapped] = useState(false)
@@ -27,7 +27,7 @@ export const InfoRow = ({
     if (!el) return
 
     const newWrapped = el.offsetHeight > 26
-    setWrapped((prev) => (prev !== newWrapped ? newWrapped : prev))
+    setWrapped(prev => (prev !== newWrapped ? newWrapped : prev))
   }, [])
 
   useEffect(() => {
@@ -50,13 +50,13 @@ export const InfoRow = ({
   }, [copy, copyable, loading, value])
 
   return (
-    <div className={`info_row ${wrapped ? 'info_row_wrapped' : ''}`} ref={valueRef}>
-      <div className="info_row_label">
+    <div className={`dir_info_row ${wrapped ? 'dir_info_row_wrapped' : ''}`} ref={valueRef}>
+      <div className="dir_info_label">
         {loading ? <Skeleton width={120} height={18} /> : label}
       </div>
 
       <div
-        className={`info_row_value${copyable ? '' : ' no_copy'}`}
+        className={`dir_info_value${copyable ? '' : ' no_copy'}`}
         onClick={handleCopyClick}
         role={copyable ? 'button' : undefined}
         tabIndex={copyable ? 0 : undefined}
@@ -66,9 +66,9 @@ export const InfoRow = ({
           <Skeleton width="100%" height={18} />
         ) : (
           <>
-            <span className="info_row_value_text">{value}</span>
+            <span className="dir_info_value_text">{value}</span>
             {copyable && (
-              <div className="info_row_copy">
+              <div className="dir_info_copy">
                 <CopyIcon />
               </div>
             )}
