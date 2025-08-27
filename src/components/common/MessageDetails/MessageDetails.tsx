@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { Status } from '@/components/transaction'
 import { StatusLabel } from '../StatusLabel'
-import { Skeleton } from '../Skeleton'
+import { InfoRow } from '../InfoRow'
 import './styles.pcss'
 
 type MessageDetailsProps = {
@@ -12,38 +12,20 @@ type MessageDetailsProps = {
 }
 
 export const MessageDetails = ({ loading, messageId, status, reason }: MessageDetailsProps): ReactElement | null => {
+	const rows = [
+		{ label: 'Concero message ID', value: messageId },
+		{ label: 'Status', value: <StatusLabel status={status} size="s" /> },
+	]
+
+	if (reason) {
+		rows.push({ label: 'Reason', value: reason })
+	}
+
 	return (
 		<div className="message_details">
-			<div className="message_details_row">
-				<span className="message_details_label">
-					{loading ? <Skeleton width={120} height={24} /> : 'Concero message ID'}
-				</span>
-
-				<span className="message_details_value">
-					{loading ? <Skeleton width={'100%'} height={24} /> : messageId}
-				</span>
-			</div>
-
-			<div className="message_details_row">
-				<span className="message_details_label">
-					{loading ? <Skeleton width={120} height={24} /> : 'Status'}
-				</span>
-
-				<span className="message_details_value">
-					{loading ? <Skeleton width={'100%'} height={24} /> : <StatusLabel status={status} size="s" />}
-				</span>
-			</div>
-			{reason && (
-				<div className="message_details_row">
-					<span className="message_details_label">
-						{loading ? <Skeleton width={120} height={24} /> : 'Reason'}
-					</span>
-
-					<span className="message_details_value">
-						{loading ? <Skeleton width={'100%'} height={24} /> : reason}
-					</span>
-				</div>
-			)}
+			{rows.map(({ label, value }) => (
+				<InfoRow key={label} label={label} value={value} loading={loading} />
+			))}
 		</div>
 	)
 }

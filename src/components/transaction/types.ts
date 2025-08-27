@@ -30,6 +30,7 @@ export type Token = {
 export type Direction = {
 	token: Token
 	chain: Chain
+	address: string
 	hash: string
 	gas: number
 }
@@ -38,8 +39,6 @@ export type TransactionData = {
 	messageId: string
 	status: Status
 	type: TransactionType
-	sender: string
-	receiver: string
 	finality: boolean
 	timestamp: number
 	duration: number

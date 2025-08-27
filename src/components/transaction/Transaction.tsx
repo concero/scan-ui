@@ -19,7 +19,14 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 	const divider = useMemo(() => <span className="transaction_divider" />, [])
 
 	const summary = useMemo(() => {
-		return <TransactionSummary sender={data.sender} receiver={data.receiver} type={data.type} loading={loading} />
+		return (
+			<TransactionSummary
+				sender={data.from.address}
+				receiver={data.to.address}
+				type={data.type}
+				loading={loading}
+			/>
+		)
 	}, [data, loading])
 
 	const finality = useMemo(() => {
@@ -46,6 +53,7 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 				{time}
 				{divider}
 				{details}
+				{divider}
 			</div>
 		</div>
 	)

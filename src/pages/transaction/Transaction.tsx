@@ -43,6 +43,7 @@ const toChain: Chain = {
 const from: Direction = {
 	token: fromToken,
 	chain: fromChain,
+	address: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
 	hash: '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
 	gas: 0.0021,
 }
@@ -50,6 +51,7 @@ const from: Direction = {
 const to: Direction = {
 	token: toToken,
 	chain: toChain,
+	address: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
 	hash: '0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
 	gas: 0.0008,
 }
@@ -59,8 +61,6 @@ const data = {
 	status: Status.Success,
 	reason: '0x019218x89121',
 	type: TransactionType.CanonicalBridge,
-	sender: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
-	receiver: '0x239d5b78680e9AD600Ab41E56508670BA9E78F51',
 	finality: true,
 	timestamp: 1696114800,
 	from: from,
