@@ -4,12 +4,23 @@ import { useMemo } from 'react'
 import { MessageDetails, TransactionDetails, TransactionTimestamp } from '../common'
 import { TransactionSummary } from '../common'
 import { TransactionFinality } from '../common'
+import { TransactionExecutionInfo } from '../common'
 import './styles.pcss'
 
 type TransactionProps = {
 	data: TransactionData
 	loading: boolean
 }
+
+type TransactionExecutionInfoProps = Readonly<{
+	payload: string
+	gasLimit: number
+	fees: number
+	dstCurrency: string
+	feeCurrency: string
+	hasRetry?: boolean
+	isExpandable?: boolean
+}>
 
 export const Transaction = ({ data, loading }: TransactionProps): ReactElement => {
 	const message = useMemo(() => {
@@ -41,6 +52,10 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 		return <TransactionDetails from={data.from} to={data.to} loading={loading} />
 	}, [data, loading])
 
+	const executionInfo = useMemo(() => {
+		return <TransactionExecutionInfo payload={data.payload} gasLimit={data.gasLimit} fees={data.fees} dstCurrency={data.to.token.symbol} feeCurrency={data.from.token.symbol} />
+	}, [data, loading])
+
 	return (
 		<div className="transaction">
 			<div className="transaction_content">
@@ -54,6 +69,7 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 				{divider}
 				{details}
 				{divider}
+				{executionInfo}
 			</div>
 		</div>
 	)

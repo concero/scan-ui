@@ -1,10 +1,10 @@
-.tx-info {
+& .tx_info {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-s);
 	width: 100%;
 
-	& .tx-expand {
+	& .tx_expand {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -12,13 +12,13 @@
 		height: 32px;
 		cursor: pointer;
 
-		& .tx-expand-label {
+		& .tx_expand_label {
 			font-size: 1rem;
 			color: var(--color-gray-600);
 			line-height: 1.125rem;
 		}
 
-		& .tx-expand-icon {
+		& .tx_expand_icon {
 			display: flex;
 			width: 24px;
 			height: 24px;
@@ -29,12 +29,12 @@
 			transition: transform 0.3s ease;
 		}
 
-		& .tx-expand-icon.rotated {
+		& .tx_expand_icon.rotated {
 			transform: rotate(180deg);
 		}
 	}
 
-	& .tx-content {
+	& .tx_content {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-s);
@@ -52,7 +52,7 @@
 		}
 	}
 
-	& .tx-row {
+	& .tx_row {
 		display: flex;
 		flex-direction: row;
 		width: 100%;
@@ -60,20 +60,20 @@
 		min-height: 24px;
 
 		& > :nth-child(1) {
-			width: 30%;
+			width: 27%;
 		}
 
 		& > :nth-child(2) {
-			width: 70%;
+			width: 73%;
 		}
 
-		& .tx-label {
+		& .tx_label {
 			font-size: 0.875rem;
 			color: var(--color-gray-500);
 			line-height: 1.125rem;
 		}
 
-		& .tx-value {
+		& .tx_value {
 			display: flex;
 			gap: var(--space-xs);
 			font-size: 0.875rem;
@@ -81,11 +81,11 @@
 			line-height: 1.125rem;
 		}
 
-		& .tx-currency {
+		& .tx_currency {
 			color: var(--color-gray-600);
 		}
 
-		& .tx-payload {
+		& .tx_payload {
 			display: flex;
 			flex-direction: column;
 			padding: var(--space-s);
@@ -97,7 +97,7 @@
 			gap: var(--space-xs);
 		}
 
-		& .tx-payload-value {
+		& .tx_payload_value {
 			font-size: 0.875rem;
 			color: var(--color-gray-700);
 			line-height: 1.125rem;
@@ -111,11 +111,11 @@
 			-ms-overflow-style: none;
 		}
 
-		& .tx-payload-value::-webkit-scrollbar {
+		& .tx_payload_value::-webkit-scrollbar {
 			display: none;
 		}
 
-		& .tx-payload-value::after {
+		& .tx_payload_value::after {
 			content: '';
 			position: absolute;
 			bottom: 0;
@@ -126,14 +126,14 @@
 			pointer-events: none;
 		}
 
-		& .tx-payload-action {
+		& .tx_payload_action {
 			display: flex;
 			justify-content: flex-start;
 			height: 24px;
 		}
 	}
 
-	& .tx-actions {
+	& .tx_actions {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -141,21 +141,47 @@
 		margin-top: var(--space-xxs);
 		width: 100%;
 
-		& .tx-warning {
+		& .tx_warning {
 			display: flex;
 			align-items: center;
 			gap: var(--space-xs);
 			width: 100%;
 		}
 
-		& .tx-warning-text {
+		& .tx_warning_text {
 			font-size: 0.875rem;
 			color: var(--color-gray-600);
 			line-height: 1.125rem;
 		}
 	}
 
-	& .payload-row {
+	& .payload_row {
 		height: 100%;
+	}
+}
+
+@media (max-width: 640px) {
+	.tx_info .tx_row {
+		flex-direction: column;
+		gap: var(--space-xs);
+
+		& > :nth-child(1),
+		& > :nth-child(2) {
+			width: 100%;
+			min-width: 0;
+		}
+
+		& .info_row_value_text {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 100%;
+			display: inline-block;
+		}
+
+		& .info_row_copy {
+			width: 24px;
+			height: 24px;
+		}
 	}
 }
