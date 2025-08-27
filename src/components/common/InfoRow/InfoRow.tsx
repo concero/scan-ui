@@ -46,7 +46,7 @@ export const InfoRow = ({ label, value, loading, copyable = true }: InfoRowProps
 
 	return (
 		<div className={`info_row ${wrapped ? 'info_row_wrapped' : ''}`} ref={valueRef}>
-			<div className="info_row_label">{loading ? <Skeleton width={120} height={24} /> : label}</div>
+			<div className="info_row_label">{loading ? <Skeleton width={120} height={18} /> : label}</div>
 
 			<div
 				className={`info_row_value${copyable ? '' : ' no-copy'}`}
@@ -56,7 +56,7 @@ export const InfoRow = ({ label, value, loading, copyable = true }: InfoRowProps
 				aria-disabled={loading || !copyable}
 			>
 				{loading ? (
-					<Skeleton width="100%" height={24} />
+					<Skeleton width="100%" height={18} />
 				) : (
 					<>
 						<span className="info_row_value_text">{value}</span>

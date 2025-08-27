@@ -21,7 +21,7 @@ export const TransactionTimestamp = ({
   const hours = date.getUTCHours().toString().padStart(2, '0')
   const minutes = date.getUTCMinutes().toString().padStart(2, '0')
 
-  const formattedDate = `${day} ${month} ${year},`
+  const formattedDate = `${day} ${month} ${year}`
   const formattedTime = `(${hours}:${minutes} UTC)`
   const formattedDuration = `${duration} sec.`
 
