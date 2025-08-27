@@ -14,18 +14,17 @@ export const TransactionFinality = ({ finality, loading }: TransactionFinalityPr
   return (
     <div className="transaction_finality">
       <div className="transaction_finality_row">
-        {loading ? (
-          <Skeleton width="100%" height={24} />
-        ) : (
-          <>
-            <span className="transaction_finality_label">Finality Required</span>
-            <div>
-              <Tag size="s" variant="neutral">
-                {status}
-              </Tag>
-            </div>
-          </>
-        )}
+        <span className="transaction_finality_label">
+          {loading ? <Skeleton width={120} height={24} /> : 'Finality Required'}
+        </span>
+
+        <span className="transaction_finality_value">
+          {loading ? <Skeleton width={'100%'} height={24} /> : (
+            <Tag size="s" variant="neutral">
+              {status}
+            </Tag>
+          )}
+        </span>
       </div>
     </div>
   )

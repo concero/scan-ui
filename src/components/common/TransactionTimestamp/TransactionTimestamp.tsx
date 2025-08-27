@@ -25,26 +25,29 @@ export const TransactionTimestamp = ({ timestamp, duration, loading }: Transacti
   return (
     <div className="transaction_timestamp">
       <div className="transaction_timestamp_row">
-        {loading ? (
-          <Skeleton width="100%" height={24} />
-        ) : (
-          <>
-            <span className="transaction_timestamp_label">Timestamp</span>
-            <span className="transaction_timestamp_value">
-              {formattedDate} <span className="transaction_timestamp_time">{formattedTime}</span>
-            </span>
-          </>
-        )}
+        <span className="transaction_timestamp_label">
+          {loading ? <Skeleton width={120} height={24} /> : 'Timestamp'}
+        </span>
+
+        <span className="transaction_timestamp_value">
+          {loading ? (
+            <Skeleton width={"100%"} height={24} />
+          ) : (
+            <>
+              {formattedDate}{' '}
+              <span className="transaction_timestamp_time">{formattedTime}</span>
+            </>
+          )}
+        </span>
       </div>
       <div className="transaction_timestamp_row">
-        {loading ? (
-          <Skeleton width="100%" height={24} />
-        ) : (
-          <>
-            <span className="transaction_timestamp_label">Duration</span>
-            <span className="transaction_timestamp_value">{formattedDuration}</span>
-          </>
-        )}
+        <span className="transaction_timestamp_label">
+          {loading ? <Skeleton width={120} height={24} /> : 'Duration'}
+        </span>
+
+        <span className="transaction_timestamp_value">
+          {loading ? <Skeleton width={'100%'} height={24} /> : formattedDuration}
+        </span>
       </div>
     </div>
   )

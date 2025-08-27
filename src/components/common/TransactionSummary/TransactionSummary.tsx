@@ -15,38 +15,34 @@ export const TransactionSummary = ({ loading, type, sender, receiver }: Transact
   return (
     <div className="transaction_summary">
       <div className="transaction_summary_row">
-        {loading ? (
-          <Skeleton width="100%" height={24} />
-        ) : (
-          <>
-            <span className="transaction_summary_label">Type</span>
-            <TransactionLabel size="s" type={type} />
-          </>
-        )}
+        <span className="transaction_summary_label">
+          {loading ? <Skeleton width={120} height={24} /> : 'Type'}
+        </span>
+
+        <span className="transaction_summary_value">
+          {loading ? <Skeleton width={"100%"} height={24} /> : <TransactionLabel size="s" type={type} />}
+        </span>
       </div>
 
       {type !== TransactionType.Message && (
         <>
           <div className="transaction_summary_row">
-            {loading ? (
-              <Skeleton width="100%" height={24} />
-            ) : (
-              <>
-                <span className="transaction_summary_label">Sender</span>
-                <span className="transaction_summary_value">{sender}</span>
-              </>
-            )}
-          </div>
+            <span className="transaction_summary_label">
+              {loading ? <Skeleton width={120} height={24} /> : 'Sender'}
+            </span>
 
+            <span className="transaction_summary_value">
+              {loading ? <Skeleton width={"100%"} height={24} /> : sender}
+            </span>
+          </div>
           <div className="transaction_summary_row">
-            {loading ? (
-              <Skeleton width="100%" height={24} />
-            ) : (
-              <>
-                <span className="transaction_summary_label">Receiver</span>
-                <span className="transaction_summary_value">{receiver}</span>
-              </>
-            )}
+            <span className="transaction_summary_label">
+              {loading ? <Skeleton width={120} height={24} /> : 'Receiver'}
+            </span>
+
+            <span className="transaction_summary_value">
+              {loading ? <Skeleton width={"100%"} height={24} /> : receiver}
+            </span>
           </div>
         </>
       )}
