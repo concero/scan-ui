@@ -1,34 +1,10 @@
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
+import type { TransactionData } from './types'
 import { useMemo } from 'react'
 import { MessageDetails, TransactionTimestamp } from '../common'
 import { TransactionSummary } from '../common'
 import { TransactionFinality } from '../common'
 import './styles.pcss'
-
-export enum Status {
-	Pending = 'pending',
-	Success = 'success',
-	Canceled = 'canceled',
-}
-
-export enum TransactionType {
-	Message = 'Message',
-	LBFBridge = 'LBF Bridge',
-	CanonicalBridge = 'Canonical Bridge',
-	IOUBridge = 'IOU Bridge',
-}
-
-type TransactionData = {
-	messageId: string
-	status: Status
-	type: TransactionType
-	sender: string
-	receiver: string
-	finality: boolean
-	timestamp: number
-	duration: number
-	reason?: string
-}
 
 type TransactionProps = {
 	data: TransactionData
@@ -36,7 +12,7 @@ type TransactionProps = {
 }
 
 export const Transaction = ({ data, loading }: TransactionProps): ReactElement => {
-	const details = useMemo(() => {
+	const message = useMemo(() => {
 		return <MessageDetails messageId={data.messageId} status={data.status} reason={data.reason} loading={loading} />
 	}, [data, loading])
 
@@ -54,11 +30,12 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 		return <TransactionTimestamp timestamp={data.timestamp} duration={data.duration} loading={loading} />
 	}, [data, loading])
 
+	const details = useMemo(() => {}, [])
 
 	return (
 		<div className="transaction">
 			<div className="transaction_content">
-				{details}
+				{message}
 				{divider}
 				{summary}
 				{divider}
