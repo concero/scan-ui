@@ -5,6 +5,7 @@ import { MessageDetails, TransactionDetails, TransactionTimestamp } from '../com
 import { TransactionSummary } from '../common'
 import { TransactionFinality } from '../common'
 import { TransactionExecutionInfo } from '../common'
+import { Skeleton } from '../common'
 import './styles.pcss'
 
 type TransactionProps = {
@@ -58,7 +59,7 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 	return (
 		<div className="transaction">
 			<div className="transaction_content">
-				<span className="transaction_title">{data.type}</span>
+				{loading ? <Skeleton width={215} height={36} /> : <span className="transaction_title">{data.type}</span>}
 				{message}
 				{divider}
 				{summary}
