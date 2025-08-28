@@ -12,16 +12,6 @@ type TransactionProps = {
 	loading: boolean
 }
 
-type TransactionExecutionInfoProps = Readonly<{
-	payload: string
-	gasLimit: number
-	fees: number
-	dstCurrency: string
-	feeCurrency: string
-	hasRetry?: boolean
-	isExpandable?: boolean
-}>
-
 export const Transaction = ({ data, loading }: TransactionProps): ReactElement => {
 	const message = useMemo(() => {
 		return <MessageDetails messageId={data.messageId} status={data.status} reason={data.reason} loading={loading} />
@@ -59,6 +49,7 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 	return (
 		<div className="transaction">
 			<div className="transaction_content">
+				<span className="transaction_title">{data.type}</span>
 				{message}
 				{divider}
 				{summary}
