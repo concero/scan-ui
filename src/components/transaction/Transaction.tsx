@@ -43,7 +43,15 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 	}, [data, loading])
 
 	const executionInfo = useMemo(() => {
-		return <TransactionExecutionInfo payload={data.payload} gasLimit={data.gasLimit} fees={data.fees} dstCurrency={data.to.token.symbol} feeCurrency={data.from.token.symbol} />
+		return (
+			<TransactionExecutionInfo
+				payload={data.payload}
+				gasLimit={data.gasLimit}
+				fees={data.fees}
+				dstCurrency={data.to.token.symbol}
+				feeCurrency={data.from.token.symbol}
+			/>
+		)
 	}, [data, loading])
 
 	return (

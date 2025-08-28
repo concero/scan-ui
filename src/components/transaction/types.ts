@@ -44,8 +44,8 @@ export type TransactionData = {
 	duration: number
 	from: Direction
 	to: Direction
-	payload: string;
-	gasLimit: number;
-	fees: number;
+	payload: string
+	gasLimit: number
+	fees: number
 	reason?: string
 }
