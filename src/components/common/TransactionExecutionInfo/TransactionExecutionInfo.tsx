@@ -2,6 +2,8 @@ import { memo, useCallback, useState, type ReactElement } from 'react'
 import { Button, IconButton } from '@concero/ui-kit'
 import { useClipboard, useModalsStore } from '@/hooks'
 import { PointerUpIcon, WarningIcon } from '@/assets'
+import { InfoRow } from '../InfoRow'
+import { Skeleton } from '../Skeleton'
 import './styles.pcss'
 
 type TransactionExecutionInfoProps = Readonly<{
@@ -10,24 +12,10 @@ type TransactionExecutionInfoProps = Readonly<{
 	fees: number
 	dstCurrency: string
 	feeCurrency: string
+	loading: boolean
 	hasRetry?: boolean
 	isExpandable?: boolean
 }>
-
-type InfoRowProps = Readonly<{
-	label: string
-	value: React.ReactNode
-	class_name?: string
-}>
-
-const InfoRow = memo(function InfoRow({ label, value, class_name = '' }: InfoRowProps) {
-	return (
-		<div className={`tx_row ${class_name}`}>
-			<span className="tx_label">{label}</span>
-			<span className="tx_value">{value}</span>
-		</div>
-	)
-})
 
 const PayloadRow = memo(function PayloadRow({
 	payload,
@@ -70,7 +58,8 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 	fees,
 	dstCurrency,
 	feeCurrency,
-	hasRetry = false,
+	loading,
+	hasRetry = true,
 	isExpandable = false,
 }: TransactionExecutionInfoProps): ReactElement {
 	const { copy, copied } = useClipboard()
@@ -79,6 +68,14 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 
 	const handleCopy = useCallback(() => copy(payload), [copy, payload])
 	const toggleDetails = useCallback(() => setExpanded(prev => !prev), [])
+
+	if (loading) {
+		return (
+			<div className="tx_info">
+				<Skeleton width="100%" height={32} />
+			</div>
+		)
+	}
 
 	return (
 		<div className="tx_info">
@@ -100,6 +97,7 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 							{gasLimit} <span className="tx_currency">{dstCurrency}</span>
 						</>
 					}
+					loading={false}
 				/>
 				<InfoRow
 					label="Concero Fees"
@@ -108,6 +106,7 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 							{fees} <span className="tx_currency">{feeCurrency}</span>
 						</>
 					}
+					loading={false}
 				/>
 				<div className="tx_actions">
 					{hasRetry && (

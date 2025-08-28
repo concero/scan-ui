@@ -50,6 +50,7 @@ export const Transaction = ({ data, loading }: TransactionProps): ReactElement =
 				fees={data.fees}
 				dstCurrency={data.to.token.symbol}
 				feeCurrency={data.from.token.symbol}
+				loading={loading}
 			/>
 		)
 	}, [data, loading])
