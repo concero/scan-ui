@@ -8,10 +8,11 @@ type InfoRowProps = {
 	readonly label: string
 	readonly value: ReactElement | string | number | null | undefined
 	readonly copyable?: boolean
+	readonly message?: string
 	readonly loading: boolean
 }
 
-export const InfoRow = ({ label, value, loading, copyable = true }: InfoRowProps): ReactElement => {
+export const InfoRow = ({ label, value, loading, copyable = true, message }: InfoRowProps): ReactElement => {
 	const { copy } = useClipboard()
 	const valueRef = useRef<HTMLDivElement>(null)
 	const [wrapped, setWrapped] = useState(false)
@@ -40,9 +41,9 @@ export const InfoRow = ({ label, value, loading, copyable = true }: InfoRowProps
 
 	const handleCopyClick = useCallback(() => {
 		if (!loading && copyable && value != null) {
-			copy(String(value))
+			copy(String(value), message ?? `${label} Copied`)
 		}
-	}, [copy, copyable, loading, value])
+	}, [copy, copyable, loading, value, message])
 
 	return (
 		<div className={`info_row ${wrapped ? 'info_row_wrapped' : ''}`} ref={valueRef}>

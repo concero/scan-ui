@@ -8,10 +8,11 @@ type DirectionInfoRowProps = {
 	readonly label: string
 	readonly value: ReactElement | string | number | null | undefined
 	readonly copyable?: boolean
+	readonly message?: string
 	readonly loading: boolean
 }
 
-export const DirectionInfoRow = ({ label, value, loading, copyable = true }: DirectionInfoRowProps): ReactElement => {
+export const DirectionInfoRow = ({ label, value, loading, copyable = true, message }: DirectionInfoRowProps): ReactElement => {
 	const { copy } = useClipboard()
 	const valueRef = useRef<HTMLDivElement>(null)
 	const [wrapped, setWrapped] = useState(false)
@@ -40,7 +41,7 @@ export const DirectionInfoRow = ({ label, value, loading, copyable = true }: Dir
 
 	const handleCopyClick = useCallback(() => {
 		if (!loading && copyable && value != null) {
-			copy(String(value))
+			copy(String(value), message ?? `${label} Copied`)
 		}
 	}, [copy, copyable, loading, value])
 

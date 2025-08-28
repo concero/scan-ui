@@ -66,7 +66,7 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 	const { toggleModal } = useModalsStore()
 	const [expanded, setExpanded] = useState(!isExpandable)
 
-	const handleCopy = useCallback(() => copy(payload), [copy, payload])
+	const handleCopy = useCallback(() => copy(payload, 'Message Payload Copied'), [copy, payload])
 	const toggleDetails = useCallback(() => setExpanded(prev => !prev), [])
 
 	if (loading) {

@@ -1,0 +1,49 @@
+.notification {
+	display: flex;
+	left: 50%;
+	top: 6%;
+	position: fixed;
+	transform: translateX(-50%);
+	padding: var(--space-s) var(--space-m);
+	align-items: center;
+	gap: var(--space-xs);
+	background: var(--color-gray-700);
+	border-radius: var(--border-radius-medium);
+	color: var(--color-gray-25);
+	z-index: 10000;
+
+	opacity: 0;
+	animation-fill-mode: forwards;
+	animation-duration: 0.4s;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notification_show {
+	animation-name: slideDown;
+}
+
+.notification_hide {
+	animation-name: slideUp;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateX(-50%) translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateX(-50%) translateY(-20px);
+	}
+}

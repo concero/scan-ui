@@ -13,12 +13,12 @@ type MessageDetailsProps = {
 
 export const MessageDetails = ({ loading, messageId, status, reason }: MessageDetailsProps): ReactElement | null => {
 	const rows = [
-		{ label: 'Concero message ID', value: messageId, copyable: true },
+		{ label: 'Concero message ID', value: messageId, copyable: true, message: 'Message ID Copied' },
 		{ label: 'Status', value: <StatusLabel status={status} size="s" />, copyable: false },
 	]
 
 	if (reason) {
-		rows.push({ label: 'Reason', value: reason, copyable: true })
+		rows.push({ label: 'Reason', value: reason, copyable: true, message: 'Fail Reason Copied' })
 	}
 
 	if (rows.length === 0) {

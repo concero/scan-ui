@@ -25,8 +25,8 @@ export const TransactionSummary = ({ loading, type, sender, receiver }: Transact
 
 			{!isMessageType && (
 				<>
-					<InfoRow label="Sender" value={sender} loading={loading} copyable={true} />
-					<InfoRow label="Receiver" value={receiver} loading={loading} copyable={true} />
+					<InfoRow label="Sender" value={sender} loading={loading} copyable={true} message='Sender Address Copied'/>
+					<InfoRow label="Receiver" value={receiver} loading={loading} copyable={true} message='Receiver Address Copied'/>
 				</>
 			)}
 		</div>

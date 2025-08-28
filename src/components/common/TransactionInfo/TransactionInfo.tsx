@@ -22,8 +22,8 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
 			),
 			copyable: false,
 		},
-		{ label: 'Chain ID', value: chain.id, copyable: true },
-		{ label: 'Selector', value: chain.selector, copyable: true },
+		{ label: 'Chain ID', value: chain.id, copyable: true, message: 'Chain ID Copied' },
+		{ label: 'Selector', value: chain.selector, copyable: true, message: 'Selector Copied' },
 		{
 			label: 'Token',
 			value: (
@@ -33,6 +33,7 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
 				</div>
 			),
 			copyable: true,
+			message: 'Token Copied',
 		},
 		{
 			label: 'Amount',
@@ -44,8 +45,8 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
 			),
 			copyable: false,
 		},
-		{ label: 'Wallet address', value: address, copyable: true },
-		{ label: 'Tx Hash', value: hash, copyable: true },
+		{ label: 'Wallet address', value: address, copyable: true, message: 'Wallet Address Copied' },
+		{ label: 'Tx Hash', value: hash, copyable: true, message: 'Tx Hash Copied' },
 		{
 			label: 'Gas Fee',
 			value: (
@@ -60,8 +61,8 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
 
 	return (
 		<div className="transaction_info">
-			{rows.map(({ label, value, copyable }) => (
-				<DirectionInfoRow key={label} label={label} value={value} loading={loading} copyable={copyable} />
+			{rows.map(({ label, value, copyable, message }) => (
+				<DirectionInfoRow key={label} label={label} value={value} loading={loading} copyable={copyable} message={message}/>
 			))}
 		</div>
 	)
