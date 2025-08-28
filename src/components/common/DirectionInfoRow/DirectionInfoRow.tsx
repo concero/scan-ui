@@ -12,7 +12,13 @@ type DirectionInfoRowProps = {
 	readonly loading: boolean
 }
 
-export const DirectionInfoRow = ({ label, value, loading, copyable = true, message }: DirectionInfoRowProps): ReactElement => {
+export const DirectionInfoRow = ({
+	label,
+	value,
+	loading,
+	copyable = true,
+	message,
+}: DirectionInfoRowProps): ReactElement => {
 	const { copy } = useClipboard()
 	const valueRef = useRef<HTMLDivElement>(null)
 	const [wrapped, setWrapped] = useState(false)

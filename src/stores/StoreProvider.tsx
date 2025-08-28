@@ -7,9 +7,7 @@ export const StoreProvider: FC<PropsWithChildren<{}>> = ({ children }): ReactEle
 	return (
 		<SettingsStoreProvider>
 			<ModalsStoreProvider>
-				<NotificationStoreProvider>
-					{children}
-				</NotificationStoreProvider>
+				<NotificationStoreProvider>{children}</NotificationStoreProvider>
 			</ModalsStoreProvider>
 		</SettingsStoreProvider>
 	)

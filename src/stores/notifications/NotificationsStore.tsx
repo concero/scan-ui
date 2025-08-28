@@ -5,15 +5,11 @@ import { CreateNotificationStore } from './CreateNotificationsStore'
 import { NotificationsContext } from './NotificationsContext'
 
 export function NotificationStoreProvider({ children }: PropsWithChildren<{}>) {
-  const storeRef = useRef<NotificationStore | null>(null)
+	const storeRef = useRef<NotificationStore | null>(null)
 
-  if (!storeRef.current) {
-    storeRef.current = CreateNotificationStore()
-  }
+	if (!storeRef.current) {
+		storeRef.current = CreateNotificationStore()
+	}
 
-  return (
-    <NotificationsContext.Provider value={storeRef.current}>
-      {children}
-    </NotificationsContext.Provider>
-  )
+	return <NotificationsContext.Provider value={storeRef.current}>{children}</NotificationsContext.Provider>
 }

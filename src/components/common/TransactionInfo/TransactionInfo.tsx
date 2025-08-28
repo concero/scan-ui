@@ -62,7 +62,14 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
 	return (
 		<div className="transaction_info">
 			{rows.map(({ label, value, copyable, message }) => (
-				<DirectionInfoRow key={label} label={label} value={value} loading={loading} copyable={copyable} message={message}/>
+				<DirectionInfoRow
+					key={label}
+					label={label}
+					value={value}
+					loading={loading}
+					copyable={copyable}
+					message={message}
+				/>
 			))}
 		</div>
 	)
