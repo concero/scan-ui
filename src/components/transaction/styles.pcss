@@ -8,6 +8,12 @@
 	background: linear-gradient(180deg, var(--color-gray-25) 0%, var(--color-gray-50) 100%);
 	position: relative;
 
+	& .back_button {
+		position: absolute;
+		top: var(--space-xl);
+		left: var(--space-xl);
+	}
+
 	& .transaction_content {
 		display: flex;
 		flex-direction: column;
@@ -46,6 +52,15 @@
 	.transaction .transaction_content {
 		max-width: 100%;
 	}
+
+	& .transaction .back_button {
+		position: relative;
+		top: auto;
+		left: auto;
+		margin-bottom: var(--space-m);
+		align-self: flex-start;
+		z-index: 10;
+	}
 }
 
 @media (max-width: 640px) {
@@ -54,5 +69,14 @@
 	}
 	.transaction .transaction_content {
 		max-width: 100%;
+	}
+
+	& .transaction .back_button {
+		position: relative;
+		top: auto;
+		left: auto;
+		margin-bottom: var(--space-m);
+		align-self: flex-start;
+		z-index: 10;
 	}
 }
