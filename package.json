@@ -70,5 +70,8 @@
 		"vite-plugin-static-copy": "^2.3.0",
 		"vite-plugin-stylelint": "^6.0.0",
 		"vite-tsconfig-paths": "^5.1.4"
+	},
+	"optionalDependencies": {
+		 "@rollup/rollup-linux-x64-gnu": "4.9.5"
 	}
 }
