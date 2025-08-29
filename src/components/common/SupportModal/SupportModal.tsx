@@ -37,7 +37,7 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 			text: 'Copy debug info',
 			buttonLabel: copied ? 'Copied!' : 'Copy debug info',
 			icon: <CopyIcon />,
-			onClick: () => copy(DEBUG_INFO),
+			onClick: () => copy(DEBUG_INFO, 'Copied Debug Info'),
 		},
 		{
 			step: 2,

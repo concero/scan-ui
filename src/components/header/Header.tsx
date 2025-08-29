@@ -1,54 +1,62 @@
 import type { ReactElement } from 'react'
+import type { Location } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { useMemo, useState, useEffect, useCallback } from 'react'
 import { SearchBar } from '../common'
 import { HeaderActions } from './HeaderActions'
 import { HeaderLogo } from './HeaderLogo'
 import { useModalsStore, useIsMobile, useIsTablet } from '@/hooks'
-import { useMemo, useState, useEffect } from 'react'
+import { routes } from '@/configuration'
 import './styles.pcss'
 
 export const Header = (): ReactElement => {
-	const [isBurgerOpen, setBurgerOpen] = useState<boolean>(false)
-	const isMobile: boolean = useIsMobile()
-	const isTablet: boolean = useIsTablet()
-	const { toggleModal } = useModalsStore()
+    const [isBurgerOpen, setBurgerOpen] = useState<boolean>(false)
+    const isMobile: boolean = useIsMobile()
+    const isTablet: boolean = useIsTablet()
+	const location: Location = useLocation()
 
-	const location = useLocation()
-	const isHomePage: boolean = location.pathname === '/'
+    const { toggleModal } = useModalsStore()
 
-	useEffect(() => {
-		setBurgerOpen(false)
-	}, [isMobile, isTablet])
+    const isHomePage: boolean = location.pathname === routes.home()
 
-	const search: ReactElement | null = useMemo(() => {
-		if (isHomePage || (!isHomePage && ((isBurgerOpen && !isTablet) || isMobile))) return null
+    useEffect(() => {
+        setBurgerOpen(false)
+    }, [isMobile, isTablet])
 
-		return (
-			<div className="header_search">
-				<SearchBar size="m" placeholder="Contract Address, Message, Tx Hash" />
-			</div>
-		)
-	}, [isHomePage, isBurgerOpen, isMobile])
+    const toggleSupport: () => void = useCallback(() => {
+        toggleModal('concero-support-modal')
+    }, [toggleModal])
 
-	const logo = useMemo(() => {
-		return <HeaderLogo />
-	}, [])
+    const search = useMemo<ReactElement | null>(() => {
+        if (
+            isHomePage ||
+            (!isHomePage && ((isBurgerOpen && !isTablet) || isMobile))
+        ) {
+            return null
+        }
 
-	const actions = useMemo(() => {
-		return (
-			<HeaderActions
-				isBurgerOpen={isBurgerOpen}
-				setBurgerOpen={setBurgerOpen}
-				handleClick={() => toggleModal('concero-support-modal')}
-			/>
-		)
-	}, [toggleModal, isBurgerOpen, setBurgerOpen])
+        return (
+            <div className="header_search">
+                <SearchBar size="m" placeholder="Contract Address, Message, Tx Hash" />
+            </div>
+        )
+    }, [isHomePage, isBurgerOpen, isMobile, isTablet])
 
-	return (
-		<header className="header">
-			{logo}
-			{search}
-			{actions}
-		</header>
-	)
+    const logo = useMemo<ReactElement>(() => <HeaderLogo />, [])
+
+    const actions: ReactElement = useMemo<ReactElement>(() => (
+        <HeaderActions
+            isBurgerOpen={isBurgerOpen}
+            setBurgerOpen={setBurgerOpen}
+            handleClick={toggleSupport}
+        />
+    ), [isBurgerOpen, setBurgerOpen, toggleSupport])
+
+    return (
+        <header className="header">
+            {logo}
+            {search}
+            {actions}
+        </header>
+    )
 }

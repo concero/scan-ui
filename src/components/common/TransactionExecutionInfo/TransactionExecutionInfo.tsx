@@ -59,8 +59,8 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 	dstCurrency,
 	feeCurrency,
 	loading,
-	hasRetry = true,
-	isExpandable = false,
+	hasRetry = false,
+	isExpandable = true,
 }: TransactionExecutionInfoProps): ReactElement {
 	const { copy, copied } = useClipboard()
 	const { toggleModal } = useModalsStore()

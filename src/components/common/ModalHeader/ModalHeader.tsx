@@ -5,12 +5,12 @@ import './styles.pcss'
 
 type ModalHeaderProps = {
 	readonly title: string
-	readonly showBack: boolean
+	readonly showBack?: boolean
 	readonly onBack?: MouseEventHandler<HTMLButtonElement>
 	readonly onClose: MouseEventHandler<HTMLButtonElement>
 }
 
-export const ModalHeader = ({ title, showBack, onBack, onClose }: ModalHeaderProps): ReactElement => (
+export const ModalHeader = ({ title, showBack = false, onBack, onClose }: ModalHeaderProps): ReactElement => (
 	<div className="modal_header">
 		{showBack ? (
 			<IconButton
