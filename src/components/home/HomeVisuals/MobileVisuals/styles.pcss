@@ -10,10 +10,7 @@
 
 	& .mobile_visual {
 		position: absolute;
-		opacity: 0;
-		--illustration-rotate: 0deg;
-		animation: desktop_visuals_animation 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-		transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+		will-change: transform;
 	}
 
 	& .visual_one {
@@ -22,21 +19,14 @@
 		left: 4.27%;
 		bottom: 25.64%;
 		--illustration-rotate: -14.66deg;
-		animation-delay: 0.1s;
-		&:hover {
-			--illustration-rotate: 0deg;
-		}
 	}
+
 	& .visual_three {
 		width: 104px;
 		height: auto;
 		bottom: 14.7%;
 		transform: translateX(-50%);
 		--illustration-rotate: 0deg;
-		animation-delay: 0.5s;
-		&:hover {
-			--illustration-rotate: 0deg;
-		}
 	}
 
 	& .visual_five {
@@ -45,20 +35,5 @@
 		right: 4.27%;
 		bottom: 25.64%;
 		--illustration-rotate: -14.66deg;
-		animation-delay: 0.1s;
-		&:hover {
-			--illustration-rotate: 0deg;
-		}
-	}
-}
-
-@keyframes desktop_visuals_animation {
-	0% {
-		opacity: 0;
-		transform: translateY(60px) rotate(var(--illustration-rotate, 0deg));
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0) rotate(var(--illustration-rotate, 0deg));
 	}
 }
