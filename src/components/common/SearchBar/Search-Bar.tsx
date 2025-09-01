@@ -11,7 +11,7 @@ type SearchBarProps = {
 
 export const SearchBar = ({
 	size = 'xl',
-	placeholder = 'Search by Contract Address, Message, Tx Hash',
+	placeholder = 'Search by Contract Address, Message ID, Tx Hash',
 }: SearchBarProps): ReactElement => {
 	return (
 		<div className="search_bar">
