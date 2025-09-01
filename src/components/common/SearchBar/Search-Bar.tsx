@@ -10,12 +10,17 @@ type SearchBarProps = {
 }
 
 export const SearchBar = ({
-	size = 'xl',
-	placeholder = 'Search by Contract Address, Message, Tx Hash',
+    size = 'xl',
+    placeholder = 'Search by Contract Address, Message, Tx Hash',
 }: SearchBarProps): ReactElement => {
-	return (
-		<div className="search_bar">
-			<Input placeholder={placeholder} size={size} icon={<SearchIcon />} />
-		</div>
-	)
+    return (
+        <div className="search_bar">
+            <Input 
+                placeholder={placeholder} 
+                size={size} 
+                icon={<SearchIcon />}
+                inputProps={{ autoComplete: "off" }}
+            />
+        </div>
+    )
 }
