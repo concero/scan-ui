@@ -9,14 +9,14 @@ import { Status } from '@/components/transaction'
 import './styles.pcss'
 
 type DirectionInfo = {
-	chainLogo: string
+	logo: string
 	address: string
 }
 
 type Data = {
 	messageId: string
 	type: TransactionType
-	time: string
+	timestamp: number
 	from: DirectionInfo
 	to: DirectionInfo
 	status: Status
@@ -45,12 +45,12 @@ type DataTableProps = {
 }
 
 export const DataTable = ({ data }: DataTableProps): ReactElement => {
-	const rows: MessageRow[] = data.map(({ messageId, type, time, from, to, status }) => ({
+	const rows: MessageRow[] = data.map(({ messageId, type, timestamp, from, to, status }) => ({
 		messageId: <MessageData messageId={messageId} />,
 		type: <TransactionLabel size="s" type={type} />,
-		age: <TimeData time={time} />,
-		from: <DirectionData chainLogo={from.chainLogo} address={from.address} />,
-		to: <DirectionData chainLogo={to.chainLogo} address={to.address} />,
+		age: <TimeData timestamp={timestamp} />,
+		from: <DirectionData logo={from.logo} address={from.address} />,
+		to: <DirectionData logo={to.logo} address={to.address} />,
 		status: <StatusLabel status={status} size="m" />,
 	}))
 
