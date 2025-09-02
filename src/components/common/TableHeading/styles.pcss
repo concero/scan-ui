@@ -7,7 +7,7 @@
 		display: grid;
 		max-width: 1464px;
 		width: 100%;
-		grid-template-columns: minmax(152px, 1fr) 160px 128px 239px 239px 119px;
+		grid-template-columns: minmax(299px, 1fr) 160px 128px 239px 239px 119px;
 		height: 50px;
 		border-bottom: 1px solid var(--color-gray-100);
 	}
@@ -19,5 +19,17 @@
 		font-size: 0.875rem;
 		line-height: 1.125rem;
 		padding: var(--space-m) var(--space-m) var(--space-l) var(--space-m);
+	}
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+	.table_heading.table_heading_container {
+		grid-template-columns: minmax(295px, 1fr) 160px 128px 239px 239px 119px;
+	}
+}
+
+@media (max-width: 640px) {
+	.table_heading .table_heading_container {
+		grid-template-columns: minmax(152px, 1fr) 160px 128px 239px 239px 119px;
 	}
 }
