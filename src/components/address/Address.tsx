@@ -6,9 +6,9 @@ import { AddressData } from '@/pages/address'
 import './styles.pcss'
 
 type AddressProps = {
-    address: string | undefined
-    data: AddressData[]
-    loading: boolean
+	address: string | undefined
+	data: AddressData[]
+	loading: boolean
 }
 
 export const Address = ({ address, data }: AddressProps): ReactElement => {

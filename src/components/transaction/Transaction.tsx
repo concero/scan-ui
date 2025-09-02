@@ -8,6 +8,7 @@ import { IconButton } from '@concero/ui-kit'
 import { ArrowLeftIcon } from '@/assets'
 import { Skeleton } from '../common'
 import { useNavigation } from '@/hooks'
+import { useMemo, useCallback, memo } from 'react'
 import './styles.pcss'
 
 type TransactionProps = {
@@ -15,40 +16,43 @@ type TransactionProps = {
 	loading: boolean
 }
 
-export const Transaction = ({ data, loading }: TransactionProps): ReactElement => {
+export const Transaction = memo(({ data, loading }: TransactionProps): ReactElement => {
 	const { back } = useNavigation()
+	const onBack = useCallback(() => back(), [back])
 	const { messageId, status, reason, from, to, type, finality, timestamp, duration, payload, gasLimit, fees } = data
 
-	const divider = <span className="transaction_divider" />
+	const memoDivider = useMemo(() => <span className="transaction_divider" />, [])
 
 	return (
 		<div className="transaction_wrapper">
 			<div className="transaction">
-				<IconButton size="m" variant="secondary" onClick={back} className="back_button">
+				<IconButton size="m" variant="secondary" onClick={onBack} className="back_button">
 					<ArrowLeftIcon />
 				</IconButton>
 				<div className="transaction_content">
 					{loading ? <Skeleton width={215} height={36} /> : <span className="transaction_title">{type}</span>}
-					<MessageDetails messageId={messageId} status={status} reason={reason} loading={loading} />
-					{divider}
-					<TransactionSummary sender={from.address} receiver={to.address} type={type} loading={loading} />
-					{divider}
-					<TransactionFinality finality={finality} loading={loading} />
-					{divider}
-					<TransactionTimestamp timestamp={timestamp} duration={duration} loading={loading} />
-					{divider}
-					<TransactionDetails from={from} to={to} loading={loading} />
-					{divider}
+					<MessageDetails {...{ messageId, status, reason, loading }} />
+					{memoDivider}
+					<TransactionSummary {...{ sender: from.address, receiver: to.address, type, loading }} />
+					{memoDivider}
+					<TransactionFinality {...{ finality, loading }} />
+					{memoDivider}
+					<TransactionTimestamp {...{ timestamp, duration, loading }} />
+					{memoDivider}
+					<TransactionDetails {...{ from, to, loading }} />
+					{memoDivider}
 					<TransactionExecutionInfo
-						payload={payload}
-						gasLimit={gasLimit}
-						fees={fees}
-						dstCurrency={to.token.symbol}
-						feeCurrency={from.token.symbol}
-						loading={loading}
+						{...{
+							payload,
+							gasLimit,
+							fees,
+							dstCurrency: to.token.symbol,
+							feeCurrency: from.token.symbol,
+							loading,
+						}}
 					/>
 				</div>
 			</div>
 		</div>
 	)
-}
+})
