@@ -5,8 +5,17 @@
 	padding: var(--space-xl) var(--space-xl) var(--space-xxxxxl) var(--space-xl);
 	width: 100%;
 	height: calc(100vh - var(--header-height));
-	gap: var(--space-xl);
+	gap: var(--space-m);
 	background: linear-gradient(180deg, var(--color-gray-25, #fcfcfd) 0%, var(--color-gray-50, #f3f5f6) 100%);
+
+	& .address_content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-xl);
+		width: 100%;
+	}
 
 	& .address_info {
 		display: flex;

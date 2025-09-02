@@ -13,6 +13,7 @@ type AddressProps = {
 export const Address = ({ address, data, isTestnet }: AddressProps): ReactElement => {
 	return (
 		<div className="address">
+			<div className='address_content'>
 			<div className="address_description">
 				<div className="address_info">
 					<span className="address_subtitle">Address</span>
@@ -21,6 +22,9 @@ export const Address = ({ address, data, isTestnet }: AddressProps): ReactElemen
 				<span className="address_title">{address}</span>
 			</div>
 			<ButtonGroup labels={['Outgoing', 'Incoming']} />
+
+			</div>
+
 			<DataTable data={data} />
 		</div>
 	)
