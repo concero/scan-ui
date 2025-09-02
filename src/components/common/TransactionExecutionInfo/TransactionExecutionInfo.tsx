@@ -59,7 +59,7 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 	dstCurrency,
 	feeCurrency,
 	loading,
-	hasRetry = false,
+	hasRetry = true,
 	isExpandable = true,
 }: TransactionExecutionInfoProps): ReactElement {
 	const { copy, copied } = useClipboard()
