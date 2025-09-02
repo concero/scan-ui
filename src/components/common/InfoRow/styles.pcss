@@ -79,20 +79,20 @@
 	display: none;
 }
 
-@media (max-width: 1024px) {
-	& .info_row_value:not(.no_copy) > .info_row_copy {
-		opacity: 1;
-		pointer-events: auto;
-	}
-}
-
-@media (min-width: 1025px) {
+@media (min-width: 1025px) and (max-width: 1920px) {
 	& .info_row_value:not(.no_copy) > .info_row_copy {
 		opacity: 0;
 		pointer-events: none;
 	}
 
 	& .info_row_value:not(.no_copy):hover > .info_row_copy {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+	& .info_row_value:not(.no_copy) > .info_row_copy {
 		opacity: 1;
 		pointer-events: auto;
 	}
