@@ -34,7 +34,7 @@ export const Header = (): ReactElement => {
 
 		return (
 			<div className="header_search">
-				<SearchBar size="m" placeholder="Contract Address, Message, Tx Hash" />
+				<SearchBar size="m" placeholder="Contract Address, Message ID, Tx Hash" />
 			</div>
 		)
 	}, [isHomePage, isBurgerOpen, isMobile, isTablet])
