@@ -2,7 +2,7 @@ import type { AddressState } from '@/stores'
 import { useContext } from 'react'
 import { AddressContext } from '@/stores'
 
-export type UseSettingsStoreResult = {
+export type UseAddressStoreResult = {
     txs: AddressState['txs']
     filters: AddressState['filters']
     loading: AddressState['loading']
@@ -12,7 +12,7 @@ export type UseSettingsStoreResult = {
     setLoading: AddressState['setLoading']
 }
 
-export const useAddressStore = (): UseSettingsStoreResult => {
+export const useAddressStore = (): UseAddressStoreResult => {
     const useStore = useContext(AddressContext)
 
     if (!useStore) {
