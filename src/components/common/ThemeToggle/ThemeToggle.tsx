@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import { DarkThemeIcon } from '../../../assets'
 import { useMemo } from 'react'
 import { Switch } from '@concero/ui-kit'
-import { useSettingsStore } from '@/hooks/useSettings'
+import { useSettingsStore } from '@/hooks/useSettingsStore'
 import { Theme } from '@/stores/settings/types'
 import './style.pcss'
 

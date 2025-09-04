@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSettingsStore } from '@/hooks/useSettings'
+import { useSettingsStore } from '@/hooks/useSettingsStore'
 
 export const ThemeProvider = () => {
 	const { theme } = useSettingsStore()

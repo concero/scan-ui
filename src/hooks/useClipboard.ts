@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { useNotificationsStore } from './useNotifications'
+import { useNotificationsStore } from './useNotificationsStore'
 
 type UseClipboardOptions = {
 	resetAfter?: number
