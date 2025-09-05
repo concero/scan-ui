@@ -3,7 +3,6 @@ import { Button, IconButton } from '@concero/ui-kit'
 import { useClipboard, useModalsStore } from '@/hooks'
 import { PointerUpIcon, WarningIcon } from '@/assets'
 import { InfoRow } from '../InfoRow'
-import { Skeleton } from '../Skeleton'
 import './styles.pcss'
 
 type TransactionExecutionInfoProps = Readonly<{
@@ -12,7 +11,6 @@ type TransactionExecutionInfoProps = Readonly<{
 	fees: number
 	dstCurrency: string
 	feeCurrency: string
-	loading: boolean
 	hasRetry?: boolean
 	isExpandable?: boolean
 }>
@@ -58,7 +56,6 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 	fees,
 	dstCurrency,
 	feeCurrency,
-	loading,
 	hasRetry = true,
 	isExpandable = true,
 }: TransactionExecutionInfoProps): ReactElement {
@@ -68,14 +65,6 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 
 	const handleCopy = useCallback(() => copy(payload, 'Message Payload Copied'), [copy, payload])
 	const toggleDetails = useCallback(() => setExpanded(prev => !prev), [])
-
-	if (loading) {
-		return (
-			<div className="tx_info">
-				<Skeleton width="100%" height={32} />
-			</div>
-		)
-	}
 
 	return (
 		<div className="tx_info">
@@ -97,7 +86,6 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 							{gasLimit} <span className="tx_currency">{dstCurrency}</span>
 						</>
 					}
-					loading={false}
 				/>
 				<InfoRow
 					label="Concero Fees"
@@ -106,7 +94,6 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 							{fees} <span className="tx_currency">{feeCurrency}</span>
 						</>
 					}
-					loading={false}
 				/>
 				<div className="tx_actions">
 					{hasRetry && (

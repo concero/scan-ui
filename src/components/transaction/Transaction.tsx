@@ -6,17 +6,15 @@ import { TransactionFinality } from '../common'
 import { TransactionExecutionInfo } from '../common'
 import { IconButton } from '@concero/ui-kit'
 import { ArrowLeftIcon } from '@/assets'
-import { Skeleton } from '../common'
 import { useNavigation } from '@/hooks'
 import { useMemo, useCallback, memo } from 'react'
 import './styles.pcss'
 
 type TransactionProps = {
 	data: TransactionData
-	loading: boolean
 }
 
-export const Transaction = memo(({ data, loading }: TransactionProps): ReactElement => {
+export const Transaction = memo(({ data }: TransactionProps): ReactElement => {
 	const { back } = useNavigation()
 	const onBack = useCallback(() => back(), [back])
 	const { messageId, status, reason, from, to, type, finality, timestamp, duration, payload, gasLimit, fees } = data
@@ -30,16 +28,16 @@ export const Transaction = memo(({ data, loading }: TransactionProps): ReactElem
 					<ArrowLeftIcon />
 				</IconButton>
 				<div className="transaction_content">
-					{loading ? <Skeleton width={215} height={36} /> : <span className="transaction_title">{type}</span>}
-					<MessageDetails {...{ messageId, status, reason, loading }} />
+					<span className="transaction_title">{type}</span>
+					<MessageDetails {...{ messageId, status, reason }} />
 					{memoDivider}
-					<TransactionSummary {...{ sender: from.address, receiver: to.address, type, loading }} />
+					<TransactionSummary {...{ sender: from.address, receiver: to.address, type }} />
 					{memoDivider}
-					<TransactionFinality {...{ finality, loading }} />
+					<TransactionFinality {...{ finality }} />
 					{memoDivider}
-					<TransactionTimestamp {...{ timestamp, duration, loading }} />
+					<TransactionTimestamp {...{ timestamp, duration }} />
 					{memoDivider}
-					<TransactionDetails {...{ from, to, loading }} />
+					<TransactionDetails {...{ from, to }} />
 					{memoDivider}
 					<TransactionExecutionInfo
 						{...{
@@ -48,7 +46,6 @@ export const Transaction = memo(({ data, loading }: TransactionProps): ReactElem
 							fees,
 							dstCurrency: to.token.symbol,
 							feeCurrency: from.token.symbol,
-							loading,
 						}}
 					/>
 				</div>

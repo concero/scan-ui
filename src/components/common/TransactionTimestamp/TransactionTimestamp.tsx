@@ -5,10 +5,9 @@ import './styles.pcss'
 type TransactionTimestampProps = {
 	timestamp: number
 	duration: number
-	loading: boolean
 }
 
-export const TransactionTimestamp = ({ timestamp, duration, loading }: TransactionTimestampProps): ReactElement => {
+export const TransactionTimestamp = ({ timestamp, duration }: TransactionTimestampProps): ReactElement => {
 	const date = new Date(timestamp * 1000)
 
 	const day = date.getUTCDate()
@@ -30,10 +29,9 @@ export const TransactionTimestamp = ({ timestamp, duration, loading }: Transacti
 						{formattedDate} <span className="transaction_timestamp_time">{formattedTime}</span>
 					</>
 				}
-				loading={loading}
 				copyable={false}
 			/>
-			<InfoRow label="Duration" value={formattedDuration} loading={loading} copyable={false} />
+			<InfoRow label="Duration" value={formattedDuration} copyable={false} />
 		</div>
 	)
 }

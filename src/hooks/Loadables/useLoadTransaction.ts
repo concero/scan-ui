@@ -2,19 +2,19 @@ import type { Transaction } from '@/stores'
 import { isHash } from 'viem'
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useTransactionStore } from '../useTranscationStore'
+import { useTransactionStore } from '../useTransactionStore'
 import { useParams } from 'react-router-dom'
 import { MOCK_TRANSACTION } from './mockTransaction'
 
 export const useLoadTransaction = (): void => {
-  const { messageId } = useParams<{ messageId: string }>()
+  const { identifier } = useParams<{ identifier: string }>()
   const { setTransaction, setLoading } = useTransactionStore()
 
   const getData = async (): Promise<Transaction | null> => {
-    if (!messageId || !isHash(messageId)) {
+    if (!identifier || !isHash(identifier)) {
       return null
     }
-    await new Promise((resolve) => setTimeout(resolve, 350))
+    await new Promise((resolve) => setTimeout(resolve, 750))
     return MOCK_TRANSACTION
   }
 
@@ -22,9 +22,9 @@ export const useLoadTransaction = (): void => {
     data,
     isLoading,
   } = useQuery({
-    queryKey: ['transaction', messageId],
+    queryKey: ['transaction', identifier],
     queryFn: getData,
-    enabled: !!messageId && isHash(messageId),
+    enabled: !!identifier && isHash(identifier),
     staleTime: 30_000,
     retry: 2,
     refetchOnWindowFocus: false,
@@ -36,3 +36,5 @@ export const useLoadTransaction = (): void => {
     setLoading(isLoading)
   }, [data, isLoading, setTransaction, setLoading])
 }
+
+

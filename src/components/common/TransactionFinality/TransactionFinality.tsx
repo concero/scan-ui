@@ -5,17 +5,15 @@ import './styles.pcss'
 
 type TransactionFinalityProps = {
 	readonly finality: boolean
-	readonly loading: boolean
 }
 
-export const TransactionFinality = ({ finality, loading }: TransactionFinalityProps): ReactElement => {
+export const TransactionFinality = ({ finality }: TransactionFinalityProps): ReactElement => {
 	const status: string = finality ? 'Yes' : 'No'
 
 	return (
 		<div className="transaction_finality">
 			<InfoRow
 				label="Finality Required"
-				loading={loading}
 				value={
 					<Tag size="s" variant="neutral">
 						{status}

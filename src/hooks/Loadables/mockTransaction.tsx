@@ -1,11 +1,12 @@
 import type { Transaction } from "@/stores"
-import { Status, TransactionType } from "@/components"
+import { TransactionType } from "@/components"
+import { Status } from "@/components"
 
 export const MOCK_TRANSACTION: Transaction = {
   messageId: '0x4231f887251b9d0b4923262d55783dafdb6bb63590a2a34243f3c9e038544791',
-  status: Status.Success,
+  status: 'success' as Status,
   reason: '0x019218x89121',
-  type: TransactionType.CanonicalBridge,
+  type: 'Canonical Bridge' as TransactionType,
   finality: true,
   timestamp: 1696114800,
   from: {

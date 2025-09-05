@@ -5,10 +5,9 @@ import './styles.pcss'
 
 type TransactionInfoProps = {
 	details: Direction
-	loading: boolean
 }
 
-export const TransactionInfo = ({ details, loading }: TransactionInfoProps): ReactElement => {
+export const TransactionInfo = ({ details }: TransactionInfoProps): ReactElement => {
 	const { chain, token, address, hash, gas } = details
 
 	const rows = [
@@ -66,7 +65,6 @@ export const TransactionInfo = ({ details, loading }: TransactionInfoProps): Rea
 					key={label}
 					label={label}
 					value={value}
-					loading={loading}
 					copyable={copyable}
 					message={message}
 				/>

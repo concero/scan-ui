@@ -7,11 +7,10 @@ import './styles.pcss'
 type MessageDetailsProps = {
 	readonly messageId: string | undefined
 	readonly status: Status
-	readonly loading: boolean
 	readonly reason?: string
 }
 
-export const MessageDetails = ({ loading, messageId, status, reason }: MessageDetailsProps): ReactElement | null => {
+export const MessageDetails = ({ messageId, status, reason }: MessageDetailsProps): ReactElement | null => {
 	const rows = [
 		{ label: 'Concero message ID', value: messageId, copyable: true, message: 'Message ID Copied' },
 		{ label: 'Status', value: <StatusLabel status={status} size="s" />, copyable: false },
@@ -28,7 +27,7 @@ export const MessageDetails = ({ loading, messageId, status, reason }: MessageDe
 	return (
 		<div className="message_details">
 			{rows.map(({ label, value, copyable }) => (
-				<InfoRow key={label} label={label} value={value} loading={loading} copyable={copyable} />
+				<InfoRow key={label} label={label} value={value} copyable={copyable} />
 			))}
 		</div>
 	)
