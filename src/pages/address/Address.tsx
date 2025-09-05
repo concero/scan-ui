@@ -4,7 +4,7 @@ import { MetaTags } from '@/components/common'
 import { Status, TransactionType } from '@/components'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
-import { dataResponse } from './mockData'
+import { MOCK_ADDRESS_DATA } from './mockData'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -36,7 +36,7 @@ export const AddressPage: FC = (): ReactElement => {
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
-			setResponse(dataResponse)
+			setResponse(MOCK_ADDRESS_DATA)
 			setLoading(false)
 		}, 2000)
 		return () => clearTimeout(timer)
