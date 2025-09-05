@@ -47,7 +47,7 @@ export type TransactionStateSlice = {
 }
 
 export type TransactionActions = {
-	setTransaction: (transaction: Transaction) => void
+	setTransaction: (transaction: Transaction | null) => void
 	setLoading: (loading: boolean) => void	
 }
 

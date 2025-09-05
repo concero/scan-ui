@@ -31,8 +31,7 @@ export const useLoadTransaction = (): void => {
   })
 
   useEffect(() => {
-    if (data) setTransaction(data)
-    
+    setTransaction(data ?? null)
     setLoading(isLoading)
   }, [data, isLoading, setTransaction, setLoading])
 }
