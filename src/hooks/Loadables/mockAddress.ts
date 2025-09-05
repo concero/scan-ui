@@ -1,4 +1,4 @@
-import type { AddressResponse } from './Address'
+import type { AddressResponse } from '@/pages'
 import { Status } from '@/components'
 import { TransactionType } from '@/components'
 

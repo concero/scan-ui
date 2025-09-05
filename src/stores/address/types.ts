@@ -17,6 +17,7 @@ export type AddressTx = {
 }
 
 export type AddressTxFilters = {
+	page?: number
 	fromTime?: number
 	toTime?: number
 	status?: Status
