@@ -31,8 +31,7 @@ export type AddressResponse = {
 export const AddressPage: FC = (): ReactElement => {
 	useLoadAddress()
 	const { address } = useParams<{ address: string }>()
-	const { txs, loading} = useAddressStore()
-
+	const { txs, loading } = useAddressStore()
 
 	return (
 		<>

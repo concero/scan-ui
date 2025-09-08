@@ -12,23 +12,21 @@ export const TransactionPage: FC = (): ReactElement => {
 	useLoadTransaction()
 	const { transaction, loading } = useTransactionStore()
 
-    const renderContent = (): ReactElement => {
-        switch (true) {
-            case loading:
-                return <ScreenLoader />
-            case !transaction:
-                return <NotFound resource='Transaction' />
-            default:
-                return <Transaction data={transaction} />
-        }
-    }
+	const renderContent = (): ReactElement => {
+		switch (true) {
+			case loading:
+				return <ScreenLoader />
+			case !transaction:
+				return <NotFound resource="Transaction" />
+			default:
+				return <Transaction data={transaction} />
+		}
+	}
 
 	return (
 		<>
 			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
-			<main>
-				{renderContent()}
-			</main>
+			<main>{renderContent()}</main>
 		</>
 	)
 }

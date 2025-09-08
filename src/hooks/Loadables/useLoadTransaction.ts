@@ -7,30 +7,25 @@ import { useParams } from 'react-router-dom'
 import { MOCK_TRANSACTION } from './mockTransaction'
 
 export const useLoadTransaction = (): void => {
-  const { identifier } = useParams<{ identifier: string }>()
-  const { setTransaction, setLoading } = useTransactionStore()
-  
-  const getData = async (): Promise<Transaction | null> => {
-    await new Promise((resolve) => setTimeout(resolve, 750))
-    return MOCK_TRANSACTION
-  }
+	const { identifier } = useParams<{ identifier: string }>()
+	const { setTransaction, setLoading } = useTransactionStore()
 
-  const {
-    data,
-    isLoading,
-  } = useQuery({
-    queryKey: ['transaction', identifier],
-    queryFn: getData,
-    enabled: !!identifier && isHash(identifier),
-    staleTime: 30_000,
-    retry: 2,
-    refetchOnWindowFocus: false,
-  })
+	const getData = async (): Promise<Transaction | null> => {
+		await new Promise(resolve => setTimeout(resolve, 750))
+		return MOCK_TRANSACTION
+	}
 
-  useEffect(() => {
-    setTransaction(data ?? null)
-    setLoading(isLoading)
-  }, [data, isLoading, setTransaction, setLoading])
+	const { data, isLoading } = useQuery({
+		queryKey: ['transaction', identifier],
+		queryFn: getData,
+		enabled: !!identifier && isHash(identifier),
+		staleTime: 30_000,
+		retry: 2,
+		refetchOnWindowFocus: false,
+	})
+
+	useEffect(() => {
+		setTransaction(data ?? null)
+		setLoading(isLoading)
+	}, [data, isLoading, setTransaction, setLoading])
 }
-
-

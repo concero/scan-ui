@@ -1,11 +1,20 @@
-import { useParams } from "react-router-dom"
-import { isAddress } from "viem"
-import { useAddressStore } from "../useAddressStore"
-import { useQuery } from "@tanstack/react-query"
-import { useEffect } from "react"
-import { useQueryParams } from "../useQueryParams"
-import { Status, TransactionType } from "@/types"
-import type { AddressTxFilters } from "@/stores"
+import type { AddressTxFilters } from '@/stores'
+import { useParams } from 'react-router-dom'
+import { isAddress } from 'viem'
+import { useAddressStore } from '../useAddressStore'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useQueryParams } from '../useQueryParams'
+import {
+  parsePage,
+  parseTime,
+  parseStatus,
+  parseType,
+  validatePage,
+  validateTime,
+  validateStatus,
+  validateType,
+} from '@/utils'
 
 export const useLoadAddress = () => {
   const { address } = useParams<{ address: string }>()
@@ -14,42 +23,37 @@ export const useLoadAddress = () => {
   const [params] = useQueryParams<AddressTxFilters>({
     page: {
       defaultValue: 1,
-      parse: (v) => (v ? parseInt(v, 10) : 1),
-      validate: (v) => v !== undefined && Number.isInteger(v) && v > 0,
+      parse: (v) => parsePage({ page: v }),
+      validate: (v) => validatePage({ page: v }),
     },
     fromTime: {
       defaultValue: undefined,
-      parse: (v) => (v ? parseInt(v, 10) : undefined),
-      validate: (v) => v === undefined || Number.isInteger(v),
+      parse: (v) => parseTime({ time: v }),
+      validate: (v) => validateTime({ time: v }),
     },
     toTime: {
       defaultValue: undefined,
-      parse: (v) => (v ? parseInt(v, 10) : undefined),
-      validate: (v) => v === undefined || Number.isInteger(v),
+      parse: (v) => parseTime({ time: v }),
+      validate: (v) => validateTime({ time: v }),
     },
     status: {
       defaultValue: undefined,
-      parse: (v) => (v && v in Status ? (Status as any)[v] : undefined),
-      validate: (v) => v === undefined || Object.values(Status).includes(v),
+      parse: (v) => parseStatus({ status: v }),
+      validate: (v) => validateStatus({ status: v }),
     },
     type: {
       defaultValue: undefined,
-      parse: (v) => (v && v in TransactionType ? (TransactionType as any)[v] : undefined),
-      validate: (v) => v === undefined || Object.values(TransactionType).includes(v),
+      parse: (v) => parseType({ type: v }),
+      validate: (v) => validateType({ type: v }),
     },
   })
 
-  const page = params.page
-
   const getData = async () => {
-    if (!address || !isAddress(address)) {
-      return []
-    }
     await new Promise((resolve) => setTimeout(resolve, 300))
   }
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["addressTxs", address, params],
+    queryKey: ['addressTxs', address, params],
     queryFn: getData,
     staleTime: 30_000,
     retry: 2,

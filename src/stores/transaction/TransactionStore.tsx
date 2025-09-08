@@ -5,11 +5,11 @@ import { TransactionContext } from './TransactionContext'
 import { CreateTransactionStore } from './CreateTransactionStore'
 
 export function TransactionStoreProvider({ children }: PropsWithChildren) {
-    const storeRef = useRef<TransactionStore | null>(null)
+	const storeRef = useRef<TransactionStore | null>(null)
 
-    if (!storeRef.current) {
-        storeRef.current = CreateTransactionStore()
-    }
+	if (!storeRef.current) {
+		storeRef.current = CreateTransactionStore()
+	}
 
-    return <TransactionContext.Provider value={storeRef.current}>{children}</TransactionContext.Provider>
+	return <TransactionContext.Provider value={storeRef.current}>{children}</TransactionContext.Provider>
 }

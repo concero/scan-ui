@@ -61,13 +61,7 @@ export const TransactionInfo = ({ details }: TransactionInfoProps): ReactElement
 	return (
 		<div className="transaction_info">
 			{rows.map(({ label, value, copyable, message }) => (
-				<DirectionInfoRow
-					key={label}
-					label={label}
-					value={value}
-					copyable={copyable}
-					message={message}
-				/>
+				<DirectionInfoRow key={label} label={label} value={value} copyable={copyable} message={message} />
 			))}
 		</div>
 	)
