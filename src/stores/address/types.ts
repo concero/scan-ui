@@ -1,6 +1,6 @@
 import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional'
 import type { StoreApi } from 'zustand'
-import { Status, TransactionType } from '@/components'
+import { Status, TransactionType } from '@/types'
 
 export type AddressTxDirection = {
 	logo: string

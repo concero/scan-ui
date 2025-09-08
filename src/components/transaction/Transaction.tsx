@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import type { TransactionData } from './types'
+import type { TransactionData } from '@/types'
 import { MessageDetails, TransactionDetails, TransactionTimestamp } from '../common'
 import { TransactionSummary } from '../common'
 import { TransactionFinality } from '../common'

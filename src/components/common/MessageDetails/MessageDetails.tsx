@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import { Status } from '@/components/transaction'
+import { Status } from '@/types'
 import { StatusLabel } from '../StatusLabel'
 import { InfoRow } from '../InfoRow'
 import './styles.pcss'

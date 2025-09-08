@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import { TransactionLabel } from '../TransactionLabel/TransactionLabel'
-import { TransactionType } from '@/components/transaction'
+import { TransactionType } from '@/types'
 import { InfoRow } from '../InfoRow'
 import './styles.pcss'
 

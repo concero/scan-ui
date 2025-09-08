@@ -1,6 +1,6 @@
-import { TransactionType } from '@/components'
 import type { AddressResponse } from '@/pages'
-import { Status } from '@/components'
+import { Status, TransactionType } from '@/types'
+
 
 const now = Date.now()
 

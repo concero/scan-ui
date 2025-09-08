@@ -1,6 +1,5 @@
 import type { Transaction } from "@/stores"
-import { TransactionType } from "@/components"
-import { Status } from "@/components"
+import { Status, TransactionType } from "@/types"
 
 export const MOCK_TRANSACTION: Transaction = {
   messageId: '0x4231f887251b9d0b4923262d55783dafdb6bb63590a2a34243f3c9e038544791',

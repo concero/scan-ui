@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react'
 import { MetaTags } from '@/components/common'
-import { Status, TransactionType } from '@/components'
+import { Status, TransactionType } from '@/types'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
 import { useAddressStore, useLoadAddress } from '@/hooks'

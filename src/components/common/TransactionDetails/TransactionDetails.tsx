@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import type { Direction } from '@/components/transaction'
+import type { Direction } from '@/types'
 import { TransactionInfo } from '../TransactionInfo'
 import './styles.pcss'
 

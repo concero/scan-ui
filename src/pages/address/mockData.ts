@@ -1,6 +1,5 @@
 import type { AddressResponse } from './Address'
-import { Status } from '@/components'
-import { TransactionType } from '@/components'
+import { Status, TransactionType } from '@/types'
 
 const now = Date.now()
 

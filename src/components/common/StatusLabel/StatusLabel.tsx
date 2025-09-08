@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import type { TTagSize } from '@concero/ui-kit'
-import { Status } from '@/components/transaction'
+import { Status } from '@/types'
 import { Tag } from '@concero/ui-kit'
 
 const variant: Record<Status, 'neutral' | 'positive' | 'negative'> = {
