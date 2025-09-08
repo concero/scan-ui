@@ -1,10 +1,9 @@
 import type { FC, ReactElement } from 'react'
-import { useState, useEffect } from 'react'
 import { MetaTags } from '@/components/common'
 import { Status, TransactionType } from '@/components'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
-import { MOCK_ADDRESS_DATA } from './mockData'
+import { useAddressStore, useLoadAddress } from '@/hooks'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -30,27 +29,16 @@ export type AddressResponse = {
 }
 
 export const AddressPage: FC = (): ReactElement => {
+	useLoadAddress()
 	const { address } = useParams<{ address: string }>()
-	const [response, setResponse] = useState<AddressResponse | null>(null)
-	const [loading, setLoading] = useState<boolean>(true)
+	const { txs, loading} = useAddressStore()
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setResponse(MOCK_ADDRESS_DATA)
-			setLoading(false)
-		}, 2000)
-		return () => clearTimeout(timer)
-	}, [])
-
-	if (loading || !response) {
-		return <div>Loading...</div>
-	}
 
 	return (
 		<>
 			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
 			<main>
-				<Address address={address} data={response.data} isTestnet={response.isTestnet} loading={loading} />
+				<Address address={address} data={txs ?? []} isTestnet={false} loading={loading} />
 			</main>
 		</>
 	)

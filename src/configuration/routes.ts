@@ -9,5 +9,5 @@ type Routes = {
 export const routes: Routes = {
 	home: () => '/',
 	address: (address: string = ':address') => `/address/${address}`,
-	transaction: (txHash: string = ':txHash') => `/txHash/${txHash}`,
+	transaction: (identifier: string = ':identifier') => `/transaction/${identifier}`,
 }

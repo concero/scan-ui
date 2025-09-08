@@ -9,11 +9,8 @@ import { MOCK_TRANSACTION } from './mockTransaction'
 export const useLoadTransaction = (): void => {
   const { identifier } = useParams<{ identifier: string }>()
   const { setTransaction, setLoading } = useTransactionStore()
-
+  
   const getData = async (): Promise<Transaction | null> => {
-    if (!identifier || !isHash(identifier)) {
-      return null
-    }
     await new Promise((resolve) => setTimeout(resolve, 750))
     return MOCK_TRANSACTION
   }

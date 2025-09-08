@@ -1,6 +1,6 @@
+import { TransactionType } from '@/components'
 import type { AddressResponse } from '@/pages'
 import { Status } from '@/components'
-import { TransactionType } from '@/components'
 
 const now = Date.now()
 
@@ -39,7 +39,7 @@ export const MOCK_ADDRESS_DATA: AddressResponse = {
     const otherIdx = Math.floor(i / 2) % otherAddresses.length
     return {
       messageId: generateMessageId(idx),
-      type: [TransactionType.CanonicalBridge, TransactionType.IOUBridge, TransactionType.Message][
+      type: ['Canonical Bridge' as TransactionType, 'IOU Bridge' as TransactionType, 'Message' as TransactionType][
         idx % 3
       ],
       timestamp: randomSecondsAgo(10 + idx * 10),
@@ -61,7 +61,7 @@ export const MOCK_ADDRESS_DATA: AddressResponse = {
             logo: logos[idx % logos.length],
             address: fixedAddress,
           },
-      status: [Status.Success, Status.Pending, Status.Canceled][idx % 3],
+      status: ['success' as Status, 'pending' as Status, 'canceled' as Status][idx % 3],
     }
   }),
 }
