@@ -1,9 +1,9 @@
+import { useEffect, useRef } from 'react'
 import type { AddressTxFilters } from '@/stores'
 import { useParams } from 'react-router-dom'
 import { isAddress } from 'viem'
 import { useAddressStore } from '../useAddressStore'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
 import { useQueryParams } from '../useQueryParams'
 import {
   parsePage,
@@ -15,6 +15,7 @@ import {
   validateStatus,
   validateType,
 } from '@/utils'
+import { getFilteredTransactions } from './mockAddress'
 
 export const useLoadAddress = () => {
   const { address } = useParams<{ address: string }>()
@@ -48,29 +49,55 @@ export const useLoadAddress = () => {
     },
   })
 
-  const getData = async () => {
+  const getData = async (): Promise<any[]> => {
+    if (!address || !isAddress(address)) {
+      return []
+    }
+
     await new Promise((resolve) => setTimeout(resolve, 300))
+
+    const { transactions } = getFilteredTransactions(params)
+    console.log('Filtered transactions:', transactions)
+
+    return transactions
   }
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['addressTxs', address, params],
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['addressTxs', address],
     queryFn: getData,
     staleTime: 30_000,
     retry: 2,
     refetchOnWindowFocus: false,
+    enabled: !!address && isAddress(address),
   })
+
+  const prevFiltersRef = useRef<AddressTxFilters | null>(null)
+
+  useEffect(() => {
+    if (address && isAddress(address)) {
+      refetch()
+
+      if ((prevFiltersRef.current === params)) {
+        setFilters(params)
+        prevFiltersRef.current = params
+      }
+    }
+  }, [params, refetch, address, setFilters])
 
   useEffect(() => {
     setLoading(isLoading)
+  }, [isLoading, setLoading])
 
+
+  useEffect(() => {
     if (error) {
       setTransactions([])
       return
     }
-
     if (data) {
+      console.log('Fetched transactions:', data)
       setTransactions(data)
-      setFilters(params)
     }
-  }, [data, isLoading, error, setLoading, setTransactions, setFilters, params])
+  }, [data, error, setTransactions])
+
 }

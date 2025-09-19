@@ -1,5 +1,7 @@
 import type { AddressResponse } from '@/pages'
 import { Status, TransactionType } from '@/types'
+import { AddressTxFilters } from '@/stores'
+import { AddressTx } from '@/stores'
 
 const now = Date.now()
 
@@ -29,39 +31,86 @@ const logos = [
 	'https://api.concero.io/static/icons/chains/56.svg',
 ]
 
+const TRANSACTIONS_PER_PAGE = 10
+
+// Your MOCK_ADDRESS_DATA as provided
 export const MOCK_ADDRESS_DATA: AddressResponse = {
-	isTestnet: false,
-	data: Array.from({ length: 20 }, (_, i) => {
-		const idx = i + 1
-		const isFromFixed = idx % 2 === 1
-		const otherIdx = Math.floor(i / 2) % otherAddresses.length
-		return {
-			messageId: generateMessageId(idx),
-			type: [
-				'Canonical Bridge' as TransactionType,
-				'IOU Bridge' as TransactionType,
-				'Message' as TransactionType,
-			][idx % 3],
-			timestamp: randomSecondsAgo(10 + idx * 10),
-			from: isFromFixed
-				? {
-						logo: logos[idx % logos.length],
-						address: fixedAddress,
-					}
-				: {
-						logo: logos[(idx + 1) % logos.length],
-						address: otherAddresses[otherIdx],
-					},
-			to: isFromFixed
-				? {
-						logo: logos[(idx + 1) % logos.length],
-						address: otherAddresses[otherIdx],
-					}
-				: {
-						logo: logos[idx % logos.length],
-						address: fixedAddress,
-					},
-			status: ['success' as Status, 'pending' as Status, 'canceled' as Status][idx % 3],
-		}
-	}),
+  isTestnet: false,
+  data: Array.from({ length: 20 }, (_, i) => {
+    const idx = i + 1
+    const isFromFixed = idx % 2 === 1
+    const otherIdx = Math.floor(i / 2) % otherAddresses.length
+    return {
+      messageId: generateMessageId(idx),
+      type: [
+        TransactionType.CanonicalBridge,
+        TransactionType.IOUBridge,
+        TransactionType.Message,
+      ][idx % 3],
+      timestamp: randomSecondsAgo(10 + idx * 10),
+      from: isFromFixed
+        ? {
+            logo: logos[idx % logos.length],
+            address: fixedAddress,
+          }
+        : {
+            logo: logos[(idx + 1) % logos.length],
+            address: otherAddresses[otherIdx],
+          },
+      to: isFromFixed
+        ? {
+            logo: logos[(idx + 1) % logos.length],
+            address: otherAddresses[otherIdx],
+          }
+        : {
+            logo: logos[idx % logos.length],
+            address: fixedAddress,
+          },
+      status: [Status.Success, Status.Pending, Status.Canceled][idx % 3],
+    } as AddressTx
+  }),
+}
+
+/**
+ * Filter and paginate MOCK_ADDRESS_DATA based on filters
+ */
+export function getFilteredTransactions(
+  filters: AddressTxFilters
+): { transactions: AddressTx[]; total: number } {
+  const {
+    page = 1,
+    fromTime,
+    toTime,
+    status,
+    type,
+  } = filters
+
+  // Filter transactions based on provided filters
+  let filtered = MOCK_ADDRESS_DATA.data
+
+  if (status !== undefined) {
+    filtered = filtered.filter(tx => tx.status === status)
+  }
+
+  if (type !== undefined) {
+    filtered = filtered.filter(tx => tx.type === type)
+  }
+
+  if (fromTime !== undefined) {
+    filtered = filtered.filter(tx => tx.timestamp >= fromTime)
+  }
+
+  if (toTime !== undefined) {
+    filtered = filtered.filter(tx => tx.timestamp <= toTime)
+  }
+
+  // Pagination
+  const total = filtered.length
+  const startIndex = (page - 1) * TRANSACTIONS_PER_PAGE
+  const paginated = filtered.slice(startIndex, startIndex + TRANSACTIONS_PER_PAGE)
+
+  return {
+    transactions: paginated,
+    total,
+  }
 }
