@@ -3,7 +3,6 @@ import { ButtonGroup, DataTable } from '../common'
 import { Transaction } from '@/types'
 import './styles.pcss'
 
-
 type AddressProps = {
 	address: string | undefined
 	data: Transaction[]

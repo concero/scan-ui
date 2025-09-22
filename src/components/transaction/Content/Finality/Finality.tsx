@@ -14,18 +14,18 @@ export const Finality = (): ReactElement | null => {
 
 	return (
 		<>
-		<div className="finality">
-			<InfoRow
-				label="Finality Required"
-				value={
-					<Tag size="s" variant="neutral">
-						{status}
-					</Tag>
-				}
-				copyable={false}
-			/>
-		</div>
-		<span className="divider" />
+			<div className="finality">
+				<InfoRow
+					label="Finality Required"
+					value={
+						<Tag size="s" variant="neutral">
+							{status}
+						</Tag>
+					}
+					copyable={false}
+				/>
+			</div>
+			<span className="divider" />
 		</>
 	)
 }

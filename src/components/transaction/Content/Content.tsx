@@ -17,7 +17,7 @@ export const Content = (): ReactElement => {
 
 	return (
 		<div className="tx_content">
-			<Title/>
+			<Title />
 			<Message />
 			<Summary />
 			<Finality />

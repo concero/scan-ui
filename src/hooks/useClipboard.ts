@@ -13,25 +13,22 @@ export const useClipboard = (options: number | UseClipboardOptions = 1000): UseC
 	const resetAfter = typeof options === 'number' ? options : (options.resetAfter ?? 5000)
 	const [copied, setCopied] = useState<boolean>(false)
 
-	const copy = useCallback(
-		async (text: string, message: string): Promise<boolean> => {
-			try {
-				if (!navigator?.clipboard?.writeText) {
-					console.error('[Concero Scan] Clipboard API not supported')
-					return false
-				}
-
-				await navigator.clipboard.writeText(text)
-				setCopied(true)
-
-				return true
-			} catch (_) {
-				console.error('[Concero Scan] Failed to copy text:')
+	const copy = useCallback(async (text: string, message: string): Promise<boolean> => {
+		try {
+			if (!navigator?.clipboard?.writeText) {
+				console.error('[Concero Scan] Clipboard API not supported')
 				return false
 			}
-		},
-		[],
-	)
+
+			await navigator.clipboard.writeText(text)
+			setCopied(true)
+
+			return true
+		} catch (_) {
+			console.error('[Concero Scan] Failed to copy text:')
+			return false
+		}
+	}, [])
 
 	useEffect(() => {
 		if (!copied) return

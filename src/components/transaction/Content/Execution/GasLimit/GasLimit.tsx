@@ -4,11 +4,11 @@ import { useTransactionStore } from '@/hooks'
 
 export const GasLimit = (): ReactElement | null => {
 	const { transaction } = useTransactionStore()
-    const limit: number | null = transaction?.dstChainGasLimit ?? null
+	const limit: number | null = transaction?.dstChainGasLimit ?? null
 
-    const hasGasLimit: boolean = Boolean(limit)
+	const hasGasLimit: boolean = Boolean(limit)
 
-    if (!hasGasLimit) return null
+	if (!hasGasLimit) return null
 
 	return (
 		<InfoRow

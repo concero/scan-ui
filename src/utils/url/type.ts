@@ -1,4 +1,4 @@
-import { TxType } from "@/types"
+import { TxType } from '@/types'
 
 type ParseTypeParameters = {
 	type: string | null | undefined

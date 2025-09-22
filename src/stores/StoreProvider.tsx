@@ -9,9 +9,7 @@ export const StoreProvider: FC<PropsWithChildren<{}>> = ({ children }): ReactEle
 		<SettingsStoreProvider>
 			<ModalsStoreProvider>
 				<AddressStoreProvider>
-					<TransactionStoreProvider>
-						{children}
-					</TransactionStoreProvider>
+					<TransactionStoreProvider>{children}</TransactionStoreProvider>
 				</AddressStoreProvider>
 			</ModalsStoreProvider>
 		</SettingsStoreProvider>

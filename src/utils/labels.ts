@@ -1,4 +1,4 @@
-import { TxType } from "@/types"
+import { TxType } from '@/types'
 
 export const TxTypeLabels: Record<TxType, string> = {
 	[TxType.LBF]: 'LBF Bridge',

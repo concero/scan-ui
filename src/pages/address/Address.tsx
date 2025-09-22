@@ -3,6 +3,8 @@ import { MetaTags } from '@/components/common'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
 import { useAddressStore, useLoadAddress } from '@/hooks'
+import { NotFound } from '@/components/common'
+import { ScreenLoader } from '@/components/common/ScreenLoader'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -13,12 +15,21 @@ export const AddressPage: FC = (): ReactElement => {
 	useLoadAddress()
 	const { txs, loading } = useAddressStore()
 
+	const renderContent = (): ReactElement => {
+		switch (true) {
+			case loading:
+				return <ScreenLoader />
+			case !txs:
+				return <NotFound resource="Transactions" />
+			default:
+				return <Address address={address} data={txs ?? []} isTestnet={false} loading={loading} />
+		}
+	}
+
 	return (
 		<>
 			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
-			<main>
-				<Address address={address} data={txs ?? []} isTestnet={false} loading={loading} />
-			</main>
+			<main>{renderContent()}</main>
 		</>
 	)
 }

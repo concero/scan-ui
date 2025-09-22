@@ -9,6 +9,6 @@ export const Details = (): ReactElement => (
 			<From />
 			<To />
 		</div>
-		<div className='divider'/>
+		<div className="divider" />
 	</>
 )
