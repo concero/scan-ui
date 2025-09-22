@@ -14,6 +14,11 @@ export enum TxType {
 	CCIP = 'ccip_testnet',
 }
 
+export enum TxsDirection{
+	Incoming = 'incoming',
+	Outgoing = 'outgoing'
+}
+
 export type TxChain = {
 	id: number
 	selector: number

@@ -1,5 +1,5 @@
-import type { Transaction } from '@/types'
-import { isAddress, isHash } from 'viem'
+import { TxsDirection, type Transaction } from '@/types'
+import { isAddress } from 'viem'
 import { useEffect, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
@@ -7,34 +7,38 @@ import { useAddressStore } from '../useAddressStore'
 import { fetchTransactions } from '@/utils/txs'
 
 export const useLoadAddress = (): void => {
-	const { address } = useParams<{ address: string }>()
-	const { setTransactions, setLoading } = useAddressStore()
+    const { address } = useParams<{ address: string }>()
+    const { direction, setTransactions, setLoading } = useAddressStore()
 
-	const getData = useCallback(async (): Promise<Transaction[] | null> => {
-		if (!address || !isAddress(address)) return null
+    const getData = useCallback(async (): Promise<Transaction[] | null> => {
+        if (!address || !isAddress(address)) return null
 
-		const response = await fetchTransactions<Transaction[]>({
-			take: 10,
-			skip: 0,
-			sender: address,
-		})
+		const sender = direction === TxsDirection.Outgoing ? address : undefined
+		const receiver = direction === TxsDirection.Incoming ? address : undefined
 
-		console.log(response)
+        const params = {
+            take: 10,
+            skip: 0,
+            sender,
+            receiver
+        }
 
-		return response.transactions.flat() ?? null
-	}, [address])
+        const response = await fetchTransactions<Transaction[]>(params)
 
-	const { data: transaction, isLoading } = useQuery({
-		queryKey: ['transaction', address],
-		queryFn: getData,
-		enabled: Boolean(address) && isAddress(address ?? ''),
-		staleTime: 30_000,
-		retry: 2,
-		refetchOnWindowFocus: false,
-	})
+        return response.transactions.flat() ?? null
+    }, [address, direction])
 
-	useEffect(() => {
-		setTransactions(transaction ?? null)
-		setLoading(isLoading)
-	}, [transaction, isLoading, setTransactions, setLoading])
+    const { data: transaction, isLoading } = useQuery({
+        queryKey: ['transaction', address, direction], 
+        queryFn: getData,
+        enabled: Boolean(address) && isAddress(address ?? ''),
+        staleTime: 30_000,
+        retry: 2,
+        refetchOnWindowFocus: false,
+    })
+
+    useEffect(() => {
+        setTransactions(transaction ?? null)
+        setLoading(isLoading)
+    }, [transaction, isLoading, setTransactions, setLoading])
 }
