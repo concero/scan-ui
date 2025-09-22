@@ -13,10 +13,7 @@ import './styles.pcss'
 export const Content = (): ReactElement => {
 	const { transaction } = useTransactionStore()
 
-
-	const detailsSection = useMemo(() => <Details />, [transaction?.from?.address, transaction?.to?.address])
-
-	const executionSection = useMemo(() => <Execution />, [transaction?.dstChainGasLimit, transaction?.to?.token.symbol, transaction?.messagePayload])
+	const executionSection = useMemo(() => <Execution />, [])
 
 	return (
 		<div className="tx_content">
@@ -25,7 +22,7 @@ export const Content = (): ReactElement => {
 			<Summary />
 			<Finality />
 			<Timestamp />
-			{detailsSection}
+			<Details />
 			{executionSection}
 		</div>
 	)

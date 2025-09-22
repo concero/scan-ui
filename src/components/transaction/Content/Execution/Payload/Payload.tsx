@@ -18,7 +18,7 @@ export const Payload = () => {
 					<Button
 						size="s"
 						variant="secondary"
-						onClick={() => copy('Payload Copied!', transaction.messagePayload)}
+						onClick={() => copy(transaction.messagePayload, 'Payload Copied!',)}
 					>
 						{copied ? 'Copied!' : 'Copy'}
 					</Button>

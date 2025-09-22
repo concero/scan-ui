@@ -4,8 +4,11 @@ import { To } from './To'
 import './styles.pcss'
 
 export const Details = (): ReactElement => (
-	<div className="details">
-		<From />
-		<To />
-	</div>
+	<>
+		<div className="details">
+			<From />
+			<To />
+		</div>
+		<div className='divider'/>
+	</>
 )

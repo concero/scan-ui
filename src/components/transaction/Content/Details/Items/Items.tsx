@@ -17,28 +17,33 @@ export const Chain = ({ name, id }: ChainParameters): ReactElement => {
 
 type TokenParameters = {
 	name: string
-	logo: string
 }
 
-export const Token = ({ name, logo }: TokenParameters): ReactElement => {
+export const Token = ({ name }: TokenParameters): ReactElement => {
 	return (
 		<div className="token">
-			<img src={logo} alt={name} className="token_logo" />
 			<span className="token_name">{name}</span>
 		</div>
 	)
 }
 
 type AmountParameters = {
-	name: string
-	amount: number
+    symbol: string
+    amount: number
+    priceUSD?: number | null
 }
 
-export const Amount = ({ name, amount }: AmountParameters): ReactElement => {
-	return (
-		<div className="amount">
-			{amount}
-			<span className="amount_name">{name}</span>
-		</div>
-	)
+export const Amount = ({ symbol, amount, priceUSD }: AmountParameters): ReactElement => {
+	const formattedAmount = amount.toLocaleString('fullwide', {useGrouping:false, maximumFractionDigits: 18})
+
+    const value = priceUSD && formattedAmount
+        ? (Number(formattedAmount) * priceUSD).toFixed(2)
+        : null
+
+    return (
+        <div className="amount">
+            <span className="amount_value">{`${formattedAmount} ${symbol}`}</span>
+            {value && <span className="amount_usd">${value}</span>}
+        </div>
+    )
 }

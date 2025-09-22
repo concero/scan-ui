@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react'
-import { useNotificationsStore } from './useNotificationsStore'
 
 type UseClipboardOptions = {
 	resetAfter?: number
@@ -12,7 +11,6 @@ type UseClipboardResult = {
 
 export const useClipboard = (options: number | UseClipboardOptions = 1000): UseClipboardResult => {
 	const resetAfter = typeof options === 'number' ? options : (options.resetAfter ?? 5000)
-	const { show, hide, clear } = useNotificationsStore()
 	const [copied, setCopied] = useState<boolean>(false)
 
 	const copy = useCallback(
@@ -25,7 +23,6 @@ export const useClipboard = (options: number | UseClipboardOptions = 1000): UseC
 
 				await navigator.clipboard.writeText(text)
 				setCopied(true)
-				show(message)
 
 				return true
 			} catch (_) {
@@ -33,20 +30,18 @@ export const useClipboard = (options: number | UseClipboardOptions = 1000): UseC
 				return false
 			}
 		},
-		[show],
+		[],
 	)
 
 	useEffect(() => {
 		if (!copied) return
 
 		const timer = setTimeout(() => {
-			hide()
-			clear()
 			setCopied(false)
 		}, resetAfter)
 
 		return () => clearTimeout(timer)
-	}, [copied, resetAfter, hide, clear])
+	}, [copied, resetAfter])
 
 	return { copied, copy }
 }

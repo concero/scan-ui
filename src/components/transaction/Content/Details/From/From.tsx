@@ -40,13 +40,12 @@ export const From = (): ReactElement | null => {
             },
         !isMessage && hasToken && {
             label: 'Token',
-            value: <Token name={token.name} logo={token.logoURL} />,
-            copyable: true,
-            message: 'Token Copied',
+            value: <Token name={token.name} />,
+            copyable: false,
         },
         !isMessage && hasAmount && {
             label: 'Amount',
-            value: <Amount name={token.name} amount={token.amount} />,
+            value: <Amount symbol={token?.symbol} amount={token.amount} priceUSD={token.priceUSD} />,
             copyable: false,
         },
         !isMessage && hasAddress && {

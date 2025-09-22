@@ -5,9 +5,8 @@ import { useTransactionStore } from '@/hooks'
 export const GasLimit = (): ReactElement | null => {
 	const { transaction } = useTransactionStore()
     const limit: number | null = transaction?.dstChainGasLimit ?? null
-    const currency: string | null = transaction?.to.token.symbol ?? null
 
-    const hasGasLimit: boolean = Boolean(limit && currency)
+    const hasGasLimit: boolean = Boolean(limit)
 
     if (!hasGasLimit) return null
 
@@ -16,7 +15,7 @@ export const GasLimit = (): ReactElement | null => {
 			label="DST Gas Limit"
 			value={
 				<>
-					{limit} <span className="tx_currency">{currency}</span>
+					{limit} <span className="gas_limit_currency">{'ETH'}</span>
 				</>
 			}
 		/>
