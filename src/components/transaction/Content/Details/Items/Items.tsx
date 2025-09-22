@@ -17,11 +17,13 @@ export const Chain = ({ name, id }: ChainParameters): ReactElement => {
 
 type TokenParameters = {
 	name: string
+	logo: string
 }
 
-export const Token = ({ name }: TokenParameters): ReactElement => {
+export const Token = ({ name, logo }: TokenParameters): ReactElement => {
 	return (
 		<div className="token">
+			<img src={logo} alt={name} className="token_logo" />
 			<span className="token_name">{name}</span>
 		</div>
 	)

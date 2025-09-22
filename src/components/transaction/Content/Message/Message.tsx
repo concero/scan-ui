@@ -31,10 +31,13 @@ export const Message = (): ReactElement | null => {
 	if (!rows.length) return null
 
 	return (
-		<div className="message">
-			{rows.map(({ label, value, copyable }) => (
-				<InfoRow key={label} label={label} value={value} copyable={copyable} />
-			))}
-		</div>
+		<>
+			<div className="message">
+				{rows.map(({ label, value, copyable }) => (
+					<InfoRow key={label} label={label} value={value} copyable={copyable} />
+				))}
+			</div>
+			<span className="divider" />
+		</>
 	)
 }

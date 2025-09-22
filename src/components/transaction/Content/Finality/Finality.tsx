@@ -13,6 +13,7 @@ export const Finality = (): ReactElement | null => {
 	const status: string = finality ? 'Yes' : 'No'
 
 	return (
+		<>
 		<div className="finality">
 			<InfoRow
 				label="Finality Required"
@@ -24,5 +25,7 @@ export const Finality = (): ReactElement | null => {
 				copyable={false}
 			/>
 		</div>
+		<span className="divider" />
+		</>
 	)
 }

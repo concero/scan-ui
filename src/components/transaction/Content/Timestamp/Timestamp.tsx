@@ -4,31 +4,59 @@ import { InfoRow } from '@/components/common'
 import './styles.pcss'
 
 export const Timestamp = (): ReactElement | null => {
-	const timestamp = useTransactionStore().transaction?.from?.timestamp
+    const { transaction } = useTransactionStore()
+    const fromTimestamp = transaction?.from?.timestamp
+    const toTimestamp = transaction?.to?.timestamp
 
-	if (!timestamp) return null
+    if (!fromTimestamp) return null
 
-	const date = new Date(timestamp * 1000)
-	const day = date.getUTCDate()
-	const month = date.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })
-	const year = date.getUTCFullYear()
-	const hours = date.getUTCHours().toString().padStart(2, '0')
-	const minutes = date.getUTCMinutes().toString().padStart(2, '0')
+    const fromDate = new Date(fromTimestamp * 1000)
+    const day = fromDate.getUTCDate()
+    const month = fromDate.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })
+    const year = fromDate.getUTCFullYear()
+    const hours = fromDate.getUTCHours().toString().padStart(2, '0')
+    const minutes = fromDate.getUTCMinutes().toString().padStart(2, '0')
 
-	const formattedDate: string = `${day} ${month} ${year}`
-	const formattedTime: string = `(${hours}:${minutes} UTC)`
+    const formattedDate = `${day} ${month} ${year}`
+    const formattedTime = `(${hours}:${minutes} UTC)`
 
-	return (
-		<div className="timestamp">
-			<InfoRow
-				label="Timestamp"
-				value={
-					<>
-						{formattedDate} <span className="timestamp_time">{formattedTime}</span>
-					</>
-				}
-				copyable={false}
-			/>
-		</div>
-	)
+    let durationDisplay: string | null = null
+    if (toTimestamp) {
+        const diffMs = (toTimestamp - fromTimestamp) * 1000
+        if (diffMs >= 0) {
+            const totalSeconds = Math.floor(diffMs / 1000)
+            const seconds = totalSeconds % 60
+            const minutesDur = Math.floor((totalSeconds / 60) % 60)
+            const hoursDur = Math.floor(totalSeconds / 3600)
+
+            durationDisplay =
+                (hoursDur > 0 ? `${hoursDur} hrs. ` : '') +
+                (minutesDur > 0 || hoursDur > 0 ? `${minutesDur} min. ` : '') +
+                `${seconds} sec.`
+        }
+    }
+
+    return (
+		<>
+			<div className="timestamp">
+				<InfoRow
+					label="Timestamp"
+					value={
+						<>
+							{formattedDate} <span className="timestamp_time">{formattedTime}</span>
+						</>
+					}
+					copyable={false}
+				/>
+				{durationDisplay && (
+					<InfoRow
+						label="Duration"
+						value={<>{durationDisplay}</>}
+						copyable={false}
+					/>
+				)}
+			</div>
+			<span className="divider" />
+		</>
+    )
 }
