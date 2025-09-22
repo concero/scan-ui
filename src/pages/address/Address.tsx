@@ -1,9 +1,9 @@
 import type { FC, ReactElement } from 'react'
 import { MetaTags } from '@/components/common'
-import { Status, TransactionType } from '@/types'
+import { Status } from '@/types'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
-import { useAddressStore, useLoadAddress } from '@/hooks'
+import { useAddressStore } from '@/hooks'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -16,7 +16,7 @@ type AddressDirection = {
 
 export type AddressData = {
 	messageId: string
-	type: TransactionType
+	type: any
 	timestamp: number
 	status: Status
 	from: AddressDirection
@@ -29,7 +29,6 @@ export type AddressResponse = {
 }
 
 export const AddressPage: FC = (): ReactElement => {
-	useLoadAddress()
 	const { address } = useParams<{ address: string }>()
 	const { txs, loading } = useAddressStore()
 

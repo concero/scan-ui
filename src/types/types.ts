@@ -1,51 +1,48 @@
+import type { Address } from 'viem'
+
 export enum Status {
 	Pending = 'pending',
 	Success = 'success',
 	Canceled = 'canceled',
 }
 
-export enum TransactionType {
-	Message = 'Message',
-	LBFBridge = 'LBF Bridge',
-	CanonicalBridge = 'Canonical Bridge',
-	IOUBridge = 'IOU Bridge',
+export enum TxType {
+	LBF = 'lbf',
+	IOU = 'iou',
+	Canonical = 'canonical',
+	Message = 'message',
 }
 
-export type Chain = {
+export type TxChain = {
 	id: number
-	name: string
 	selector: number
-	logo: string
-	currency: string
+	name: string
 }
 
-export type Token = {
+export type TxToken = {
 	name: string
 	symbol: string
+	address: Address
+	decimals: number
+	priceUSD: number
 	amount: number
-	usd: number
-	logo: string
 }
 
-export type Direction = {
-	token: Token
-	chain: Chain
+export type TxDirection = {
+	chain: TxChain
+	token: TxToken
 	address: string
 	hash: string
-	gas: number
+	timestamp: number
 }
 
-export type TransactionData = {
-	messageId: string
+export type Transaction = {
+	type: TxType
+	id: string
 	status: Status
-	type: TransactionType
-	finality: boolean
-	timestamp: number
-	duration: number
-	from: Direction
-	to: Direction
-	payload: string
-	gasLimit: number
-	fees: number
-	reason?: string
+	isFinalityRequired: boolean
+	dstChainGasLimit?: number
+	messagePayload: string
+	from: TxDirection
+	to: TxDirection
 }

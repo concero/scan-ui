@@ -19,7 +19,7 @@ export const TransactionPage: FC = (): ReactElement => {
 			case !transaction:
 				return <NotFound resource="Transaction" />
 			default:
-				return <Transaction data={transaction} />
+				return <Transaction />
 		}
 	}
 

@@ -1,44 +1,47 @@
 import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional'
 import type { StoreApi } from 'zustand'
-import { Status, TransactionType } from '@/types'
+import { Status } from '@/types'
+import { Address } from 'viem'
+
+export enum TxType {
+	LBF = 'lbf',
+	IOU = 'iou',
+	Canonical = 'canonical',
+	Message = 'message',
+}
 
 export type TxChain = {
 	id: number
-	name: string
 	selector: number
-	logo: string
-	currency: string
+	name: string
 }
 
 export type TxToken = {
 	name: string
 	symbol: string
+	address: Address
+	decimals: number
+	priceUSD: number
 	amount: number
-	usd: number
-	logo: string
 }
 
 export type TxDirection = {
-	token: TxToken
 	chain: TxChain
+	token: TxToken
 	address: string
 	hash: string
-	gas: number
+	timestamp: number
 }
 
 export type Transaction = {
-	messageId: string
+	type: TxType
+	id: string
 	status: Status
-	type: TransactionType
-	finality: boolean
-	timestamp: number
-	duration: number
+	isFinalityRequired: boolean
+	dstChainGasLimit?: number
+	messagePayload: string
 	from: TxDirection
 	to: TxDirection
-	payload: string
-	gasLimit: number
-	fees: number
-	reason?: string
 }
 
 export type TransactionStateSlice = {
