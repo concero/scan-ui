@@ -15,6 +15,7 @@ export type TxChain = {
 	id: number
 	selector: number
 	name: string
+	currency: string
 }
 
 export type TxToken = {
@@ -22,6 +23,7 @@ export type TxToken = {
 	symbol: string
 	address: Address
 	decimals: number
+	logoURL: string
 	priceUSD: number
 	amount: number
 }
