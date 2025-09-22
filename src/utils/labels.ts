@@ -5,4 +5,5 @@ export const TxTypeLabels: Record<TxType, string> = {
 	[TxType.IOU]: 'IOU Bridge',
 	[TxType.Canonical]: 'Canonical Bridge',
 	[TxType.Message]: 'Message',
+	[TxType.CCIP]: 'CCIP Bridge',
 }
