@@ -1,0 +1,17 @@
+.execution {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-s);
+	width: 100%;
+
+	& .execution_content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+		width: 100%;
+		overflow: hidden;
+		transition:
+			max-height 0.4s ease,
+			opacity 0.3s ease;
+	}
+}

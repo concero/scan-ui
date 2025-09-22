@@ -5,89 +5,79 @@ import { InfoRow } from '@/components/common'
 import './styles.pcss'
 
 export const From = (): ReactElement | null => {
-  const { transaction } = useTransactionStore()
+	const { transaction } = useTransactionStore()
 
-  if (!transaction?.from) return null
-  
-  const {
-    chain,
-    token,
-    address,
-    hash,
-  } = transaction.from
+	if (!transaction?.from) return null
 
-  const hasChain = chain && chain.name && chain.id != null
-  const hasToken = token && token.name
-  const hasAmount = token && token.amount != null && token.name
-  const hasAddress = Boolean(address)
-  const hasHash = Boolean(hash)
+	const { chain, token, address, hash } = transaction.from
 
-  const rows = [
-    hasChain && {
-      label: 'Chain',
-      value: <Chain name={chain.name} id={chain.id} />,
-      copyable: false,
-    },
-    hasChain && {
-      label: 'Chain ID',
-      value: chain.id,
-      copyable: true,
-      message: 'Chain ID Copied',
-    },
-    hasChain && chain.selector && {
-      label: 'Selector',
-      value: chain.selector,
-      copyable: true,
-      message: 'Selector Copied',
-    },
-    hasToken && {
-      label: 'Token',
-      value: <Token name={token.name} />,
-      copyable: true,
-      message: 'Token Copied',
-    },
-    hasAmount && {
-      label: 'Amount',
-      value: <Amount name={token.name} amount={token.amount} />,
-      copyable: false,
-    },
-    hasAddress && {
-      label: 'Wallet address',
-      value: address,
-      copyable: true,
-      message: 'Wallet Address Copied',
-    },
-    hasHash && {
-      label: 'Tx Hash',
-      value: hash,
-      copyable: true,
-      message: 'Tx Hash Copied',
-    },
-  ].filter(Boolean) as Array<{
-    label: string
-    value: ReactElement | string | number
-    copyable: boolean
-    message?: string
-  }>
+	const hasChain = chain && chain.name && chain.id != null
+	const hasToken = token && token.name
+	const hasAmount = token && token.amount != null && token.name
+	const hasAddress = Boolean(address)
+	const hasHash = Boolean(hash)
 
-  if (rows.length === 0) {
-    return null
-  }
+	const rows = [
+		hasChain && {
+			label: 'Chain',
+			value: <Chain name={chain.name} id={chain.id} />,
+			copyable: false,
+		},
+		hasChain && {
+			label: 'Chain ID',
+			value: chain.id,
+			copyable: true,
+			message: 'Chain ID Copied',
+		},
+		hasChain &&
+			chain.selector && {
+				label: 'Selector',
+				value: chain.selector,
+				copyable: true,
+				message: 'Selector Copied',
+			},
+		hasToken && {
+			label: 'Token',
+			value: <Token name={token.name} />,
+			copyable: true,
+			message: 'Token Copied',
+		},
+		hasAmount && {
+			label: 'Amount',
+			value: <Amount name={token.name} amount={token.amount} />,
+			copyable: false,
+		},
+		hasAddress && {
+			label: 'Wallet address',
+			value: address,
+			copyable: true,
+			message: 'Wallet Address Copied',
+		},
+		hasHash && {
+			label: 'Tx Hash',
+			value: hash,
+			copyable: true,
+			message: 'Tx Hash Copied',
+		},
+	].filter(Boolean) as Array<{
+		label: string
+		value: ReactElement | string | number
+		copyable: boolean
+		message?: string
+	}>
 
-  return (
-    <div className="from">
-      <span className="from_label">From</span>
-      <div className="from_content">
-        {rows.map(({ label, value, copyable, message }) => (
-          <InfoRow
-            key={label}
-            label={label}
-            value={value}
-            copyable={copyable}
-            message={message}
-          />
-        ))}
-      </div>
-    </div>
-  )
+	if (rows.length === 0) {
+		return null
+	}
+
+	return (
+		<div className="from">
+			<span className="from_label">From</span>
+			<div className="from_content">
+				{rows.map(({ label, value, copyable, message }) => (
+					<InfoRow key={label} label={label} value={value} copyable={copyable} message={message} />
+				))}
+			</div>
+		</div>
+	)
 }

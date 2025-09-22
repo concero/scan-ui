@@ -87,14 +87,6 @@ export const TransactionExecutionInfo = memo(function TransactionExecutionInfo({
 						</>
 					}
 				/>
-				<InfoRow
-					label="Concero Fees"
-					value={
-						<>
-							{fees} <span className="tx_currency">{feeCurrency}</span>
-						</>
-					}
-				/>
 				<div className="tx_actions">
 					{hasRetry && (
 						<>
