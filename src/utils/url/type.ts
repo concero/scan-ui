@@ -1,18 +1,18 @@
-import { TransactionType } from '@/types'
+import { TxType } from "@/types"
 
 type ParseTypeParameters = {
 	type: string | null | undefined
 }
 
-export const parseType = ({ type }: ParseTypeParameters): TransactionType | undefined => {
+export const parseType = ({ type }: ParseTypeParameters): TxType | undefined => {
 	if (!type) return undefined
-	const values = Object.values(TransactionType)
-	return values.includes(type as TransactionType) ? (type as TransactionType) : undefined
+	const values = Object.values(TxType)
+	return values.includes(type as TxType) ? (type as TxType) : undefined
 }
 
 type ValidateTypeParameters = {
-	type: TransactionType | undefined | null
+	type: TxType | undefined | null
 }
 
 export const validateType = ({ type }: ValidateTypeParameters): boolean =>
-	type === undefined || type === null || Object.values(TransactionType).includes(type)
+	type === undefined || type === null || Object.values(TxType).includes(type)

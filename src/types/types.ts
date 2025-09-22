@@ -11,6 +11,7 @@ export enum TxType {
 	IOU = 'iou',
 	Canonical = 'canonical',
 	Message = 'message',
+	CCIP = 'ccip_testnet'
 }
 
 export type TxChain = {

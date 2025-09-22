@@ -1,4 +1,4 @@
-import type { Transaction } from '@/stores'
+import type { Transaction } from '@/types'
 import { isHash } from 'viem'
 import { useEffect, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'

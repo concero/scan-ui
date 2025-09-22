@@ -1,39 +1,14 @@
 import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional'
 import type { StoreApi } from 'zustand'
-import { Status, TransactionType } from '@/types'
-
-export type AddressTxDirection = {
-	logo: string
-	address: string
-}
-
-export type AddressTx = {
-	messageId: string
-	type: TransactionType
-	timestamp: number
-	status: Status
-	from: AddressTxDirection
-	to: AddressTxDirection
-}
-
-export type AddressTxFilters = {
-	page?: number
-	fromTime?: number
-	toTime?: number
-	status?: Status
-	type?: TransactionType
-}
+import { Transaction } from '@/types'
 
 export type AddressStateSlice = {
-	txs: AddressTx[] | null
-	filters: AddressTxFilters
+	txs: Transaction[] | null
 	loading: boolean
 }
 
 export type AddressActions = {
-	setTransactions: (txs: AddressTx[]) => void
-	setFilters: (filters: Partial<AddressTxFilters>) => void
-	resetFilters: () => void
+	setTransactions: (txs: Transaction[] | null) => void
 	setLoading: (loading: boolean) => void
 }
 

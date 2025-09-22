@@ -1,25 +1,11 @@
 import type { ReactElement } from 'react'
 import type { Column } from '../TableRow'
+import type { Transaction } from '@/types'
 import { Table } from '../Table'
 import { TimeData, DirectionData, MessageData } from './Data/Data'
 import { TransactionLabel } from '../TransactionLabel'
-import { Status, TransactionType } from '@/types'
 import { StatusLabel } from '../StatusLabel'
 import './styles.pcss'
-
-type DirectionInfo = {
-	logo: string
-	address: string
-}
-
-type Data = {
-	messageId: string
-	type: TransactionType
-	timestamp: number
-	from: DirectionInfo
-	to: DirectionInfo
-	status: Status
-}
 
 type MessageRow = {
 	messageId: ReactElement
@@ -40,16 +26,16 @@ const columns: Column<MessageRow>[] = [
 ]
 
 type DataTableProps = {
-	data: Data[]
+	data: Transaction[]
 }
 
 export const DataTable = ({ data }: DataTableProps): ReactElement => {
-	const rows: MessageRow[] = data.map(({ messageId, type, timestamp, from, to, status }) => ({
-		messageId: <MessageData messageId={messageId} />,
+	const rows: MessageRow[] = data.map(({ id, type, from, to, status }) => ({
+		messageId: <MessageData messageId={id} />,
 		type: <TransactionLabel size="s" type={type} />,
-		age: <TimeData timestamp={timestamp} />,
-		from: <DirectionData logo={from.logo} address={from.address} />,
-		to: <DirectionData logo={to.logo} address={to.address} />,
+		age: <TimeData timestamp={from.timestamp} />,
+		from: <DirectionData chainId={from.chain.id} address={from.address} />,
+		to: <DirectionData chainId={to.chain.id} address={to.address} />,
 		status: <StatusLabel status={status} size="m" />,
 	}))
 
