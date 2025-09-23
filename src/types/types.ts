@@ -1,5 +1,11 @@
 import type { Address } from 'viem'
 
+export enum SearchType {
+	Address = 'address',
+	Hash = 'hash',
+	Unknown = 'unknown',
+}
+
 export enum Status {
 	Pending = 'pending',
 	Success = 'success',
