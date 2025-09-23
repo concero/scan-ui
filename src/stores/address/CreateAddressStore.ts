@@ -8,10 +8,12 @@ export const CreateAddressStore = () =>
 			txs: null,
 			loading: false,
 			direction: TxsDirection.Outgoing,
+			page: 1,
 
 			setTransactions: txs => set({ txs }),
 			setLoading: loading => set({ loading }),
-			setFilter: (filter: TxsDirection) => set({ direction: filter }),
+			setDirection: (direction: TxsDirection) => set({ direction: direction }),
+			setPage: (page: number) => set({ page }),
 		}),
 		Object.is,
 	)

@@ -9,13 +9,13 @@ type ButtonGroupProps = {
 }
 
 export const ButtonGroup = ({ labels }: ButtonGroupProps): ReactElement => {
-	const { direction, setFilter } = useAddressStore()
+	const { direction, setDirection } = useAddressStore()
 
 	const id: number = direction === TxsDirection.Outgoing ? 0 : 1
 
 	const handleClick = (index: number) => {
 		const selectedDirection = index === 0 ? TxsDirection.Outgoing : TxsDirection.Incoming
-		setFilter(selectedDirection)
+		setDirection(selectedDirection)
 	}
 
 	return (

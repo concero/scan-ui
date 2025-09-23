@@ -6,9 +6,11 @@ export type UseAddressStoreResult = {
 	txs: AddressState['txs']
 	loading: AddressState['loading']
 	direction: AddressState['direction']
+	page: AddressState['page']	
 	setTransactions: AddressState['setTransactions']
 	setLoading: AddressState['setLoading']
-	setFilter: AddressState['setFilter']
+	setDirection: AddressState['setDirection']
+	setPage: AddressState['setPage']	
 }
 
 export const useAddressStore = (): UseAddressStoreResult => {
@@ -22,8 +24,10 @@ export const useAddressStore = (): UseAddressStoreResult => {
 		txs: useStore(state => state.txs),
 		loading: useStore(state => state.loading),
 		direction: useStore(state => state.direction),
+		page: useStore(state => state.page),
 		setTransactions: useStore(state => state.setTransactions),
 		setLoading: useStore(state => state.setLoading),
-		setFilter: useStore(state => state.setFilter),
+		setDirection: useStore(state => state.setDirection),
+		setPage: useStore(state => state.setPage),
 	}
 }
