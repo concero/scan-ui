@@ -8,41 +8,41 @@ import { useCallback } from 'react'
 import './styles.pcss'
 
 type SearchBarProps = {
-  placeholder?: string
-  size?: TInputSize
+	placeholder?: string
+	size?: TInputSize
 }
 
 export const SearchBar = ({
-  size = 'xl',
-  placeholder = 'Search by Contract Address, Message ID, Tx Hash',
+	size = 'xl',
+	placeholder = 'Search by Contract Address, Message ID, Tx Hash',
 }: SearchBarProps): ReactElement => {
-  const { input, type, onChange, onFocus, onBlur, onSearch } = useSearch()
+	const { input, type, onChange, onFocus, onBlur, onSearch } = useSearch()
 
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter') {
-        onSearch()
-      }
-    },
-    [onSearch]
-  )
+	const handleKeyDown = useCallback(
+		(event: KeyboardEvent<HTMLInputElement>) => {
+			if (event.key === 'Enter') {
+				onSearch()
+			}
+		},
+		[onSearch],
+	)
 
-  return (
-    <div className="search_bar">
-      <Input
-        placeholder={placeholder}
-        size={size}
-        icon={<SearchIcon />}
-        value={input}
-        isSuccess={type !== SearchType.Unknown}
-        onChange={(e) => onChange(e.target.value)}
-        inputProps={{
-          onFocus,
-          onBlur,
-          onKeyDown: handleKeyDown,
-          autoComplete: 'off',
-        }}
-      />
-    </div>
-  )
+	return (
+		<div className="search_bar">
+			<Input
+				placeholder={placeholder}
+				size={size}
+				icon={<SearchIcon />}
+				value={input}
+				isSuccess={type !== SearchType.Unknown}
+				onChange={e => onChange(e.target.value)}
+				inputProps={{
+					onFocus,
+					onBlur,
+					onKeyDown: handleKeyDown,
+					autoComplete: 'off',
+				}}
+			/>
+		</div>
+	)
 }

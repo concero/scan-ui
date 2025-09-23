@@ -10,14 +10,5 @@ export const GasLimit = (): ReactElement | null => {
 
 	if (!hasGasLimit) return null
 
-	return (
-		<InfoRow
-			label="DST Gas Limit"
-			value={
-				<>
-					{limit} <span className="gas_limit_currency">{'ETH'}</span>
-				</>
-			}
-		/>
-	)
+	return <InfoRow label="DST Gas Limit" value={<>{limit}</>} />
 }
