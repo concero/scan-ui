@@ -12,25 +12,25 @@ type TableProps<T extends { [key: string]: any }> = {
 }
 
 export const Table = <T extends { [key: string]: any }>({ columns, data }: TableProps<T>): ReactElement => {
-  const { page, count, setPage } = useAddressStore()
-  
-  const ITEMS_PER_PAGE = 9
-  const pages = Math.max(1, Math.ceil(count / ITEMS_PER_PAGE))
+	const { page, count, setPage } = useAddressStore()
 
-  const onChange = (pg: number) => {
-    if (pg < 1 || pg > pages) return
-    setPage(pg)
-  }
+	const ITEMS_PER_PAGE = 9
+	const pages = Math.max(1, Math.ceil(count / ITEMS_PER_PAGE))
 
-  return (
-    <div className="table">
-      <div className="table-wrapper">
-        <table className="table">
-          <TableHeading headers={columns.map(col => col.header)} />
-          <TableBody rows={data} columns={columns} />
-        </table>
-      </div>
-      <TablePagination current={page} total={pages} onChange={onChange} />
-    </div>
-  )
+	const onChange = (pg: number) => {
+		if (pg < 1 || pg > pages) return
+		setPage(pg)
+	}
+
+	return (
+		<div className="table">
+			<div className="table-wrapper">
+				<table className="table">
+					<TableHeading headers={columns.map(col => col.header)} />
+					<TableBody rows={data} columns={columns} />
+				</table>
+			</div>
+			<TablePagination current={page} total={pages} onChange={onChange} />
+		</div>
+	)
 }

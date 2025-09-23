@@ -13,7 +13,7 @@ export type AddressStateSlice = {
 export type AddressActions = {
 	setTransactions: (txs: Transaction[] | null) => void
 	setDirection: (direction: TxsDirection) => void
-	setCount: (count: number) => void	
+	setCount: (count: number) => void
 	setPage: (page: number) => void
 	setLoading: (loading: boolean) => void
 }
