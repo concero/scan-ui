@@ -67,15 +67,16 @@ type DirectionDataProps = {
 	address: string
 }
 
-export const DirectionData: FC<DirectionDataProps> = ({ chainId, address }): ReactElement => (
-	<div className="direction_data">
-		<img
-			src={`https://dev.concero.io/static/chains/${chainId}.svg`}
-			alt="Chain Logo"
-			className="direction_data_img"
-		/>
-		<span className="direction_data_address" title={address}>
-			{address.slice(0, 8)}...{address.slice(-8)}
-		</span>
-	</div>
-)
+export const DirectionData: FC<DirectionDataProps> = ({ chainId, address }): ReactElement => {
+	const url = chainId
+		? `https://dev.concero.io/static/chains/${chainId}.svg`
+		: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="gray"%3E%3Crect width="100%" height="100%"%3E%3C/rect%3E%3C/svg%3E'
+	return (
+		<div className="direction_data">
+			<img src={url} alt="Chain Logo" className="direction_data_img" />
+			<span className="direction_data_address" title={address}>
+				{address.slice(0, 8)}...{address.slice(-8)}
+			</span>
+		</div>
+	)
+}
