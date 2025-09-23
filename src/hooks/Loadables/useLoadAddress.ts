@@ -17,7 +17,7 @@ export const useLoadAddress = (): void => {
 		const receiver = direction === TxsDirection.Incoming ? address : null
 
 		const params = {
-			take: 10,
+			take: 9,
 			skip: 0,
 			...(sender ? { sender } : {}),
 			...(receiver ? { receiver } : {}),
