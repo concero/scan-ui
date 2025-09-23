@@ -25,7 +25,7 @@ export const MessageData: FC<MessageDataProps> = ({ messageId }): ReactElement =
 			className="message_data"
 			role="link"
 			tabIndex={0}
-			onClick={() => to(routes.transaction())}
+			onClick={() => to(routes.transaction(messageId))}
 			style={{ cursor: 'pointer' }}
 			aria-label={`Navigate to message ${messageId}`}
 		>

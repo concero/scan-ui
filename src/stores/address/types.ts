@@ -5,6 +5,7 @@ import { Transaction, TxsDirection } from '@/types'
 export type AddressStateSlice = {
 	txs: Transaction[] | null
 	direction: TxsDirection
+	count: number
 	page: number
 	loading: boolean
 }
@@ -12,7 +13,8 @@ export type AddressStateSlice = {
 export type AddressActions = {
 	setTransactions: (txs: Transaction[] | null) => void
 	setDirection: (direction: TxsDirection) => void
-	setPage: (page: number) => void	
+	setCount: (count: number) => void	
+	setPage: (page: number) => void
 	setLoading: (loading: boolean) => void
 }
 
