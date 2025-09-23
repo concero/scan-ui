@@ -1,11 +1,20 @@
 import type { ReactElement, FC } from 'react'
 import { useNavigation } from '@/hooks'
+import { getRelativeTime } from '@/utils/time'
+import { routes } from '@/configuration'
 import './styles.pcss'
-
-// MESSAGE DATA COMPONENT
 
 type MessageDataProps = {
 	messageId: string
+}
+
+type TimeDataProps = {
+	timestamp: number
+}
+
+type DirectionDataProps = {
+	chainId: number
+	address: string
 }
 
 export const MessageData: FC<MessageDataProps> = ({ messageId }): ReactElement => {
@@ -16,41 +25,13 @@ export const MessageData: FC<MessageDataProps> = ({ messageId }): ReactElement =
 			className="message_data"
 			role="link"
 			tabIndex={0}
-			onClick={() => to(`/transaction/${encodeURIComponent(messageId)}`)}
+			onClick={() => to(routes.transaction())}
 			style={{ cursor: 'pointer' }}
 			aria-label={`Navigate to message ${messageId}`}
 		>
 			{messageId}
 		</span>
 	)
-}
-
-export const getRelativeTime = (timestamp: number): string => {
-	const now = Date.now()
-	const tsMillis = timestamp * 1000
-	const diff = now - tsMillis
-
-	if (diff < 0) return 'just now'
-
-	const seconds = Math.floor(diff / 1000)
-	const minutes = Math.floor(seconds / 60)
-	const hours = Math.floor(minutes / 60)
-	const days = Math.floor(hours / 24)
-
-	switch (true) {
-		case seconds < 60:
-			return `${seconds === 1 ? '1 sec' : `${seconds} secs`} ago`
-		case minutes < 60:
-			return `${minutes === 1 ? '1 min' : `${minutes} mins`} ago`
-		case hours < 24:
-			return `${hours === 1 ? '1 hr' : `${hours} hrs`} ago`
-		default:
-			return `${days === 1 ? '1 day' : `${days} days`} ago`
-	}
-}
-
-type TimeDataProps = {
-	timestamp: number
 }
 
 export const TimeData: FC<TimeDataProps> = ({ timestamp }): ReactElement => {
@@ -60,11 +41,6 @@ export const TimeData: FC<TimeDataProps> = ({ timestamp }): ReactElement => {
 			{time}
 		</span>
 	)
-}
-
-type DirectionDataProps = {
-	chainId: number
-	address: string
 }
 
 export const DirectionData: FC<DirectionDataProps> = ({ chainId, address }): ReactElement => {

@@ -34,23 +34,14 @@ export const fetchTransaction = async <T = unknown>(
 	switch (true) {
 		case validator.srcHash:
 			url.searchParams.set('srcHash', identifier)
-			url.searchParams.set('dstHash', '')
-			url.searchParams.set('messageId', '')
 			break
 		case validator.dstHash:
-			url.searchParams.set('srcHash', '')
 			url.searchParams.set('dstHash', identifier)
-			url.searchParams.set('messageId', '')
 			break
 		case validator.id:
-			url.searchParams.set('srcHash', '')
-			url.searchParams.set('dstHash', '')
 			url.searchParams.set('messageId', identifier)
 			break
 		default:
-			url.searchParams.set('srcHash', '')
-			url.searchParams.set('dstHash', '')
-			url.searchParams.set('messageId', '')
 			break
 	}
 

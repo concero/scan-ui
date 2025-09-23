@@ -36,13 +36,10 @@ export const fetchTransactions = async <T = unknown>({
 
 	if (sender) {
 		url.searchParams.set('sender', sender)
-		url.searchParams.set('receiver', '')
 	} else if (receiver) {
-		url.searchParams.set('sender', '')
 		url.searchParams.set('receiver', receiver)
 	} else {
-		url.searchParams.set('sender', '')
-		url.searchParams.set('receiver', '')
+		throw new Error('Either sender or receiver must be provided.')
 	}
 
 	const response = await fetch(url.toString(), {
