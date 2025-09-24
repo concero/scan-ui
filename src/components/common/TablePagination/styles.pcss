@@ -5,7 +5,7 @@
 	max-width: 416px;
 	width: 100%;
 	margin: 0 auto;
-	padding: 0 var(--space-l) var(--space-l) var(--space-l);
+	padding: 0 var(--space-m) var(--space-m) var(--space-m);
 	min-height: 40px;
 
 	& .table_pagination_controls {
@@ -17,5 +17,23 @@
 			display: flex;
 			gap: var(--space-xxs);
 		}
+	}
+}
+
+.table_pagination_mobile {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	padding: 0 var(--space-m) var(--space-m) var(--space-m);
+	align-items: center;
+
+	& .pagination_mobile_status {
+		font-size: 1rem;
+		font-weight: 400;
+		color: var(--color-gray-500);
+	}
+
+	& .pagination_mobile_status_value {
+		color: var(--color-gray-700);
 	}
 }
