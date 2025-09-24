@@ -29,8 +29,8 @@ export const Table = <T extends { [key: string]: any }>({ columns, data }: Table
 					<TableHeading headers={columns.map(col => col.header)} />
 					<TableBody rows={data} columns={columns} />
 				</table>
+				<TablePagination current={page} total={pages} onChange={onChange} />
 			</div>
-			<TablePagination current={page} total={pages} onChange={onChange} />
 		</div>
 	)
 }

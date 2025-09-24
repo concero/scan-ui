@@ -71,7 +71,7 @@ export const TablePagination: FC<TablePaginationProps> = ({ current, total, onCh
 				>
 					<ArrowLeftIcon />
 				</IconButton>
-				<div className='pagination_buttons'>
+				<div className="pagination_buttons">
 					{pages.map((page, idx) =>
 						page === '...' ? (
 							<EllipsisButton key={`ellipsis-${idx}`} />
