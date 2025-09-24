@@ -12,7 +12,7 @@ type TablePaginationProps = {
 const PaginationButton: FC<{ page: number; active: boolean; onClick: () => void }> = ({ page, active, onClick }) => (
 	<IconButton
 		size="m"
-		variant={active ? 'primary' : 'tetrary'}
+		variant={active ? 'secondary_color' : 'tetrary'}
 		aria-current={active ? 'page' : undefined}
 		onClick={onClick}
 		className={`pagination_button ${active ? 'active' : ''}`}
