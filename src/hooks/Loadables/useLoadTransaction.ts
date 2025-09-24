@@ -32,7 +32,6 @@ export const useLoadTransaction = (): void => {
 	})
 
 	useEffect(() => {
-		console.log('useLoadTransaction effect', { transaction, isLoading })
 		setTransaction(transaction ?? null)
 		setLoading(isLoading)
 	}, [transaction, isLoading, setTransaction, setLoading])
