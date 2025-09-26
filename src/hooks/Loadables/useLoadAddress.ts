@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useAddressStore } from '../useAddressStore'
 import { fetchTransactions } from '@/utils/txs'
 
-const ITEMS_PER_PAGE = 9
+const ITEMS_PER_PAGE = 10
 
 export const useLoadAddress = (): void => {
 	const { address } = useParams<{ address: string }>()
