@@ -13,12 +13,16 @@
 	border-radius: var(--border-radius-large);
 	cursor: grab;
 	position: relative;
-	overflow-y: hidden;
 	max-height: 802px;
 	transition: overflow-y 0.3s ease;
 
-	& .table_wrapper::-webkit-scrollbar {
+	&::-webkit-scrollbar {
 		display: none;
+		height: 0;
+	}
+
+	&:hover {
+		overflow-y: visible;
 	}
 
 	& .table {
@@ -26,8 +30,18 @@
 		margin: 0 auto;
 		box-sizing: border-box;
 		width: 100%;
-		display: flex;
-		flex-direction: column;
-		padding: var(--space-m) var(--space-m) var(--space-m) var(--space-m);
+		display: block;
+		padding: 0 var(--space-m);
+	}
+}
+
+@media (max-width: 1024px) {
+	.table_wrapper {
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+	.table_wrapper::-webkit-scrollbar {
+		display: none;
+		height: 0;
 	}
 }

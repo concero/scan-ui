@@ -15,9 +15,7 @@ export const Table = <T extends { [key: string]: any }>({ columns, data }: Table
 				<table className="table">
 					<TableHeading headers={columns.map(col => col.header)} />
 					<TableBody rows={data} columns={columns} />
-									<div className='table_shadow'/>
 				</table>
-
 			</div>
 	)
 }
