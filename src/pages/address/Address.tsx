@@ -22,7 +22,12 @@ export const AddressPage: FC = (): ReactElement => {
 			case loading:
 				return <ScreenLoader />
 			case !txs:
-				return <NotFound resource="Transactions" />
+				return (
+					<NotFound
+						resource="Address"
+						description="We couldn’t find this address. It may be incorrect or doesn’t have any transactions yet."
+					/>
+				)
 			default:
 				return <Address address={address} data={txs ?? []} isTestnet={false} loading={loading} />
 		}

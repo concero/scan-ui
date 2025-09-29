@@ -11,11 +11,11 @@ type TableProps<T extends { [key: string]: any }> = {
 
 export const Table = <T extends { [key: string]: any }>({ columns, data }: TableProps<T>): ReactElement => {
 	return (
-			<div className="table_wrapper">
-				<table className="table">
-					<TableHeading headers={columns.map(col => col.header)} />
-					<TableBody rows={data} columns={columns} />
-				</table>
-			</div>
+		<div className="table_wrapper">
+			<table className="table">
+				<TableHeading headers={columns.map(col => col.header)} />
+				<TableBody rows={data} columns={columns} />
+			</table>
+		</div>
 	)
 }

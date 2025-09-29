@@ -7,6 +7,7 @@ import './styles.pcss'
 
 type NotFoundProps = {
 	resource: string
+	description: string
 }
 
 const visuals: Visual[] = [
@@ -14,7 +15,7 @@ const visuals: Visual[] = [
 	{ src: 'visual_two.webp', alt: 'Location', className: 'visual_two' },
 ]
 
-export const NotFound = ({ resource }: NotFoundProps): ReactElement => {
+export const NotFound = ({ resource, description }: NotFoundProps): ReactElement => {
 	const { to } = useNavigation()
 	const { theme } = useSettingsStore()
 
@@ -38,10 +39,7 @@ export const NotFound = ({ resource }: NotFoundProps): ReactElement => {
 			<div className="not_found_content">
 				<div className="not_found_description">
 					<h2 className="not_found_title">{resource} not found</h2>
-					<p className="not_found_subtitle">
-						We couldn’t locate this {resource.toLowerCase()}. It may not have been processed yet, or the
-						link might be incorrect.
-					</p>
+					<p className="not_found_subtitle">{description}</p>
 				</div>
 				<div className="not_found_action">
 					<Button variant="secondary_color" onClick={() => to(routes.home())}>

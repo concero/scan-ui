@@ -38,7 +38,7 @@ export const useLoadAddress = (): void => {
 		queryFn: getData,
 		enabled: Boolean(address) && isAddress(address ?? ''),
 		staleTime: 30_000,
-		retry: 0,
+		retry: 2,
 		refetchOnWindowFocus: false,
 	})
 
