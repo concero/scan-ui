@@ -4,15 +4,15 @@ import { Header } from './components'
 import { HomePage, AddressPage, TransactionPage, MissingPage } from './pages'
 
 export const Navigator = (): ReactElement => {
-    return (
-        <>
-            <Header />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/address/:address" element={<AddressPage />} />
-                <Route path="/transaction/:identifier" element={<TransactionPage />} />
-                <Route path="*" element={<MissingPage />} />
-            </Routes>
-        </>
-    )
+	return (
+		<>
+			<Header />
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/address/:address" element={<AddressPage />} />
+				<Route path="/transaction/:identifier" element={<TransactionPage />} />
+				<Route path="*" element={<MissingPage />} />
+			</Routes>
+		</>
+	)
 }

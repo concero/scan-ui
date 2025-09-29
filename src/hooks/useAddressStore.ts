@@ -4,34 +4,38 @@ import { AddressContext } from '@/stores'
 
 export type UseAddressStoreResult = {
 	txs: AddressState['txs']
-	loading: AddressState['loading']
-	direction: AddressState['direction']
-	page: AddressState['page']
-	count: AddressState['count']
+	initialLoading: AddressState['initialLoading']
+	dataLoading: AddressState['dataLoading']
+	dataFilters: AddressState['dataFilters']
+	pagination: AddressState['pagination']
+
 	setTransactions: AddressState['setTransactions']
-	setLoading: AddressState['setLoading']
+	addTransactions: AddressState['addTransactions']
+	setInitialLoading: (loading: boolean) => void
+	setDataLoading: (loading: boolean) => void
 	setDirection: AddressState['setDirection']
-	setPage: AddressState['setPage']
-	setCount: AddressState['setCount']
+	setPagination: AddressState['setPagination']
 }
 
 export const useAddressStore = (): UseAddressStoreResult => {
 	const useStore = useContext(AddressContext)
 
 	if (!useStore) {
-		throw new Error('useSettingsStore must be used inside <SettingsStoreProvider>.')
+		throw new Error('useAddressStore must be used inside <AddressStoreProvider>.')
 	}
 
 	return {
 		txs: useStore(state => state.txs),
-		loading: useStore(state => state.loading),
-		count: useStore(state => state.count),
-		direction: useStore(state => state.direction),
-		page: useStore(state => state.page),
+		initialLoading: useStore(state => state.initialLoading),
+		dataLoading: useStore(state => state.dataLoading),
+		dataFilters: useStore(state => state.dataFilters),
+		pagination: useStore(state => state.pagination),
+
 		setTransactions: useStore(state => state.setTransactions),
-		setCount: useStore(state => state.setCount),
-		setLoading: useStore(state => state.setLoading),
+		addTransactions: useStore(state => state.addTransactions),
+		setInitialLoading: useStore(state => (loading: boolean) => state.setLoading(loading, true)),
+		setDataLoading: useStore(state => (loading: boolean) => state.setLoading(loading, false)),
 		setDirection: useStore(state => state.setDirection),
-		setPage: useStore(state => state.setPage),
+		setPagination: useStore(state => state.setPagination),
 	}
 }

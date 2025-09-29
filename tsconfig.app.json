@@ -36,6 +36,10 @@
 		"noUnusedLocals": false,
 		"noUnusedParameters": false
 	},
-	"include": ["src", "node_modules/eslint-plugin-react/lib/types.d.ts", "src/components/missing_page/MissingPage.tsx"],
+	"include": [
+		"src",
+		"node_modules/eslint-plugin-react/lib/types.d.ts",
+		"src/components/missing_page/MissingPage.tsx"
+	],
 	"exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx", ".storybook/**/*.ts"]
 }

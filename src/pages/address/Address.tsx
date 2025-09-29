@@ -15,11 +15,11 @@ export const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
 	useSyncParams()
 	useLoadAddress()
-	const { txs, loading } = useAddressStore()
+	const { txs, initialLoading, dataLoading } = useAddressStore()
 
 	const renderContent = (): ReactElement => {
 		switch (true) {
-			case loading:
+			case initialLoading:
 				return <ScreenLoader />
 			case !txs:
 				return (
@@ -29,7 +29,7 @@ export const AddressPage: FC = (): ReactElement => {
 					/>
 				)
 			default:
-				return <Address address={address} data={txs ?? []} isTestnet={false} loading={loading} />
+				return <Address address={address} data={txs ?? []} isTestnet={false} loading={dataLoading} />
 		}
 	}
 

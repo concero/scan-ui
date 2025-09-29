@@ -1,4 +1,3 @@
-import type { Address } from 'viem'
 import type { Transaction } from '@/types'
 import { TxsDirection } from '@/types'
 import { isAddress } from 'viem'
@@ -8,35 +7,46 @@ import { useParams } from 'react-router-dom'
 import { useAddressStore } from '../useAddressStore'
 import { fetchTransactions } from '@/utils/txs'
 
-const ITEMS_PER_PAGE = 20
-
 export const useLoadAddress = (): void => {
 	const { address } = useParams<{ address: string }>()
-	const { direction, page, setTransactions, setDirection, setCount, setLoading } = useAddressStore()
+	const {
+		dataFilters,
+		pagination,
+		initialLoading,
+		dataLoading,
+		setTransactions,
+		addTransactions,
+		setDirection,
+		setInitialLoading,
+		setDataLoading,
+	} = useAddressStore()
 
-	const getData = useCallback(async (): Promise<Transaction[] | null> => {
-		if (!address || !isAddress(address)) return null
+	const { take, skip } = pagination
 
-		const sender: Address | null = direction === TxsDirection.Outgoing ? address : null
-		const receiver: Address | null = direction === TxsDirection.Incoming ? address : null
-		const skip = (page - 1) * ITEMS_PER_PAGE
+	const addr = address && isAddress(address) ? address : null
+	const isInit = skip === 0
+	const direction = dataFilters.direction
+	const sender = direction === TxsDirection.Outgoing ? addr : null
+	const receiver = direction === TxsDirection.Incoming ? addr : null
 
-		const params = {
-			take: ITEMS_PER_PAGE,
-			skip,
-			...(sender ? { sender } : {}),
-			...(receiver ? { receiver } : {}),
-		}
+	const parameters = {
+		take,
+		skip,
+		...(sender ? { sender } : {}),
+		...(receiver ? { receiver } : {}),
+	}
 
-		const response = await fetchTransactions<Transaction[]>(params)
-		setCount(response.pagination.count ?? 0)
-		return response.transactions.flat() ?? null
-	}, [address, direction, page])
+	const getTransactionData = useCallback(async (): Promise<Transaction[] | null> => {
+		if (!addr) return null
 
-	const { data: transaction, isLoading } = useQuery({
-		queryKey: ['transaction', address, direction, page],
-		queryFn: getData,
-		enabled: Boolean(address) && isAddress(address ?? ''),
+		const res = await fetchTransactions<Transaction[]>(parameters)
+		return res.transactions.flat() ?? null
+	}, [addr, parameters])
+
+	const { data, isLoading } = useQuery({
+		queryKey: ['transaction', addr, direction, skip],
+		queryFn: getTransactionData,
+		enabled: Boolean(addr),
 		staleTime: 30_000,
 		retry: 2,
 		refetchOnWindowFocus: false,
@@ -47,7 +57,24 @@ export const useLoadAddress = (): void => {
 	}, [direction, setDirection])
 
 	useEffect(() => {
-		setTransactions(transaction ?? null)
-		setLoading(isLoading)
-	}, [transaction, isLoading, setTransactions, setLoading])
+		if (isInit && initialLoading !== isLoading) {
+			setInitialLoading(isLoading)
+		}
+	}, [skip, isLoading, initialLoading, setInitialLoading])
+
+	useEffect(() => {
+		if (!isInit && dataLoading !== isLoading) {
+			setDataLoading(isLoading)
+		}
+	}, [skip, isLoading, dataLoading, setDataLoading])
+
+	useEffect(() => {
+		if (!data || !isInit) return
+		setTransactions(data)
+	}, [isInit, data, setTransactions])
+
+	useEffect(() => {
+		if (!data || isInit) return
+		addTransactions(data)
+	}, [isInit, data, addTransactions])
 }
