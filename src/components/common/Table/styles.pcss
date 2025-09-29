@@ -1,58 +1,49 @@
-.table_wrapper {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+.table {
 	width: 100%;
 	max-width: 1464px;
-	-webkit-overflow-scrolling: touch;
-	scrollbar-width: none;
-	-ms-overflow-style: none;
+	max-height: 802px;
 	background: var(--color-gray-25);
 	border-radius: var(--border-radius-large);
 	cursor: grab;
+	padding-left: var(--space-s);
 	position: relative;
-	max-height: 802px;
-	transition: overflow-y 0.3s ease;
 	overflow-x: auto;
-	overflow-y: auto;
+	overflow-y: scroll;
+	transition: overflow-y 0.3s ease;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
 
-	&::-webkit-scrollbar {
-		display: none;
-		height: 0;
-	}
-
-	&:hover {
-		overflow-y: visible;
-	}
-
-	& .table {
-		max-width: 1464px;
-		margin: 0 auto;
+	& .table_content {
 		box-sizing: border-box;
-		width: 100%;
 		display: block;
 		padding: 0 var(--space-m);
-	}
-
-	& .table_shadow {
-		pointer-events: none;
-		content: '';
-		position: absolute;
-		bottom: 0;
 		width: 100%;
-		height: 20px;
-		background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+		max-width: 1464px;
+		margin: 0 auto;
 	}
 }
 
+.table .table::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+	background: transparent;
+}
+
+.table::-webkit-scrollbar-thumb {
+	border-radius: var(--border-radius-large);
+}
+
+.table:hover::-webkit-scrollbar-thumb {
+	background-color: var(--color-gray-300);
+}
+
+.table:hover {
+	scrollbar-color: var(--color-gray-300) transparent;
+}
+
 @media (max-width: 1024px) {
-	.table_wrapper {
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-	}
 	.table_wrapper::-webkit-scrollbar {
-		display: none;
-		height: 0;
+		display: block;
+		width: 4px;
 	}
 }

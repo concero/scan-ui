@@ -30,7 +30,6 @@ type DataTableProps = {
 }
 
 export const DataTable = ({ data }: DataTableProps): ReactElement => {
-
 	const rows: MessageRow[] = data.map(({ id, type, from, to, status }) => ({
 		messageId: <MessageData messageId={id} />,
 		type: <TransactionLabel size="s" type={type} />,
@@ -40,10 +39,5 @@ export const DataTable = ({ data }: DataTableProps): ReactElement => {
 		status: <StatusLabel status={status} size="m" />,
 	}))
 
-	return (
-		<Table
-			columns={columns}
-			data={rows}
-		/>
-	)
+	return <Table columns={columns} data={rows} />
 }
