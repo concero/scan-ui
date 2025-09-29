@@ -1,9 +1,9 @@
 @keyframes float_up {
 	from {
-		transform: rotate(-15deg) translateY(0);
+		transform: translateY(0);
 	}
 	to {
-		transform: rotate(-15deg) translateY(-24.69px);
+		transform: translateY(-24.69px);
 	}
 }
 
@@ -16,29 +16,30 @@
 	}
 }
 
-.not_found {
+.missing_page {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	margin: var(--space-xl) auto;
-	max-width: 608px;
+	max-width: 920px;
 	width: 100%;
 	gap: var(--space-m);
 	align-items: center;
 
-	& .not_found_visuals {
-		max-height: 390px;
+	& .missing_page_visuals {
+		max-height: 358px;
 		width: 100%;
+		max-width: 920px;
 		aspect-ratio: 95/61;
-		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		position: relative;
 
-		& .not_found_visual {
+		& .missing_page_visual {
 			position: absolute;
-			width: 201px;
-			height: 201px;
+			width: 226px;
+			height: 226px;
 			object-fit: contain;
 			transition:
 				transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
@@ -48,40 +49,45 @@
 				bottom 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 		}
 
-		& .visual_one {
-			bottom: 5%;
-			left: 12.5%;
-			top: auto;
+		& .visual_missing_one {
+			left: 10.42%;
+			top: 18.44%;
 			right: auto;
-			transform: rotate(-15deg);
 			animation: float_up 3.2s linear infinite alternate;
 		}
 
-		& .visual_two {
-			top: 5%;
-			right: 12.5%;
+		& .visual_missing_two {
+			top: 18.44%;
+			right: 38%;
 			bottom: auto;
 			left: auto;
-			transform: rotate(15deg);
 			animation: float_down 3.2s linear infinite alternate;
+		}
+
+		& .visual_missing_three {
+			right: 10.42%;
+			top: 18.44%;
+			bottom: auto;
+			left: auto;
+			animation: float_up 3.2s linear infinite alternate;
 		}
 	}
 
-	& .not_found_content {
+	& .missing_page_content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--space-s);
 		width: 100%;
 
-		& .not_found_description {
+		& .missing_page_description {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			gap: var(--space-xxs);
 			width: 100%;
 
-			& .not_found_title {
+			& .missing_page_title {
 				font-size: 2rem;
 				color: var(--color-gray-700);
 				font-weight: 500;
@@ -90,7 +96,7 @@
 				text-align: center;
 			}
 
-			& .not_found_subtitle {
+			& .missing_page_subtitle {
 				font-size: 1rem;
 				font-weight: 400;
 				text-align: center;
@@ -99,7 +105,7 @@
 			}
 		}
 
-		& .not_found_action {
+		& .missing_page_action {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -109,47 +115,60 @@
 }
 
 @media (min-width: 1025px) and (max-width: 1920px) {
-	.not_found {
-		max-width: 394px;
+	.missing_page {
+		max-width: 651px;
 	}
 
-	.not_found .not_found_visuals {
+	.missing_page .missing_page_visuals {
 		max-height: 253px;
 	}
 
-	.not_found .not_found_visuals .not_found_visual {
-		width: 130px;
-		height: 130px;
+	.missing_page .missing_page_visuals .missing_page_visual {
+		width: 160px;
+		height: 160px;
 	}
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
-	.not_found {
-		max-width: 448px;
+	.missing_page {
+		max-width: 622px;
 	}
 
-	.not_found .not_found_visuals {
-		max-height: 287px;
+	.missing_page .missing_page_visuals {
+		max-height: 241px;
 	}
 
-	.not_found .not_found_visuals .not_found_visual {
-		width: 150px;
-		height: 150px;
+	.missing_page .missing_page_visuals .missing_page_visual {
+		width: 153px;
+		height: 153px;
 	}
 }
 
 @media (max-width: 640px) {
-	.not_found {
+	.missing_page {
 		max-width: 343px;
 		padding: var(--space-m) var(--space-m) 0 var(--space-m);
 	}
 
-	.not_found .not_found_visuals {
-		max-height: 287px;
+	.missing_page .missing_page_visuals {
+		max-height: 133.301px;
+		max-width: 100%;
 	}
 
-	.not_found .not_found_visuals .not_found_visual {
-		width: 110px;
-		height: 110px;
+	.missing_page .missing_page_visuals .missing_page_visual {
+		width: 84.3px;
+		height: 84.3px;
+	}
+
+	.missing_page .missing_page_visuals .visual_missing_two {
+		top: 10%;
+	}
+
+	.missing_page .missing_page_visuals .visual_missing_one {
+		left: 6%;
+	}
+
+	.missing_page .missing_page_visuals .visual_missing_three {
+		right: 9.33%;
 	}
 }
