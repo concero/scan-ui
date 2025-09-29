@@ -45,7 +45,7 @@ export const TimeData: FC<TimeDataProps> = ({ timestamp }): ReactElement => {
 
 export const DirectionData: FC<DirectionDataProps> = ({ chainId, address }): ReactElement => {
 	const url = chainId
-		? `https://dev.concero.io/static/chains/${chainId}.svg`
+		? `https://api.v2.concero.io/static/chains/${chainId}.svg`
 		: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="gray"%3E%3Crect width="100%" height="100%"%3E%3C/rect%3E%3C/svg%3E'
 	return (
 		<div className="direction_data">

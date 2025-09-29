@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { routes } from '@/configuration'
 import { useNavigate, To, NavigateOptions } from 'react-router-dom'
 
 type UseNavigation = {
@@ -9,35 +10,24 @@ type UseNavigation = {
 export const useNavigation = (): UseNavigation => {
     const navigate = useNavigate()
 
-    const canGoBack = (): boolean => window.history.length > 1;
-
-    const isSameOriginReferrer = (): boolean => {
-        try {
-            const referrerUrl = new URL(document.referrer);
-            return referrerUrl.origin === window.location.origin;
-        } catch {
-            return false;
-        }
-    };
-
     const back = useCallback((): void => {
-        if (canGoBack() && isSameOriginReferrer()) {
+        if (window.history.length > 1) {
             try {
-                navigate(-1);
-            } catch {
-                navigate('/', { replace: true });
+                navigate(-1)
+            } catch (error) {
+                navigate(routes.home(), { replace: true })
             }
         } else {
-            navigate('/', { replace: true });
+            navigate(routes.home(), { replace: true })
         }
-    }, [navigate]);
+    }, [navigate])
 
     const to = useCallback(
         (path: To, options?: NavigateOptions): void => {
-            navigate(path, options);
+            navigate(path, options)
         },
         [navigate],
-    );
+    )
 
-    return { back, to };
+    return { back, to }
 }
