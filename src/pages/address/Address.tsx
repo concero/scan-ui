@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react'
 import { MetaTags } from '@/components/common'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
-import { useAddressStore, useLoadAddress } from '@/hooks'
+import { useAddressStore, useLoadAddressData } from '@/hooks'
 import { NotFound } from '@/components/common'
 import { ScreenLoader } from '@/components/common/ScreenLoader'
 import { useSyncParams } from '@/hooks/useSyncParams'
@@ -14,7 +14,7 @@ const META_DESCRIPTION =
 export const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
 	useSyncParams()
-	useLoadAddress()
+	useLoadAddressData()
 	const { txs, initialLoading, dataLoading } = useAddressStore()
 
 	const renderContent = (): ReactElement => {

@@ -1,2 +1,2 @@
-export * from './useLoadAddress'
+export * from './useLoadAddressData'
 export * from './useLoadTransaction'
