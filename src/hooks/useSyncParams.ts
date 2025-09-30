@@ -5,23 +5,21 @@ import { useRef, useEffect } from 'react'
 import type { TxsDirection } from '@/types'
 
 export const useSyncParams = (): void => {
-	const [{ direction: urlDirection, page: urlPage }, setQuery] = useQueryParams<{
+	const [{ direction: urlDirection }, setQuery] = useQueryParams<{
 		direction: TxsDirection
-		page: number
 	}>(paramConfig)
 
-	const { direction, page, setDirection, setPage } = useAddressStore()
+	const { dataFilters, setDirection } = useAddressStore()
 
 	const isURLUpdate = useRef<boolean>(false)
 	const isStoreUpdate = useRef<boolean>(false)
 
 	useEffect(() => {
-		if (direction !== urlDirection || page !== urlPage) {
+		if (dataFilters.direction !== urlDirection) {
 			isURLUpdate.current = true
 			setDirection(urlDirection)
-			setPage(urlPage)
 		}
-	}, [urlDirection, urlPage])
+	}, [urlDirection, dataFilters.direction, setDirection])
 
 	useEffect(() => {
 		if (isURLUpdate.current) {
@@ -29,15 +27,15 @@ export const useSyncParams = (): void => {
 			return
 		}
 
-		if (direction !== urlDirection || page !== urlPage) {
+		if (dataFilters.direction !== urlDirection) {
 			isStoreUpdate.current = true
-			setQuery({ direction, page })
+			setQuery({ direction: dataFilters.direction })
 		}
-	}, [direction, page])
+	}, [dataFilters.direction, urlDirection, setQuery])
 
 	useEffect(() => {
 		if (isStoreUpdate.current) {
 			isStoreUpdate.current = false
 		}
-	}, [urlDirection, urlPage])
+	}, [urlDirection])
 }

@@ -21,7 +21,7 @@ export const Header = (): ReactElement => {
 
 	useEffect(() => {
 		setBurgerOpen(false)
-	}, [isMobile, isTablet])
+	}, [location, isMobile, isTablet])
 
 	const toggleSupport: () => void = useCallback(() => {
 		toggleModal('concero-support-modal')
