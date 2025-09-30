@@ -14,10 +14,13 @@
 		cursor: grab;
 		position: relative;
 		overflow-x: auto;
-		overflow-y: scroll;
 		transition: overflow-y 0.3s ease;
-		scrollbar-width: thin;
-		scrollbar-color: transparent transparent;
+
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
 
 		& .table_content {
 			box-sizing: border-box;
@@ -59,28 +62,3 @@
 		height: 100%;
 	}
 }
-
-/* .table::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-    background: transparent;
-}
-
-.table::-webkit-scrollbar-thumb {
-    border-radius: var(--border-radius-large);
-}
-
-.table:hover::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray-300);
-}
-
-.table:hover {
-    scrollbar-color: var(--color-gray-300) transparent;
-}
-
-@media (max-width: 1024px) {
-    .table::-webkit-scrollbar {
-        display: block;
-        width: 4px;
-    }
-} */
