@@ -21,7 +21,7 @@ export const AddressPage: FC = (): ReactElement => {
 		switch (true) {
 			case initialLoading:
 				return <ScreenLoader />
-			case !txs:
+			case !txs || txs.length === 0:
 				return (
 					<NotFound
 						resource="Address"
