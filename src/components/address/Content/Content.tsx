@@ -1,14 +1,14 @@
 import type { ReactElement } from 'react'
 import { ButtonGroup } from '@/components/common'
 import { useMemo } from 'react'
-import "./styles.pcss"
+import './styles.pcss'
 
 type ContentProps = {
 	address?: string
 }
 
 export const Content = ({ address }: ContentProps): ReactElement => {
-    const actions = useMemo(() => <ButtonGroup labels={['Outgoing', 'Incoming']} />, [])
+	const actions = useMemo(() => <ButtonGroup labels={['Outgoing', 'Incoming']} />, [])
 
 	return (
 		<div className="address_content">

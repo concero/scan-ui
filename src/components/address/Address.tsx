@@ -9,7 +9,6 @@ type AddressProps = {
 }
 
 export const Address = ({ address }: AddressProps): ReactElement => {
-
 	const content = useMemo(() => <Content address={address} />, [address])
 	const table = useMemo(() => <DataTable />, [])
 

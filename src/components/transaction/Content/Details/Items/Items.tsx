@@ -9,7 +9,7 @@ type ChainParameters = {
 export const Chain = ({ name, id }: ChainParameters): ReactElement => {
 	return (
 		<div className="chain">
-			<img src={`https://api.v2.concero.io/static/chains/${id}.svg`} alt={name} className="chain_logo" />
+			<img src={`https://dev.concero.io/static/chains/${id}.svg`} alt={name} className="chain_logo" />
 			<span className="chain_name">{name}</span>
 		</div>
 	)

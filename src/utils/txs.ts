@@ -25,7 +25,7 @@ export const fetchTransactions = async <T = unknown>({
 	sender,
 	receiver,
 }: SenderOrReceiver): Promise<TransactionResponse<T>['payload']> => {
-	const url = new URL('https://api.v2.concero.io/api/v1/scan/tx')
+	const url = new URL('https://dev.concero.io/api/v1/scan/tx')
 
 	url.searchParams.set('take', String(take))
 	url.searchParams.set('skip', String(skip))
