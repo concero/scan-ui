@@ -1,5 +1,5 @@
 import type { Column } from '../TableRow'
-import { ReactElement, useRef } from 'react'
+import { ReactElement, useRef, useState, useEffect } from 'react'
 import { TableHeading } from '../TableHeading'
 import { TableBody } from '../TableBody/TableBody'
 import { useAddressStore } from '@/hooks'
@@ -14,15 +14,40 @@ type TableProps<T extends { [key: string]: any }> = {
 export const Table = <T extends { [key: string]: any }>({ columns, data }: TableProps<T>): ReactElement => {
 	const { pagination, setPagination } = useAddressStore()
 	const containerRef = useRef<HTMLDivElement>(null)
+	const [showShadow, setShowShadow] = useState<boolean>(false)
 
 	useInfiniteScroll(containerRef, pagination, setPagination, 0)
 
+	useEffect(() => {
+	const el = containerRef.current
+	if (!el) return
+
+	const checkShadow = () => {
+		setShowShadow(el.scrollLeft < el.scrollWidth - el.clientWidth)
+	}
+
+	el.addEventListener('scroll', checkShadow)
+	window.addEventListener('resize', checkShadow)
+
+	checkShadow()
+
+	return () => {
+		el.removeEventListener('scroll', checkShadow)
+		window.removeEventListener('resize', checkShadow)
+	}
+	}, [])
+
+
 	return (
-		<div className="table" ref={containerRef}>
-			<table className="table_content">
-				<TableHeading headers={columns.map(col => col.header)} />
-				<TableBody rows={data} columns={columns} />
-			</table>
+		<div className="table_wrapper">
+			<div className="table" ref={containerRef}>
+				<table className="table_content">
+					<TableHeading headers={columns.map(col => col.header)} />
+					<TableBody rows={data} columns={columns} />
+				</table>
+			</div>
+			<div className="table_shadow_bottom" />
+			{showShadow && <div className="table_shadow_right" />}
 		</div>
 	)
 }

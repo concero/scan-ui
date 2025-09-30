@@ -11,8 +11,6 @@ type ButtonGroupProps = {
 export const ButtonGroup = ({ labels }: ButtonGroupProps): ReactElement => {
 	const { txs, dataFilters, setDirection } = useAddressStore()
 
-	console.log(txs)
-
 	const id: number = dataFilters.direction === TxsDirection.Outgoing ? 0 : 1
 
 	const handleClick = (index: number) => {
