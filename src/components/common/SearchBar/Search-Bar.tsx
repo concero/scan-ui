@@ -4,7 +4,7 @@ import { Input } from '@concero/ui-kit'
 import { SearchIcon } from '@/assets/search-icon'
 import { useSearch } from '@/hooks'
 import { SearchType } from '@/types'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import './styles.pcss'
 
 type SearchBarProps = {
@@ -27,12 +27,20 @@ export const SearchBar = ({
 		[onSearch],
 	)
 
+	const icon = useMemo<ReactElement>(() => {
+		return (
+			<span onClick={onSearch} style={{ cursor: 'pointer' }}>
+				<SearchIcon />
+			</span>
+		)
+	}, [onSearch])
+
 	return (
 		<div className="search_bar">
 			<Input
 				placeholder={placeholder}
 				size={size}
-				icon={<SearchIcon />}
+				icon={icon}
 				value={input}
 				isSuccess={type !== SearchType.Unknown}
 				onChange={e => onChange(e.target.value)}
