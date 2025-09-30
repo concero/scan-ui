@@ -13,11 +13,11 @@ const META_DESCRIPTION =
 
 export const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
+	const { txs, initialLoading } = useAddressStore()
 	useSyncParams()
 	useLoadAddressData()
-	const { txs, initialLoading, dataLoading } = useAddressStore()
 
-	const renderContent = (): ReactElement => {
+	const render = (): ReactElement => {
 		switch (true) {
 			case initialLoading:
 				return <ScreenLoader />
@@ -29,14 +29,14 @@ export const AddressPage: FC = (): ReactElement => {
 					/>
 				)
 			default:
-				return <Address address={address} data={txs ?? []} isTestnet={false} loading={dataLoading} />
+				return <Address address={address} />
 		}
 	}
 
 	return (
 		<>
 			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
-			<main>{renderContent()}</main>
+			<main>{render()}</main>
 		</>
 	)
 }
