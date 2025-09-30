@@ -33,7 +33,6 @@ export const InfoRow = ({
       <div
         className={`info_row_value${copyable ? '' : ' no_copy'}`}
         onClick={handleCopy}
-        role={copyable ? 'button' : undefined}
         tabIndex={copyable ? 0 : undefined}
         aria-disabled={!copyable}
         onKeyDown={e => {
