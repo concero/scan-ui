@@ -15,6 +15,7 @@ export type UseAddressStoreResult = {
 	setDataLoading: (loading: boolean) => void
 	setDirection: AddressState['setDirection']
 	setPagination: AddressState['setPagination']
+	resetData: AddressState['resetData'] 
 }
 
 export const useAddressStore = (): UseAddressStoreResult => {
@@ -37,5 +38,6 @@ export const useAddressStore = (): UseAddressStoreResult => {
 		setDataLoading: useStore(state => (loading: boolean) => state.setLoading(loading, false)),
 		setDirection: useStore(state => state.setDirection),
 		setPagination: useStore(state => state.setPagination),
+		resetData: useStore(state => state.resetData)
 	}
 }

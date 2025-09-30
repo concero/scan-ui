@@ -20,12 +20,16 @@ export const useLoadAddressData = (): void => {
 		setDirection,
 		setInitialLoading,
 		setDataLoading,
+		setPagination
 	} = useAddressStore()
 
 	const { take, skip } = pagination
 	const { direction } = dataFilters
 
-	const addr: Address | null = address && isAddress(address) ? address : null
+	const addr = useMemo<Address | null>(() => {
+		return address && isAddress(address) ? address : null
+	}, [address])
+
 	const initialLoad: boolean = useMemo(() => {
 		const result = skip === 0
 		return result
@@ -61,7 +65,7 @@ export const useLoadAddressData = (): void => {
 	const { data, isLoading } = useQuery({
 		queryKey: ['transaction', addr, direction, skip],
 		queryFn: getAddressData,
-		enabled: Boolean(addr) && hasMore.current,
+		enabled: Boolean(addr),
 		staleTime: 30000,
 		retry: 1,
 		retryDelay: attempt => Math.min(1000 * 2 ** attempt, 30000),
@@ -79,23 +83,34 @@ export const useLoadAddressData = (): void => {
 		if (!Array.isArray(data)) return
 		if (data.length < take) hasMore.current = false
 		else hasMore.current = true
-	}, [data])
+	}, [data, addr])
 
 	useEffect(() => {
 		if (initialLoad && initialLoading !== isLoading) setInitialLoading(isLoading)
-	}, [initialLoad, initialLoading, isLoading, setInitialLoading])
+	}, [initialLoad, initialLoading, isLoading, setInitialLoading, addr])
 
 	useEffect(() => {
 		if (!initialLoad && dataLoading !== isLoading) setDataLoading(isLoading)
-	}, [initialLoad, dataLoading, isLoading, setDataLoading])
+	}, [initialLoad, dataLoading, isLoading, setDataLoading, addr])
 
 	useEffect(() => {
 		if (!data || !initialLoad) return
+
 		setTransactions(data)
-	}, [data, initialLoad, setTransactions])
+	}, [data, initialLoad, setTransactions, addr])
 
 	useEffect(() => {
 		if (!data || initialLoad) return
 		addTransactions(data)
-	}, [data, initialLoad, addTransactions])
+	}, [data, initialLoad, addTransactions, addr])
+
+	useEffect(() => {
+		if (!addr) return
+
+		setPagination({ take: pagination.take, skip: 0 })
+		hasMore.current = true
+		
+	}, [addr, setPagination])
+
+
 }

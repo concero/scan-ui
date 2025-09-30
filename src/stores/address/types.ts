@@ -25,6 +25,7 @@ export type AddressActions = {
 	setDirection: (direction: TxsDirection) => void
 	setLoading: (loading: boolean, initial?: boolean) => void
 	setPagination: (pagination: Pagination) => void
+	resetData: () => void	
 }
 
 export type AddressState = AddressStateSlice & AddressActions
