@@ -1,0 +1,20 @@
+.notification {
+	display: flex;
+	left: 50%;
+	top: 6%;
+	position: fixed;
+	transform: translateX(-50%);
+	padding: var(--space-s) var(--space-m);
+	align-items: center;
+	gap: var(--space-xs);
+	background: var(--color-gray-700);
+	border-radius: var(--border-radius-medium);
+	color: var(--color-gray-25);
+	z-index: 30;
+	opacity: 0;
+
+	& .notification_icon {
+		width: 16px;
+		height: 16px;
+	}
+}

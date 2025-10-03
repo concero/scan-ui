@@ -11,37 +11,38 @@ type NotFoundProps = {
 }
 
 const visuals: Visual[] = [
-	{ src: 'visual_one.webp', alt: 'Negation', className: 'visual_one' },
-	{ src: 'visual_two.webp', alt: 'Location', className: 'visual_two' },
+	{ src: 'visual_three.webp', alt: 'Location', className: 'visual_missing_one' },
+	{ src: 'visual_one.webp', alt: 'Negation', className: 'visual_missing_two' },
+	{ src: 'visual_three.webp', alt: 'Location', className: 'visual_missing_three' },
 ]
 
-export const NotFound = ({ resource, description }: NotFoundProps): ReactElement => {
+export const MissingPage = ({ resource, description }: NotFoundProps): ReactElement => {
 	const { to } = useNavigation()
 	const { theme } = useSettingsStore()
 
 	const basePath = theme === 'light' ? '/NotFound/Light/' : '/NotFound/Dark/'
 
 	return (
-		<div className="not_found" role="alert" aria-live="polite">
-			<div className="not_found_visuals">
+		<div className="missing_page" role="alert" aria-live="polite">
+			<div className="missing_page_visuals">
 				{visuals.map(({ src, alt, className, props }) => (
 					<img
 						key={className}
 						src={`${basePath}${src}`}
 						alt={alt}
-						className={`not_found_visual ${className}`}
+						className={`missing_page_visual ${className}`}
 						draggable={false}
 						loading="lazy"
 						{...props}
 					/>
 				))}
 			</div>
-			<div className="not_found_content">
-				<div className="not_found_description">
-					<h2 className="not_found_title">{resource} not found</h2>
-					<p className="not_found_subtitle">{description}</p>
+			<div className="missing_page_content">
+				<div className="missing_page_description">
+					<h2 className="missing_page_title">{resource} not found</h2>
+					<p className="missing_page_subtitle">{description}</p>
 				</div>
-				<div className="not_found_action">
+				<div className="missing_page_action">
 					<Button variant="secondary_color" onClick={() => to(routes.home())}>
 						Go to Main Page
 					</Button>

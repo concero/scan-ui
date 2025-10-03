@@ -17,7 +17,12 @@ export const TransactionPage: FC = (): ReactElement => {
 			case loading:
 				return <ScreenLoader />
 			case !transaction:
-				return <NotFound resource="Transaction" />
+				return (
+					<NotFound
+						resource="Transaction"
+						description="We couldn’t locate this transaction. It may not have been processed yet, or thelink might be incorrect."
+					/>
+				)
 			default:
 				return <Transaction />
 		}

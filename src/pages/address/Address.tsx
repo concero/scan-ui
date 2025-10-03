@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react'
 import { MetaTags } from '@/components/common'
 import { Address } from '@/components'
 import { useParams } from 'react-router-dom'
-import { useAddressStore, useLoadAddress } from '@/hooks'
+import { useAddressStore, useLoadAddressData } from '@/hooks'
 import { NotFound } from '@/components/common'
 import { ScreenLoader } from '@/components/common/ScreenLoader'
 import { useSyncParams } from '@/hooks/useSyncParams'
@@ -13,25 +13,30 @@ const META_DESCRIPTION =
 
 export const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
+	const { txs, initialLoading } = useAddressStore()
 	useSyncParams()
-	useLoadAddress()
-	const { txs, loading } = useAddressStore()
+	useLoadAddressData()
 
-	const renderContent = (): ReactElement => {
+	const render = (): ReactElement => {
 		switch (true) {
-			case loading:
+			case initialLoading:
 				return <ScreenLoader />
-			case !txs:
-				return <NotFound resource="Transactions" />
+			case !txs || txs.length === 0:
+				return (
+					<NotFound
+						resource="Address"
+						description="We couldn’t find this address. It may be incorrect or doesn’t have any transactions yet."
+					/>
+				)
 			default:
-				return <Address address={address} data={txs ?? []} isTestnet={false} loading={loading} />
+				return <Address address={address} />
 		}
 	}
 
 	return (
 		<>
 			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
-			<main>{renderContent()}</main>
+			<main>{render()}</main>
 		</>
 	)
 }
