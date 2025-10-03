@@ -16,7 +16,7 @@ export enum TxType {
 	LBF = 'lbf',
 	IOU = 'iou',
 	Canonical = 'canonical',
-	Message = 'message',
+	Message = 'v2',
 	CCIP = 'ccip_testnet',
 }
 

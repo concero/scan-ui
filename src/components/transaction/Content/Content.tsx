@@ -7,12 +7,9 @@ import { Summary } from './Summary'
 import { Timestamp } from './Timestamp'
 import { Execution } from './Execution'
 import { useMemo } from 'react'
-import { useTransactionStore } from '@/hooks'
 import './styles.pcss'
 
 export const Content = (): ReactElement => {
-	const { transaction } = useTransactionStore()
-
 	const executionSection = useMemo(() => <Execution />, [])
 
 	return (
