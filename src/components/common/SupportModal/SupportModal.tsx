@@ -33,13 +33,6 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 
 	const supportOptions: SupportOptionConfig[] = [
 		{
-			step: 1,
-			text: 'Copy debug info',
-			buttonLabel: copied ? 'Copied!' : 'Copy debug info',
-			icon: <CopyIcon />,
-			onClick: () => copy(DEBUG_INFO, 'Copied Debug Info'),
-		},
-		{
 			step: 2,
 			text: 'Drop us a message',
 			buttonLabel: 'Open Discord',
@@ -53,14 +46,12 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 				<ModalHeader title="Contact Support" onClose={onClose} />
 
 				<span className="support_modal_description">
-					We apologise that you had issues with your transaction. We will do our best to resolve the issue.
+					We apologize for any difficulties you encountered using our website. Please contact us on Discord, and we will help you.
 				</span>
 
 				{supportOptions.map(({ step, text, buttonLabel, icon, onClick }) => (
 					<SupportOption
 						key={step}
-						step={step}
-						text={text}
 						buttonLabel={buttonLabel}
 						icon={icon}
 						onClick={onClick}
