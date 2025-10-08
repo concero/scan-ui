@@ -6,7 +6,7 @@ import { ScreenLoader } from '@/components/common/ScreenLoader'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
-	'Track and verify Concero transactions effortlessly with Concero Scan. A fast, secure, and transparent tool designed exclusively for monitoring transactions routed through Concero’s cross-chain infrastructure'
+	'Check the status, timestamp, and key on-chain details of any Concero transaction — a clear, reliable view built for quick validation and developer debugging'
 
 export const TransactionPage: FC = (): ReactElement => {
 	useLoadTransaction()

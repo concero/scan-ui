@@ -9,7 +9,7 @@ import { useSyncParams } from '@/hooks/useSyncParams'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
-	'Track and verify Concero transactions effortlessly with Concero Scan. A fast, secure, and transparent tool designed exclusively for monitoring transactions routed through Concero’s cross-chain infrastructure'
+	'Explore any address to see its activity across Concero — recent transactions and interactions in one clear, unified view'
 
 export const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
