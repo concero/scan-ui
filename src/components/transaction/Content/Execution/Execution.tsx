@@ -24,7 +24,7 @@ export const Execution = (): ReactElement => {
 			{!isMessage && (
 				<div className="execution_toggle" onClick={toggle}>
 					<span className="execution_toggle_label">{toggleLabel}</span>
-					<IconButton size="s" variant="secondary" className={btnClass}>
+					<IconButton size="l" variant="secondary" className={btnClass}>
 						<PointerUpIcon />
 					</IconButton>
 				</div>
