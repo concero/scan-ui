@@ -5,27 +5,27 @@ import { Tag } from '@concero/ui-kit'
 import './styles.pcss'
 
 export const Finality = (): ReactElement | null => {
-	const { transaction } = useTransactionStore()
+    const { transaction } = useTransactionStore()
+	
+    if (!transaction) return null
 
-	if (!transaction?.isFinalityRequired) return null
+    const finality: boolean = Boolean(transaction.isFinalityRequired)
+    const status: string = finality ? 'Yes' : 'No'
 
-	const finality: boolean = Boolean(transaction?.isFinalityRequired)
-	const status: string = finality ? 'Yes' : 'No'
-
-	return (
-		<>
-			<div className="finality">
-				<InfoRow
-					label="Finality Required"
-					value={
-						<Tag size="s" variant="neutral">
-							{status}
-						</Tag>
-					}
-					copyable={false}
-				/>
-			</div>
-			<span className="divider" />
-		</>
-	)
+    return (
+        <>
+            <div className="finality">
+                <InfoRow
+                    label="Finality Required"
+                    value={
+                        <Tag size="s" variant="neutral">
+                            {status}
+                        </Tag>
+                    }
+                    copyable={false}
+                />
+            </div>
+            <span className="divider" />
+        </>
+    )
 }
