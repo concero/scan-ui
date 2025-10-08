@@ -27,7 +27,6 @@ export const TransactionPage: FC = (): ReactElement => {
 				return <Transaction />
 		}
 	}
-
 	return (
 		<>
 			<MetaTags title={META_TITLE} description={META_DESCRIPTION} />
