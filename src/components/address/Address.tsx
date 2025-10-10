@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { DataTable } from '../common'
 import { PageHeading } from '../common'
-import { useAddressStore, useTransactionsStore } from '@/hooks'
+import { useAddressStore } from '@/hooks'
 import { useMemo } from 'react'
 import './styles.pcss'
 
