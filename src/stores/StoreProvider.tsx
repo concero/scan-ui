@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren, ReactElement } from 'react'
 import { SettingsStoreProvider } from './settings'
 import { ModalsStoreProvider } from './modals'
 import { AddressStoreProvider } from './address'
-import { TransactionStoreProvider } from './transaction/TransactionStore'
+import { TransactionsStoreProvider } from './transactions/TransactionsStore'
 import { NotificationsStoreProvider } from './notifications'
 
 export const StoreProvider: FC<PropsWithChildren<{}>> = ({ children }): ReactElement => {
@@ -10,11 +10,11 @@ export const StoreProvider: FC<PropsWithChildren<{}>> = ({ children }): ReactEle
 		<SettingsStoreProvider>
 			<ModalsStoreProvider>
 				<AddressStoreProvider>
-					<TransactionStoreProvider>
+					<TransactionsStoreProvider>
 							<NotificationsStoreProvider>
 								{children}
 							</NotificationsStoreProvider>
-						</TransactionStoreProvider>
+						</TransactionsStoreProvider>
 				</AddressStoreProvider>
 			</ModalsStoreProvider>
 		</SettingsStoreProvider>

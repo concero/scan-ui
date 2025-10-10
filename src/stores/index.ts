@@ -1,6 +1,6 @@
 export * from './settings'
 export * from './modals'
 export * from './address'
-export * from './transaction'
+export * from './transactions'
 export * from './notifications'
 export * from './StoreProvider'
