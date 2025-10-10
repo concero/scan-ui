@@ -2,13 +2,16 @@ import type { FC, ReactElement } from 'react'
 import { MetaTags, NotFound } from '@/components/common'
 import { useLoadTransaction, useTransactionsStore } from '@/hooks'
 import { Transaction } from '@/components'
+import { useParams } from 'react-router-dom'
 import { ScreenLoader } from '@/components/common/ScreenLoader'
+import { Transactions } from '@/components/transactions/Transactions'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
     'Check the status, timestamp, and key on-chain details of any Concero transaction — a clear, reliable view built for quick validation and developer debugging'
 
 export const TransactionPage: FC = (): ReactElement => {
+    const { identifier } = useParams<{ identifier: string }>()
     useLoadTransaction()
     const { txs, initialLoading, dataLoading } = useTransactionsStore()
 
@@ -29,7 +32,7 @@ export const TransactionPage: FC = (): ReactElement => {
         }
 
         if (txs.length > 1) {
-            return <>bamba</> 
+            return <Transactions txHash={identifier} />;
         }
 
         return <Transaction />
