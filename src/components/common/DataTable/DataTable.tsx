@@ -19,12 +19,19 @@ type Columns = {
 
 const LOADING_ROWS = 20
 
-interface DataTableProps {
-    txs: Transaction[] | null
-    dataLoading: boolean
+type Pagination = {
+    take: number
+    skip: number
 }
 
-export const DataTable = ({ txs, dataLoading }: DataTableProps): ReactElement => {
+type DataTableProps = {
+    txs: Transaction[] | null
+    dataLoading: boolean
+    pagination: Pagination
+    setPagination: (pagination: Pagination) => void
+}
+
+export const DataTable = ({ txs, dataLoading, pagination, setPagination }: DataTableProps): ReactElement => {
     const columns: Column<Columns>[] = [
         { header: 'Message ID', accessor: 'id' },
         { header: 'Type', accessor: 'type' },
@@ -55,5 +62,5 @@ export const DataTable = ({ txs, dataLoading }: DataTableProps): ReactElement =>
 
     const rows = dataLoading ? [...data, ...skeletons] : data
 
-    return <Table columns={columns} data={rows} />
+    return <Table columns={columns} data={rows} pagination={pagination} setPagination={setPagination} />
 }

@@ -10,9 +10,19 @@ type AddressProps = {
 }
 
 export const Transactions = ({ txHash }: AddressProps): ReactElement => {
-    const { txs, dataLoading } = useTransactionsStore()
+    const { txs, dataLoading, pagination, setPagination } = useTransactionsStore()
     const content = useMemo(() => <PageHeading value={txHash} type="TxHash" />, [txHash])
-    const table = useMemo(() => <DataTable txs={txs} dataLoading={dataLoading} />, [txs, dataLoading])
+    const table = useMemo(
+        () => (
+            <DataTable
+                txs={txs}
+                dataLoading={dataLoading}
+                pagination={pagination}
+                setPagination={setPagination}
+            />
+        ),
+        [txs, dataLoading, pagination, setPagination]
+    )
 
     return (
         <div className="transactions">
