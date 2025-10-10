@@ -7,7 +7,7 @@ export const CreateTransactionsStore = () =>
             txs: null,
             initialLoading: false,
             dataLoading: false,
-            pagination: { take: 10, skip: 0 },
+            pagination: { take: 20, skip: 0 },
 
             setTransactions: (txs) => set({ txs }),
             addTransactions: (newTxs) =>

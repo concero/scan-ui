@@ -15,10 +15,8 @@ export const TransactionPage: FC = (): ReactElement => {
     useLoadTransaction()
     const { txs, initialLoading, dataLoading } = useTransactionsStore()
 
-    const loading = initialLoading || dataLoading
-
     const renderContent = (): ReactElement => {
-        if (loading) {
+        if (initialLoading) {
             return <ScreenLoader />
         }
 
