@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import type { Column } from '../TableRow'
-import { useAddressStore } from '@/hooks'
+import type { Transaction } from '@/types'
 import { Table } from '../Table'
 import { TimeData, DirectionData, MessageData } from './Data/Data'
 import { TransactionLabel } from '../TransactionLabel'
@@ -9,48 +9,58 @@ import { Skeleton } from '../Skeleton'
 import './styles.pcss'
 
 type Columns = {
-	id: ReactElement
-	type: ReactElement
-	age: ReactElement
-	from: ReactElement
-	to: ReactElement
-	status: ReactElement
+    id: ReactElement
+    type: ReactElement
+    age: ReactElement
+    from: ReactElement
+    to: ReactElement
+    status: ReactElement
 }
 
 const LOADING_ROWS = 20
 
-export const DataTable = (): ReactElement => {
-	const { txs, dataLoading } = useAddressStore()
+type Pagination = {
+    take: number
+    skip: number
+}
 
-	const columns: Column<Columns>[] = [
-		{ header: 'Message ID', accessor: 'id' },
-		{ header: 'Type', accessor: 'type' },
-		{ header: 'Age', accessor: 'age' },
-		{ header: 'From', accessor: 'from' },
-		{ header: 'To', accessor: 'to' },
-		{ header: 'Status', accessor: 'status' },
-	]
+type DataTableProps = {
+    txs: Transaction[] | null
+    dataLoading: boolean
+    pagination: Pagination
+    setPagination: (pagination: Pagination) => void
+}
 
-	const data: Columns[] =
-		txs?.map(({ id, type, from, to, status }) => ({
-			id: <MessageData messageId={id} />,
-			type: <TransactionLabel size="s" type={type} />,
-			age: <TimeData timestamp={from.timestamp} />,
-			from: <DirectionData chainId={from.chain.id} address={from.address} />,
-			to: <DirectionData chainId={to.chain.id} address={to.address} />,
-			status: <StatusLabel status={status} size="m" />,
-		})) ?? []
+export const DataTable = ({ txs, dataLoading, pagination, setPagination }: DataTableProps): ReactElement => {
+    const columns: Column<Columns>[] = [
+        { header: 'Message ID', accessor: 'id' },
+        { header: 'Type', accessor: 'type' },
+        { header: 'Age', accessor: 'age' },
+        { header: 'From', accessor: 'from' },
+        { header: 'To', accessor: 'to' },
+        { header: 'Status', accessor: 'status' },
+    ]
 
-	const skeletons: Columns[] = Array.from({ length: LOADING_ROWS }).map((_, index) => ({
-		id: <Skeleton key={`skeleton-id-${index}`} width="100%" height="24px" />,
-		type: <Skeleton key={`skeleton-type-${index}`} width="128px" height="24px" />,
-		age: <Skeleton key={`skeleton-age-${index}`} width="100px" height="24px" />,
-		from: <Skeleton key={`skeleton-from-${index}`} width="207px" height="24px" />,
-		to: <Skeleton key={`skeleton-to-${index}`} width="207px" height="24px" />,
-		status: <Skeleton key={`skeleton-status-${index}`} width="87px" height="24px" />,
-	}))
+    const data: Columns[] =
+        txs?.map(({ id, type, from, to, status }) => ({
+            id: <MessageData messageId={id} />,
+            type: <TransactionLabel size="s" type={type} />,
+            age: <TimeData timestamp={from.timestamp} />,
+            from: <DirectionData chainId={from.chain.id} address={from.address} />,
+            to: <DirectionData chainId={to.chain.id} address={to.address} />,
+            status: <StatusLabel status={status} size="m" />,
+        })) ?? []
 
-	const rows = dataLoading ? [...data, ...skeletons] : data
+    const skeletons: Columns[] = Array.from({ length: LOADING_ROWS }).map((_, index) => ({
+        id: <Skeleton key={`skeleton-id-${index}`} width="100%" height="24px" />,
+        type: <Skeleton key={`skeleton-type-${index}`} width="128px" height="24px" />,
+        age: <Skeleton key={`skeleton-age-${index}`} width="100px" height="24px" />,
+        from: <Skeleton key={`skeleton-from-${index}`} width="207px" height="24px" />,
+        to: <Skeleton key={`skeleton-to-${index}`} width="207px" height="24px" />,
+        status: <Skeleton key={`skeleton-status-${index}`} width="87px" height="24px" />,
+    }))
 
-	return <Table columns={columns} data={rows} />
+    const rows = dataLoading ? [...data, ...skeletons] : data
+
+    return <Table columns={columns} data={rows} pagination={pagination} setPagination={setPagination} />
 }

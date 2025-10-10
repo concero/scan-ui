@@ -1,17 +1,17 @@
 import type { ReactElement } from 'react'
 import { DataTable } from '../common'
 import { PageHeading } from '../common'
-import { useAddressStore } from '@/hooks'
+import { useTransactionsStore } from '@/hooks'
 import { useMemo } from 'react'
 import './styles.pcss'
 
 type AddressProps = {
-    address?: string
+    txHash?: string
 }
 
-export const Address = ({ address }: AddressProps): ReactElement => {
-    const { txs, dataLoading, pagination, setPagination } = useAddressStore()
-    const content = useMemo(() => <PageHeading value={address} type="Address" showActions />, [address])
+export const Transactions = ({ txHash }: AddressProps): ReactElement => {
+    const { txs, dataLoading, pagination, setPagination } = useTransactionsStore()
+    const content = useMemo(() => <PageHeading value={txHash} type="TxHash" />, [txHash])
     const table = useMemo(
         () => (
             <DataTable
@@ -25,7 +25,7 @@ export const Address = ({ address }: AddressProps): ReactElement => {
     )
 
     return (
-        <div className="address">
+        <div className="transactions">
             {content}
             {table}
         </div>

@@ -13,28 +13,14 @@ export const parseDirection: ParseFn<TxsDirection> = val => {
 
 export const validateDirection: ValidateFn<TxsDirection> = val => Object.values(TxsDirection).includes(val)
 
-export const parsePage: ParseFn<number> = val => {
-	if (!val) return 1
-	const parsed = Number(val)
-	if (Number.isInteger(parsed) && parsed > 0) {
-		return parsed
-	}
-	return 1
-}
-
-export const validatePage: ValidateFn<number> = val => Number.isInteger(val) && val > 0
+// TODO: Add page parsing logic
 
 export const paramConfig = {
 	direction: {
 		defaultValue: TxsDirection.Incoming,
 		parse: parseDirection,
 		validate: validateDirection,
-	},
-	page: {
-		defaultValue: 1,
-		parse: parsePage,
-		validate: validatePage,
-	},
+	}
 } as const
 
 export type ParamConfig = typeof paramConfig
