@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { DataTable } from '../common'
 import { PageHeading } from '../common'
-import { useTransactionsStore } from '@/hooks'
+import { useAddressStore, useTransactionsStore } from '@/hooks'
 import { useMemo } from 'react'
 import './styles.pcss'
 
@@ -10,7 +10,7 @@ type AddressProps = {
 }
 
 export const Address = ({ address }: AddressProps): ReactElement => {
-    const { txs, dataLoading, pagination, setPagination } = useTransactionsStore()
+    const { txs, dataLoading, pagination, setPagination } = useAddressStore()
     const content = useMemo(() => <PageHeading value={address} type="Address" showActions />, [address])
     const table = useMemo(
         () => (
