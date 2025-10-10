@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import { DataTable } from '../common'
-import { Content } from './Content'
+import { PageHeading } from '../common'
 import { useMemo } from 'react'
 import './styles.pcss'
 
@@ -9,7 +9,7 @@ type AddressProps = {
 }
 
 export const Address = ({ address }: AddressProps): ReactElement => {
-	const content = useMemo(() => <Content address={address} />, [address])
+	const content = useMemo(() => <PageHeading value={address} type="Address" showActions/>, [address])
 	const table = useMemo(() => <DataTable />, [])
 
 	return (
