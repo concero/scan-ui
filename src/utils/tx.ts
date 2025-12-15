@@ -29,7 +29,7 @@ export const fetchTransaction = async <T = unknown>(
         throw new Error('Identifier cannot be empty')
     }
 
-    const url = new URL('https://api.v2.concero.io/api/v1/scan/tx')
+    const url = new URL('https://dev.concero.io/api/v1/scan/tx')
     url.searchParams.set('take', take.toString())
     url.searchParams.set('skip', skip.toString())
 

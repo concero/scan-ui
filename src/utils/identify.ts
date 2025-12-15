@@ -18,7 +18,7 @@ export const identifyParam = async (hashOrId: IdentifyParam): Promise<IdentifyPa
 		throw new Error("The parameter 'hashOrId' is required and cannot be empty.")
 	}
 
-	const url = new URL('https://api.v2.concero.io/api/v1/scan/observe')
+	const url = new URL('https://dev.concero.io/api/v1/scan/observe')
 	url.searchParams.set('hashOrId', trimmed)
 
 	const response = await fetch(url.toString(), {
