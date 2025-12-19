@@ -46,16 +46,12 @@ export const SupportModal = ({ isOpen, onClose }: SupportModalProps): ReactEleme
 				<ModalHeader title="Contact Support" onClose={onClose} />
 
 				<span className="support_modal_description">
-					We apologize for any difficulties you encountered using our website. Please contact us on Discord, and we will help you.
+					We apologize for any difficulties you encountered using our website. Please contact us on Discord,
+					and we will help you.
 				</span>
 
 				{supportOptions.map(({ step, text, buttonLabel, icon, onClick }) => (
-					<SupportOption
-						key={step}
-						buttonLabel={buttonLabel}
-						icon={icon}
-						onClick={onClick}
-					/>
+					<SupportOption key={step} buttonLabel={buttonLabel} icon={icon} onClick={onClick} />
 				))}
 			</div>
 		</div>,

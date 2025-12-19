@@ -3,38 +3,35 @@ import { TxsDirection } from '@/types'
 import { createWithEqualityFn } from 'zustand/traditional'
 
 export const CreateAddressStore = () =>
-  createWithEqualityFn<AddressState>(
-    set => {
-      const defaultState = {
-        txs: null,
-        initialLoading: false,
-        dataLoading: false,
-        dataFilters: { direction: TxsDirection.Outgoing },
-        pagination: { take: 20, skip: 0 },
-      }
+	createWithEqualityFn<AddressState>(set => {
+		const defaultState = {
+			txs: null,
+			initialLoading: false,
+			dataLoading: false,
+			dataFilters: { direction: TxsDirection.Outgoing },
+			pagination: { take: 20, skip: 0 },
+		}
 
-      return {
-        ...defaultState,
+		return {
+			...defaultState,
 
-        setTransactions: txs => set({ txs }),
+			setTransactions: txs => set({ txs }),
 
-        addTransactions: newTxs =>
-          set(state => ({
-            txs: state.txs ? [...state.txs, ...newTxs] : [...newTxs],
-          })),
+			addTransactions: newTxs =>
+				set(state => ({
+					txs: state.txs ? [...state.txs, ...newTxs] : [...newTxs],
+				})),
 
-        setDirection: direction =>
-          set(() => ({
-            dataFilters: { direction },
-          })),
+			setDirection: direction =>
+				set(() => ({
+					dataFilters: { direction },
+				})),
 
-        setLoading: (loading, initial = false) =>
-          set(() => (initial ? { initialLoading: loading } : { dataLoading: loading })),
+			setLoading: (loading, initial = false) =>
+				set(() => (initial ? { initialLoading: loading } : { dataLoading: loading })),
 
-        setPagination: pagination => set({ pagination }),
+			setPagination: pagination => set({ pagination }),
 
-        resetData: () => set({ ...defaultState }),
-      }
-    },
-    Object.is,
-  )
+			resetData: () => set({ ...defaultState }),
+		}
+	}, Object.is)

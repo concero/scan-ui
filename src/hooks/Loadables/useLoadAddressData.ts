@@ -20,7 +20,7 @@ export const useLoadAddressData = (): void => {
 		setDirection,
 		setInitialLoading,
 		setDataLoading,
-		setPagination
+		setPagination,
 	} = useAddressStore()
 
 	const { take, skip } = pagination
@@ -109,8 +109,5 @@ export const useLoadAddressData = (): void => {
 
 		setPagination({ take: pagination.take, skip: 0 })
 		hasMore.current = true
-		
 	}, [addr, setPagination])
-
-
 }

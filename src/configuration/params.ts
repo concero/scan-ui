@@ -20,7 +20,7 @@ export const paramConfig = {
 		defaultValue: TxsDirection.Incoming,
 		parse: parseDirection,
 		validate: validateDirection,
-	}
+	},
 } as const
 
 export type ParamConfig = typeof paramConfig

@@ -11,10 +11,8 @@ export const StoreProvider: FC<PropsWithChildren<{}>> = ({ children }): ReactEle
 			<ModalsStoreProvider>
 				<AddressStoreProvider>
 					<TransactionsStoreProvider>
-							<NotificationsStoreProvider>
-								{children}
-							</NotificationsStoreProvider>
-						</TransactionsStoreProvider>
+						<NotificationsStoreProvider>{children}</NotificationsStoreProvider>
+					</TransactionsStoreProvider>
 				</AddressStoreProvider>
 			</ModalsStoreProvider>
 		</SettingsStoreProvider>

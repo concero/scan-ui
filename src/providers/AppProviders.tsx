@@ -8,14 +8,14 @@ import { HelmetProvider } from 'react-helmet-async'
 export const AppProviders: FC<PropsWithChildren<{}>> = ({ children }) => {
 	return (
 		<HelmetProvider>
-			<StoreProvider>
-				<QueryProvider>
+			<QueryProvider>
+				<StoreProvider>
 					<WalletProvider>
 						<ThemeProvider />
 						{children}
 					</WalletProvider>
-				</QueryProvider>
-			</StoreProvider>
+				</StoreProvider>
+			</QueryProvider>
 		</HelmetProvider>
 	)
 }
