@@ -16,7 +16,7 @@ type VerificationStepProps = {
 
 export const VerificationStep = ({ onVerified, onDisconnected }: VerificationStepProps): ReactElement => {
 	const { value, onChange } = useInput<number>({
-		defaultValue: 2000000,
+		defaultValue: 0,
 		debounceMs: 300,
 		parse: input => {
 			const digitsOnly = input.replace(/[^\d]/g, '')
