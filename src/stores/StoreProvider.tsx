@@ -4,17 +4,20 @@ import { ModalsStoreProvider } from './modals'
 import { AddressStoreProvider } from './address'
 import { TransactionsStoreProvider } from './transactions/TransactionsStore'
 import { NotificationsStoreProvider } from './notifications'
+import { ChainsStoreProvider } from './chains'
 
 export const StoreProvider: FC<PropsWithChildren<{}>> = ({ children }): ReactElement => {
 	return (
 		<SettingsStoreProvider>
-			<ModalsStoreProvider>
-				<AddressStoreProvider>
-					<TransactionsStoreProvider>
-						<NotificationsStoreProvider>{children}</NotificationsStoreProvider>
-					</TransactionsStoreProvider>
-				</AddressStoreProvider>
-			</ModalsStoreProvider>
+			<ChainsStoreProvider>
+				<ModalsStoreProvider>
+					<AddressStoreProvider>
+						<TransactionsStoreProvider>
+							<NotificationsStoreProvider>{children}</NotificationsStoreProvider>
+						</TransactionsStoreProvider>
+					</AddressStoreProvider>
+				</ModalsStoreProvider>
+			</ChainsStoreProvider>
 		</SettingsStoreProvider>
 	)
 }
