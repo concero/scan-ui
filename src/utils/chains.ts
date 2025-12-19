@@ -54,7 +54,7 @@ export type ConceroChain = {
 	explorer: string | null
 	testnet: boolean
 	contracts: {
-		message_v2: string
+        message_v2: string
 	}
 }
 
@@ -66,8 +66,10 @@ export const parseChainName = (chainName: string): string => {
 		.trim()
 }
 
-export const getChains = async () => {
+export const getChains = async (isTestnet = true) => {
 	const url = new URL('/api/v1/chains/configuration', API_BASE_URL)
+	url.searchParams.set('is_testnet', String(isTestnet))
+
 	const response = await fetch(url.toString())
 
 	if (!response.ok) {
@@ -89,7 +91,7 @@ export const toConceroChain = (config: ChainConfig): ConceroChain | null => {
 	const messagingV2 = findDeploymentAddress(config.deployments, DeploymentType.message_v2)
 	const validRpcs = sanitizeRpcUrls(config.chain.rpcs)
 
-	if (!messagingV2 || validRpcs.length === 0) return null
+	if (!messagingV2  || validRpcs.length === 0) return null
 	if (!isAddress(messagingV2)) return null
 
 	const displayName = parseChainName(config.chain.name)

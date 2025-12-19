@@ -7,12 +7,8 @@ import { useLoadChains } from '@/hooks/Loadables/useLoadChains'
 export const WalletProvider: React.FC<React.PropsWithChildren> = ({ 
   children 
 }): ReactElement => {
+  useLoadChains()
   const { chains } = useChainsStore()
-  const { loading } = useLoadChains()
-  
-  if (loading || Object.keys(chains).length === 0) {
-	return <>{children}</>
-  }
   
   const conceroChains = Object.values(chains)
   const config = createConfiguration(conceroChains)
