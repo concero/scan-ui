@@ -1,4 +1,5 @@
 import type { ReactElement, MouseEvent } from 'react'
+import { useState, useEffect } from 'react'
 import { useSteps } from '@/hooks'
 import { createPortal } from 'react-dom'
 import { ModalHeader } from '../ModalHeader'
@@ -13,6 +14,9 @@ type TransactionModalProps = {
 }
 
 export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): ReactElement | null => {
+	const [gasLimitOverride, setGasLimitOverride] = useState<number | undefined>(undefined)
+	const [resetKey, setResetKey] = useState(0)
+
 	const handleDialogClick = (e: MouseEvent<HTMLDivElement>): void => {
 		e.stopPropagation()
 	}
@@ -20,11 +24,15 @@ export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): Re
 	const handleClose = (): void => {
 		onClose()
 		stepApi.reset()
+		setGasLimitOverride(undefined)
+		setResetKey(prev => prev + 1)
 	}
+
 	const stepApi = useSteps([
 		{
 			component: (
 				<ConnectionStep
+					key={`connection-${resetKey}`}
 					onConnected={() => {
 						stepApi.next()
 					}}
@@ -32,12 +40,37 @@ export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): Re
 			),
 		},
 		{
-			component: <VerificationStep onVerified={() => stepApi.next()} onDisconnected={() => stepApi.back()} />,
+			component: (
+				<VerificationStep
+					key={`verification-${resetKey}`}
+					onVerified={(gasLimit: number) => {
+						if (gasLimit > 0) {
+							setGasLimitOverride(gasLimit)
+							stepApi.next()
+						}
+					}}
+					onDisconnected={() => stepApi.back()}
+				/>
+			),
 		},
 		{
-			component: <ExecutionStep onDisconnected={() => stepApi.reset()} onBack={() => stepApi.back()} />,
+			component: (
+				<ExecutionStep
+					key={`execution-${resetKey}`}
+					onDisconnected={() => stepApi.reset()}
+					onBack={() => stepApi.back()}
+					gasLimitOverride={gasLimitOverride ?? 0}
+				/>
+			),
 		},
 	])
+
+	useEffect(() => {
+		if (isOpen) {
+			stepApi.reset()
+			setGasLimitOverride(undefined)
+		}
+	}, [isOpen])
 
 	if (!isOpen) return null
 

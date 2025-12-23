@@ -53,6 +53,11 @@ export type Transaction = {
 	id: string
 	status: Status
 	isFinalityRequired: boolean
+	messageReceipt?: string
+	dstValidatorLibs?: string[]
+	validations?: string[]
+	validationChecks?: boolean[]
+	dstRelayerLib?: string
 	dstChainGasLimit?: number
 	messagePayload: string
 	from: TxDirection

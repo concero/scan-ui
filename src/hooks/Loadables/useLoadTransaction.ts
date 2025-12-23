@@ -30,10 +30,6 @@ export const useLoadTransaction = (): void => {
 		return skip === 0
 	}, [skip])
 
-	const parameters = useMemo(() => {
-		return { take, skip }
-	}, [take, skip])
-
 	const hasMore = useRef<boolean>(true)
 
 	const getTransactionData = useCallback(async (): Promise<Transaction[] | null> => {

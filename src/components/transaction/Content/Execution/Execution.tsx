@@ -6,14 +6,25 @@ import { GasLimit } from './GasLimit'
 import { Payload } from './Payload'
 import { Retry } from './Retry'
 import { useState, useCallback } from 'react'
-import { TxType } from '@/types'
+import { Transaction, TxType } from '@/types'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Status } from '@/types'
 import './styles.pcss'
 
 export const Execution = (): ReactElement => {
 	const [toggled, setToggled] = useState<boolean>(false)
 	const { txs } = useTransactionsStore()
-	const transaction = txs && txs.length > 0 ? txs[0] : null
+	const transaction: Transaction | null = txs && txs.length > 0 ? txs[0] : null
+
+	const hasRetryData = transaction?.type === TxType.Message && transaction?.status === Status.Canceled
+	const canRetry =
+		hasRetryData &&
+		transaction.messageReceipt &&
+		transaction.dstValidatorLibs?.length &&
+		transaction.validations?.length &&
+		transaction.validationChecks?.length &&
+		transaction.dstRelayerLib &&
+		transaction.dstChainGasLimit
 
 	const isMessage: boolean = transaction?.type === TxType.Message
 	const toggleLabel: string = toggled ? 'Less Details' : 'More Details'
@@ -44,7 +55,7 @@ export const Execution = (): ReactElement => {
 					>
 						<Payload />
 						<GasLimit />
-						<Retry />
+						{canRetry && <Retry />}
 					</motion.div>
 				)}
 			</AnimatePresence>

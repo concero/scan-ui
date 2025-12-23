@@ -1,17 +1,10 @@
 import { WarningIcon } from '@/assets'
 import { Button } from '@concero/ui-kit'
-import { useModalsStore, useTransactionsStore } from '@/hooks'
-import { Status } from '@/types'
+import { useModalsStore } from '@/hooks'
 import './styles.pcss'
 
 export const Retry = () => {
 	const { toggleModal } = useModalsStore()
-	const { txs } = useTransactionsStore()
-	const transaction = txs && txs.length > 0 ? txs[0] : null
-
-	const isCanceled = transaction?.status === Status.Canceled
-
-	if (!isCanceled) return null
 
 	return (
 		<div className="retry">

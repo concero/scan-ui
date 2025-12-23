@@ -54,7 +54,7 @@ export type ConceroChain = {
 	explorer: string | null
 	testnet: boolean
 	contracts: {
-        message_v2: string
+		message_v2: string
 	}
 }
 
@@ -91,7 +91,7 @@ export const toConceroChain = (config: ChainConfig): ConceroChain | null => {
 	const messagingV2 = findDeploymentAddress(config.deployments, DeploymentType.message_v2)
 	const validRpcs = sanitizeRpcUrls(config.chain.rpcs)
 
-	if (!messagingV2  || validRpcs.length === 0) return null
+	if (!messagingV2 || validRpcs.length === 0) return null
 	if (!isAddress(messagingV2)) return null
 
 	const displayName = parseChainName(config.chain.name)
