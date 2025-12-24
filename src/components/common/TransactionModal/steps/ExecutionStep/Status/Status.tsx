@@ -3,6 +3,7 @@ import { Button } from '@concero/ui-kit'
 import './Status.pcss'
 
 export enum StatusVariant {
+    Idle = 'idle',
     Loading = 'loading',
     Processing = 'processing', 
     Success = 'success',
@@ -28,6 +29,8 @@ export const Status: FC<StatusProps> = ({
 }) => {
   const getImage = (): string => {
     switch (variant) {
+      case StatusVariant.Idle:
+        return '/Transaction/Question.svg'
       case StatusVariant.Loading:
         return '/Transaction/Wallet.svg'
       case StatusVariant.Processing: 
@@ -36,6 +39,7 @@ export const Status: FC<StatusProps> = ({
         return '/Transaction/Success.svg'
       case StatusVariant.Failed:
         return '/Transaction/Failed.svg'
+
       default:
         return '/Transaction/Wallet.svg'
     }
@@ -43,6 +47,17 @@ export const Status: FC<StatusProps> = ({
 
   const getActions = (): ReactElement | null => {
     switch (variant) {
+      case StatusVariant.Idle: 
+        return (
+          <div className="execution_step_status_actions">
+            <Button isFull size="l" variant="secondary" onClick={onBack}>
+              Back
+            </Button>
+            <Button isFull size="l" variant="primary" onClick={onRetry}>
+              Retry
+            </Button>
+          </div>
+        )
       case StatusVariant.Failed:
         return (
           <div className="execution_step_status_actions">

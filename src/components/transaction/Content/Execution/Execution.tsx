@@ -16,15 +16,16 @@ export const Execution = (): ReactElement => {
 	const { txs } = useTransactionsStore()
 	const transaction: Transaction | null = txs && txs.length > 0 ? txs[0] : null
 	const hasRetryData = transaction?.type === TxType.Message && transaction?.status === Status.Canceled
-	const canRetry =
-		hasRetryData &&
-		transaction.messageReceipt &&
-		transaction.dstValidatorLibs?.length &&
-		transaction.validations?.length &&
-		transaction.validationChecks?.length &&
-		transaction.dstRelayerLib &&
-		transaction.dstChainGasLimit
+	// const canRetry =
+	// 	hasRetryData &&
+	// 	transaction.messageReceipt &&
+	// 	transaction.dstValidatorLibs?.length &&
+	// 	transaction.validations?.length &&
+	// 	transaction.validationChecks?.length &&
+	// 	transaction.dstRelayerLib &&
+	// 	transaction.dstChainGasLimit
 
+	const canRetry = hasRetryData
 	const isMessage: boolean = transaction?.type === TxType.Message
 	const toggleLabel: string = toggled ? 'Less Details' : 'More Details'
 	const btnClass: string = `execution_toggle_icon ${toggled ? 'rotated' : ''}`

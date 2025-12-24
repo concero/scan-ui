@@ -1,11 +1,9 @@
 import type { ReactElement } from 'react'
-import { Button } from '@concero/ui-kit'
 import { useAccount } from 'wagmi'
 import { useEffect, useMemo, useCallback } from 'react'
 import { useTransactionsStore } from '@/hooks'
 import { useRetryMessage } from '@/hooks/useRetryMessage'
 import { Status, StatusVariant } from './Status'
-import './styles.pcss'
 
 type ExecutionStepProps = {
     onBack: () => void
@@ -71,6 +69,7 @@ export const ExecutionStep = ({ onDisconnected, onClose, onBack, gasLimitOverrid
                     title="Transaction Retried"
                     subtitle="You successfully retried transaction"
                     onClose={onClose}
+                    onBack={onBack}
                 />
             )
         }
@@ -86,24 +85,15 @@ export const ExecutionStep = ({ onDisconnected, onClose, onBack, gasLimitOverrid
                 />
             )
         }
-
+        
         return (
-            <div className="execution_step">
-                <div className="execution_step_description">
-                    <div className="execution_step_title">Are you the contract owner?</div>
-                    <div className="execution_step_subtitle">
-                        Only restart the transaction if the contract itself was changed; otherwise you'll just waste gas.
-                    </div>
-                </div>
-                <div className="execution_step_actions">
-                    <Button isFull size="l" variant="secondary" onClick={onBack}>
-                        Back
-                    </Button>
-                    <Button isFull size="l" variant="primary" onClick={handleRetry}>
-                        Retry
-                    </Button>
-                </div>
-            </div>
+            <Status
+                variant={StatusVariant.Idle}
+                title="Are you the contract owner?"
+                subtitle="Only restart the transaction if the contract itself was changed; otherwise you'll just waste gas."
+                onBack={onBack}
+                onRetry={handleRetry}
+            />
         )
     }
 
