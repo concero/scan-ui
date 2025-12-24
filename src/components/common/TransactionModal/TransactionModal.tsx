@@ -59,6 +59,7 @@ export const TransactionModal = ({ isOpen, onClose }: TransactionModalProps): Re
 					key={`execution-${resetKey}`}
 					onDisconnected={() => stepApi.reset()}
 					onBack={() => stepApi.back()}
+					onClose={onClose}
 					gasLimitOverride={gasLimitOverride ?? 0}
 				/>
 			),

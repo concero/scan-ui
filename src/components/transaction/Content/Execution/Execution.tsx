@@ -15,7 +15,6 @@ export const Execution = (): ReactElement => {
 	const [toggled, setToggled] = useState<boolean>(false)
 	const { txs } = useTransactionsStore()
 	const transaction: Transaction | null = txs && txs.length > 0 ? txs[0] : null
-
 	const hasRetryData = transaction?.type === TxType.Message && transaction?.status === Status.Canceled
 	const canRetry =
 		hasRetryData &&

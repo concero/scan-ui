@@ -1,0 +1,52 @@
+.execution_step_status {
+	display: flex;
+	flex-direction: column;
+	aliogn-items: center;
+	jiustify-content: center;
+	width: 100%;
+	gap: var(--space-m);
+
+	& .execution_step_status_img_container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+
+		& .execution_step_status_img {
+			width: 160px;
+			height: 160px;
+		}
+	}
+
+	& .execution_step_status_description {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xxs);
+		width: 100%;
+		align-items: center;
+
+		& .execution_step_status_title {
+			font-size: 1.5rem;
+			font-weight: 500;
+			line-height: 1.75rem;
+			color: var(--color-gray-700);
+			letter-spacing: -0.048px;
+			text-align: center;
+		}
+
+		& .execution_step_status_subtitle {
+			font-size: 1rem;
+			font-weight: 500;
+			line-height: 1.25rem;
+			color: var(--color-gray-600);
+			text-align: center;
+		}
+	}
+
+	& .execution_step_status_actions {
+		display: flex;
+		flex-direction: row;
+		gap: var(--space-xs);
+		width: 100%;
+	}
+}
