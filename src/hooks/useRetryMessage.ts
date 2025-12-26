@@ -25,20 +25,21 @@ export const useRetryMessage = ({
     const { isConnected, address: account } = useAccount()
     const { switchNetwork } = useSwitchNetwork(chainId)
     
-    const { writeContract, data: hash, isPending, isError: writeError, isSuccess: writeSuccess } = useWriteContract()
-    const { isLoading: isConfirming, isSuccess: isConfirmed, isError: receiptError } = useWaitForTransactionReceipt({
+    const contract = chains[chainId]?.contracts.message_v2
+    
+    const { writeContract, data: hash, isPending, isSuccess: writeSuccess } = useWriteContract()
+    const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
         hash,
         confirmations: 2,
     })
 
-    const contract = chains[chainId]?.contracts.message_v2
-
     const execute = async () => {
-        if (!isConnected || !contract) {
+        if (!isConnected || !contract || !account) {
             throw new Error('Wallet not connected or contract not found')
         }
         
         await switchNetwork()
+        
         await writeContract({
             address: contract as Address,
             abi: MessagingV2ABI,
@@ -53,21 +54,21 @@ export const useRetryMessage = ({
                     validationChecks,
                     relayerLib,
                 },
-                gasLimitOverride,
+                Number(gasLimitOverride),
             ],
         })
     }
 
-    const isPendingState: boolean = isPending                         
-    const isProcessingState: boolean = writeSuccess && isConfirming   
-    const isSuccessState: boolean = isConfirmed                       
-    const isFailedState: boolean = !!writeError || !!receiptError    
+    const isPendingState = isPending
+    const isProcessingState = writeSuccess && isConfirming
+    const isSuccessState = isConfirmed
+    const isFailedState = !isPendingState && !isProcessingState && !isSuccessState
 
     return {
         execute,
-        isPending: isPendingState,     
+        isPending: isPendingState,
         isProcessing: isProcessingState,
-        isSuccess: isSuccessState,      
-        isFailed: isFailedState,   
+        isSuccess: isSuccessState,
+        isFailed: isFailedState,
     }
 }
