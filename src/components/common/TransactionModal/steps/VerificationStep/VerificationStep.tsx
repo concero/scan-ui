@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react'
 import { zeroAddress } from 'viem'
 import { Button } from '@concero/ui-kit'
-import { useEffect } from 'react'
 import { Input } from '@concero/ui-kit'
 import { WarningIcon } from '@/assets'
 import { useAccount, useDisconnect } from 'wagmi'
@@ -11,10 +10,11 @@ import './styles.pcss'
 
 type VerificationStepProps = {
 	onVerified: (gasLimit: number) => void
-	onDisconnected: () => void
 }
 
-export const VerificationStep = ({ onVerified, onDisconnected }: VerificationStepProps): ReactElement => {
+export const VerificationStep = ({ onVerified }: VerificationStepProps): ReactElement => {
+	const { address } = useAccount()
+	const { disconnect } = useDisconnect()
 	const { value, onChange } = useInput<number>({
 		defaultValue: 200000,
 		debounceMs: 300,
@@ -25,15 +25,8 @@ export const VerificationStep = ({ onVerified, onDisconnected }: VerificationSte
 		},
 		validate: val => val >= 0,
 	})
-	const { disconnect } = useDisconnect()
-	const { address, isConnected, isDisconnected } = useAccount()
-	const identicon = blo(address ?? zeroAddress)
 
-	useEffect(() => {
-		if (!isConnected || isDisconnected) {
-			onDisconnected()
-		}
-	}, [isConnected, isDisconnected, onDisconnected])
+	const identicon = blo(address ?? zeroAddress)
 
 	return (
 		<div className="verification_step">

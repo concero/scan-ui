@@ -1,23 +1,15 @@
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 import { Button } from '@concero/ui-kit'
 import { Alert } from '@concero/ui-kit'
-import { useAccount } from 'wagmi'
 import { useConnect } from 'wagmi'
 import './styles.pcss'
 
 type ConnectionStepProps = {
-	onConnected: () => void
+	isConnecting: boolean
 }
 
-export const ConnectionStep = ({ onConnected }: ConnectionStepProps): ReactElement => {
+export const ConnectionStep = ({ isConnecting }: ConnectionStepProps): ReactElement => {
 	const { connect, connectors, error } = useConnect()
-	const { isConnected, isConnecting } = useAccount()
-
-	useEffect(() => {
-		if (isConnected) {
-			onConnected()
-		}
-	}, [isConnected, onConnected])
 
 	return (
 		<div className="connection_step">
