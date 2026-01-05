@@ -24,10 +24,11 @@ export const useRetryMessage = ({
     const { chains } = useChainsStore()
     const { isConnected, address: account } = useAccount()
     const { switchNetwork } = useSwitchNetwork(chainId)
-    
-    const { writeContract, data: hash, isPending, isError: writeError, reset, isSuccess: writeSuccess } = useWriteContract()
+
+    const { writeContract, data: hash, isPending, isError: writeError, isSuccess: writeSuccess } = useWriteContract()
     const { isLoading: isConfirming, isSuccess: isConfirmed, isError: receiptError } = useWaitForTransactionReceipt({
         hash,
+        chainId: Number(chainId),
         confirmations: 2,
     })
 

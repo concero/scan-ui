@@ -1,6 +1,5 @@
 import type { ReactElement } from 'react'
-import { useAccount } from 'wagmi'
-import { useEffect, useMemo, useCallback } from 'react'
+import { useMemo, useCallback } from 'react'
 import { useTransactionsStore } from '@/hooks'
 import { useRetryMessage } from '@/hooks/useRetryMessage'
 import { Status, StatusVariant } from './Status'
