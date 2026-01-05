@@ -23,8 +23,7 @@ export const Execution = (): ReactElement => {
 		transaction.dstValidatorLibs?.length &&
 		transaction.validations?.length &&
 		transaction.validationChecks?.length &&
-		transaction.dstRelayerLib &&
-		transaction.dstChainGasLimit
+		transaction.dstRelayerLib
 
 	const isMessage: boolean = transaction?.type === TxType.Message
 	const toggleLabel: string = toggled ? 'Less Details' : 'More Details'
