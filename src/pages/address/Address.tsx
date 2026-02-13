@@ -11,7 +11,7 @@ const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
 	'Explore any address to see its activity across Concero — recent transactions and interactions in one clear, unified view'
 
-export const AddressPage: FC = (): ReactElement => {
+const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
 	const { txs, initialLoading } = useAddressStore()
 	useSyncParams()
@@ -40,3 +40,4 @@ export const AddressPage: FC = (): ReactElement => {
 		</>
 	)
 }
+export default AddressPage
