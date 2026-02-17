@@ -11,7 +11,6 @@ export const Summary = (): ReactElement | null => {
 
 	if (!transaction) return null
 
-	const isMessage: boolean = transaction.type === TxType.Message
 	const srcAddress: string | null = transaction.from?.address ?? null
 	const dstAddress: string | null = transaction.to?.address ?? null
 
@@ -27,15 +26,9 @@ export const Summary = (): ReactElement | null => {
 						copyable={false}
 					/>
 				)}
-				{!isMessage && (
-					<>
-						{srcAddress && (
-							<InfoRow label="Sender" value={srcAddress} copyable message="Sender Address Copied" />
-						)}
-						{dstAddress && (
-							<InfoRow label="Receiver" value={dstAddress} copyable message="Receiver Address Copied" />
-						)}
-					</>
+				{srcAddress && <InfoRow label="Sender" value={srcAddress} copyable message="Sender Address Copied" />}
+				{dstAddress && (
+					<InfoRow label="Receiver" value={dstAddress} copyable message="Receiver Address Copied" />
 				)}
 			</div>
 			<span className="divider" />
