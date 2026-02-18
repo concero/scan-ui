@@ -27,7 +27,6 @@ export const useLoadChains = () => {
 
 	useEffect(() => {
 		setChains(chains || [])
-		console.log('Chains loaded:', chains)
 		setLoading(isLoading)
 	}, [chains, isLoading, setChains, setLoading])
 
