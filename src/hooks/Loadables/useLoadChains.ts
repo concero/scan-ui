@@ -4,35 +4,35 @@ import { useChainsStore } from '../useChainsStore'
 import { getChains, toConceroChains } from '@/utils/chains'
 
 export const useLoadChains = () => {
-    const { setChains, setLoading } = useChainsStore()
+	const { setChains, setLoading } = useChainsStore()
 
-    const { data: chains, isLoading, error } = useQuery({
-        queryKey: ['chainsConfig'],
-        queryFn: async () => {
-            const [mainnetResponse, testnetResponse] = await Promise.all([
-                getChains(false), 
-                getChains(true),
-            ])
+	const {
+		data: chains,
+		isLoading,
+		error,
+	} = useQuery({
+		queryKey: ['chainsConfig'],
+		queryFn: async () => {
+			const [mainnetResponse, testnetResponse] = await Promise.all([getChains(false), getChains(true)])
 
-            const mainnetChains = toConceroChains(mainnetResponse.payload.items)
-            const testnetChains = toConceroChains(testnetResponse.payload.items)
-            
-            return [...mainnetChains, ...testnetChains]
-        },
-        staleTime: 30_000,
-        retry: 2,
-        refetchOnWindowFocus: false,
-    })
+			const mainnetChains = toConceroChains(mainnetResponse.payload.items)
+			const testnetChains = toConceroChains(testnetResponse.payload.items)
 
-    useEffect(() => {
-        setChains(chains || [])
-		console.log('Chains loaded:', chains)
-        setLoading(isLoading)
-    }, [chains, isLoading, setChains, setLoading])
+			return [...mainnetChains, ...testnetChains]
+		},
+		staleTime: 30_000,
+		retry: 2,
+		refetchOnWindowFocus: false,
+	})
 
-    return { 
-        chains: chains || [], 
-        loading: isLoading,
-        error 
-    }
+	useEffect(() => {
+		setChains(chains || [])
+		setLoading(isLoading)
+	}, [chains, isLoading, setChains, setLoading])
+
+	return {
+		chains: chains || [],
+		loading: isLoading,
+		error,
+	}
 }
