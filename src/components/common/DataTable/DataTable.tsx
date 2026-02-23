@@ -7,6 +7,9 @@ import { TransactionLabel } from '../TransactionLabel'
 import { StatusLabel } from '../StatusLabel'
 import { Skeleton } from '../Skeleton'
 import './styles.pcss'
+import { AgeHeader } from './header/AgeHeader/AgeHeader'
+import { TypeHeader } from './header/TypeHeader/TypeHeader'
+import { StatusHeader } from './header/StatusHeader/StatusHeader'
 
 type Columns = {
 	id: ReactElement
@@ -34,11 +37,11 @@ type DataTableProps = {
 export const DataTable = ({ txs, dataLoading, pagination, setPagination }: DataTableProps): ReactElement => {
 	const columns: Column<Columns>[] = [
 		{ header: 'Message ID', accessor: 'id' },
-		{ header: 'Type', accessor: 'type' },
-		{ header: 'Age', accessor: 'age' },
+		{ header: <TypeHeader />, accessor: 'type' },
+		{ header: <AgeHeader />, accessor: 'age' },
 		{ header: 'From', accessor: 'from' },
 		{ header: 'To', accessor: 'to' },
-		{ header: 'Status', accessor: 'status' },
+		{ header: <StatusHeader />, accessor: 'status' },
 	]
 
 	const data: Columns[] =

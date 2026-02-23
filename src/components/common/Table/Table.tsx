@@ -5,7 +5,7 @@ import { TableBody } from '../TableBody/TableBody'
 import { useInfiniteScroll } from '@/hooks'
 import './styles.pcss'
 
-type TableProps<T extends { [key: string]: any }> = {
+type TableProps<T extends { [key: string]: unknown }> = {
 	columns: Column<T>[]
 	data: T[]
 	pagination: {
@@ -15,7 +15,7 @@ type TableProps<T extends { [key: string]: any }> = {
 	setPagination: (pagination: { take: number; skip: number }) => void
 }
 
-export const Table = <T extends { [key: string]: any }>({
+export const Table = <T extends { [key: string]: unknown }>({
 	columns,
 	data,
 	pagination,

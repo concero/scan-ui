@@ -2,12 +2,12 @@ import type { ReactElement } from 'react'
 import { TableRow, Column } from '../TableRow'
 import './styles.pcss'
 
-type TableBodyProps<T extends { [key: string]: any }> = {
+type TableBodyProps<T extends { [key: string]: unknown }> = {
 	rows: T[]
 	columns: Column<T>[]
 }
 
-export const TableBody = <T extends { [key: string]: any }>({ rows, columns }: TableBodyProps<T>): ReactElement => (
+export const TableBody = <T extends { [key: string]: unknown }>({ rows, columns }: TableBodyProps<T>): ReactElement => (
 	<tbody className="table_body">
 		{rows.map((row, idx) => {
 			const keyValue = (row as any).messageId

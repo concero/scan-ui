@@ -91,7 +91,7 @@ export const AgeFilter = ({ onApply }: TProps) => {
 						{PRESETS.slice(0, 3).map(item => (
 							<Button
 								key={item.value}
-								variant={activePreset === item.value ? 'primary' : 'tetrary_color'}
+								variant={activePreset === item.value ? 'secondary_color' : 'tetrary'}
 								size="s"
 								onClick={() => handlePresetClick(item.value)}
 								className={activePreset !== item.value ? cls.unselected_button : undefined}

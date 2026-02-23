@@ -7,7 +7,7 @@ import './styles.pcss'
 type ButtonGroupProps = {
 	readonly labels: [string, string]
 }
-
+//TODO: (Mikhail) Refactor/rename this component
 export const ButtonGroup = ({ labels }: ButtonGroupProps): ReactElement => {
 	const { txs, dataFilters, setDirection } = useAddressStore()
 
