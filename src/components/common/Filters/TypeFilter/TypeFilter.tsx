@@ -4,25 +4,27 @@ import { Filter } from '../Filter/Filter'
 import { Separator } from '../../Separator/Separator'
 import { useState } from 'react'
 import cls from './TypeFilter.module.pcss'
-
-type TStatus = 'all' | 'message' | 'iou' | 'lbf' | 'canonical_bridge'
+import { TxType } from '@/types'
+type TxTypeValue = (typeof TxType)[keyof typeof TxType]
 
 export type TProps = {
-	onApply?: (args: { status: TStatus }) => void
+	value?: TxTypeValue
+	onApply?: (args: { status: TxTypeValue }) => void
 }
 
-const STATUS_OPTIONS: { value: TStatus; label: string }[] = [
-	{ value: 'all', label: 'All' },
-	{ value: 'message', label: 'Message' },
-	{ value: 'iou', label: 'IOU' },
-	{ value: 'lbf', label: 'LBF' },
-	{ value: 'canonical_bridge', label: 'Canonical Bridge' },
+const STATUS_OPTIONS: { value: TxTypeValue; label: string }[] = [
+	{ value: TxType.All, label: 'All' },
+	{ value: TxType.LBF, label: 'LBF' },
+	{ value: TxType.IOU, label: 'IOU' },
+	{ value: TxType.Canonical, label: 'Canonical' },
+	{ value: TxType.Message, label: 'Message' }, // Значение 'v2'
+	{ value: TxType.CCIP, label: 'CCIP' },
 ]
 
-export const TypeFilter = ({ onApply }: TProps) => {
-	const [selected, setSelected] = useState<TStatus | null>(null)
+export const TypeFilter = ({ onApply, value }: TProps) => {
+	const [selected, setSelected] = useState<TxTypeValue | null>(value ?? null)
 
-	const handleSelect = (value: TStatus) => {
+	const handleSelect = (value: TxTypeValue) => {
 		setSelected(value)
 	}
 

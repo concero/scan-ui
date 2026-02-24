@@ -9,7 +9,7 @@ type ButtonGroupProps = {
 }
 //TODO: (Mikhail) Refactor/rename this component
 export const ButtonGroup = ({ labels }: ButtonGroupProps): ReactElement => {
-	const { txs, dataFilters, setDirection } = useAddressStore()
+	const { dataFilters, setDirection } = useAddressStore()
 
 	const id: number = dataFilters.direction === TxsDirection.Outgoing ? 0 : 1
 

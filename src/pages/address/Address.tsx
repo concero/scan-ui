@@ -14,6 +14,7 @@ const META_DESCRIPTION =
 const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
 	const { txs, initialLoading } = useAddressStore()
+
 	useSyncParams()
 	useLoadAddressData()
 

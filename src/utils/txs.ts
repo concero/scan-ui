@@ -1,3 +1,5 @@
+import { Filters } from '@/stores'
+
 type Pagination = {
 	count: number
 	skip: number
@@ -15,6 +17,7 @@ type TransactionResponse<T = unknown> = {
 export type SenderOrReceiver = {
 	take: number
 	skip: number
+	filters: Filters
 	sender?: string
 	receiver?: string
 }
@@ -22,6 +25,7 @@ export type SenderOrReceiver = {
 export const fetchTransactions = async <T = unknown>({
 	take,
 	skip,
+	filters,
 	sender,
 	receiver,
 }: SenderOrReceiver): Promise<TransactionResponse<T>['payload']> => {
@@ -40,6 +44,22 @@ export const fetchTransactions = async <T = unknown>({
 		url.searchParams.set('receiver', receiver)
 	} else {
 		throw new Error('Either sender or receiver must be provided.')
+	}
+
+	if (filters.direction) {
+		url.searchParams.set('direction', filters.direction)
+	}
+	if (filters.fromChainIds) {
+		url.searchParams.set('fromChainId', filters.fromChainIds.join(','))
+	}
+	if (filters.toChainIds) {
+		url.searchParams.set('toChainId', filters.toChainIds.join(','))
+	}
+	if (filters.status) {
+		url.searchParams.set('status', filters.status)
+	}
+	if (filters.type) {
+		url.searchParams.set('type', filters.type)
 	}
 
 	const response = await fetch(url.toString(), {

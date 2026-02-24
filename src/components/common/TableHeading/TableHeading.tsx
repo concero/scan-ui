@@ -8,8 +8,8 @@ type TableHeadingProps = {
 export const TableHeading: FC<TableHeadingProps> = ({ headers }): ReactElement => (
 	<thead className="table_heading">
 		<tr className="table_heading_container">
-			{headers.map(header => (
-				<th key={header?.toString()} className="table_head">
+			{headers.map((header, index) => (
+				<th key={index} className="table_head">
 					{header}
 				</th>
 			))}

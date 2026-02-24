@@ -1,12 +1,15 @@
 import { FilterDropdown } from '@/components/common/Filters/FilterDropdown/FilterDropdown'
 import { StatusFilter } from '@/components/common/Filters/StatusFilter/StatusFilter'
+import { useAddressStore } from '@/hooks'
 
 export const StatusHeader = () => {
+	const { setStatus, dataFilters } = useAddressStore()
 	return (
-		<FilterDropdown isApplied={true} title="Status">
+		<FilterDropdown isApplied={Boolean(dataFilters.status)} title="Status">
 			<StatusFilter
+				value={dataFilters.status}
 				onApply={arg => {
-					console.log(arg)
+					setStatus(arg.status)
 				}}
 			/>
 		</FilterDropdown>

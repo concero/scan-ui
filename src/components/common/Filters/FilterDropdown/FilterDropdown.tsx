@@ -15,6 +15,7 @@ export const FilterDropdown = ({ children, title, isApplied }: FilterDropdownPro
   return (
     <Dropdown
       open={isOpen}
+      placement='bottomRight'
       onOpenChange={(openArg) => {
         if (openArg) open();
         else close();

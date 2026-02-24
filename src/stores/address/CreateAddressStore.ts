@@ -27,6 +27,35 @@ export const CreateAddressStore = () =>
 					dataFilters: { direction },
 				})),
 
+			setFromChainIds: ids =>
+				set(state => ({
+					dataFilters: { ...state.dataFilters, fromChainIds: ids },
+				})),
+
+			setToChainIds: ids =>
+				set(state => ({
+					dataFilters: { ...state.dataFilters, toChainIds: ids },
+				})),
+
+			setStatus: status =>
+				set(state => ({
+					dataFilters: { ...state.dataFilters, status },
+				})),
+
+			setType: type =>
+				set(state => ({
+					dataFilters: { ...state.dataFilters, type },
+				})),
+			setFromTimestamp: timestamp =>
+				set(state => ({
+					dataFilters: { ...state.dataFilters, fromTimestamp: timestamp },
+				})),
+
+			setToTimestamp: timestamp =>
+				set(state => ({
+					dataFilters: { ...state.dataFilters, toTimestamp: timestamp },
+				})),
+
 			setLoading: (loading, initial = false) =>
 				set(() => (initial ? { initialLoading: loading } : { dataLoading: loading })),
 

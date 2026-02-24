@@ -1,6 +1,6 @@
 import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional'
 import type { StoreApi } from 'zustand'
-import { Transaction, TxsDirection } from '@/types'
+import { Status, Transaction, TxsDirection, TxType } from '@/types'
 
 export type AddressPagination = {
 	take: number
@@ -9,6 +9,12 @@ export type AddressPagination = {
 
 export type Filters = {
 	direction: TxsDirection
+	fromChainIds?: string[]
+	toChainIds?: string[]
+	fromTimestamp?: string
+	toTimestamp?: string
+	status?: Status
+	type?: TxType
 }
 
 export type AddressStateSlice = {
@@ -26,6 +32,13 @@ export type AddressActions = {
 	setLoading: (loading: boolean, initial?: boolean) => void
 	setPagination: (pagination: AddressPagination) => void
 	resetData: () => void
+	// Filters actions
+	setFromChainIds: (ids: string[] | undefined) => void
+	setToChainIds: (ids: string[] | undefined) => void
+	setStatus: (status: Status | undefined) => void
+	setType: (type: TxType | undefined) => void
+	setToTimestamp: (timestamp: string | undefined) => void
+	setFromTimestamp: (timestamp: string | undefined) => void
 }
 
 export type AddressState = AddressStateSlice & AddressActions

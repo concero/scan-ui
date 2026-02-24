@@ -4,23 +4,25 @@ import { Filter } from '../Filter/Filter'
 import { Separator } from '../../Separator/Separator'
 import { useState } from 'react'
 import cls from './StatusFilter.module.pcss'
-type TStatus = 'all' | 'pending' | 'success' | 'failed'
+import { Status } from '@/types'
+type StatusValue = (typeof Status)[keyof typeof Status]
 
 export type TProps = {
-	onApply?: (args: { status: TStatus }) => void
+	value?: StatusValue
+	onApply?: (args: { status: StatusValue }) => void
 }
 
-const STATUS_OPTIONS: { value: TStatus; label: string }[] = [
-	{ value: 'all', label: 'All' },
-	{ value: 'pending', label: 'Pending' },
-	{ value: 'success', label: 'Success' },
-	{ value: 'failed', label: 'Failed' },
+const STATUS_OPTIONS: { value: StatusValue; label: string }[] = [
+	{ value: Status.All, label: 'All' },
+	{ value: Status.Pending, label: 'Pending' },
+	{ value: Status.Success, label: 'Success' },
+	{ value: Status.Canceled, label: 'Failed' },
 ]
 
-export const StatusFilter = ({ onApply }: TProps) => {
-	const [selected, setSelected] = useState<TStatus | null>(null)
+export const StatusFilter = ({ onApply, value }: TProps) => {
+	const [selected, setSelected] = useState<StatusValue | null>(value ?? null)
 
-	const handleSelect = (value: TStatus) => {
+	const handleSelect = (value: StatusValue) => {
 		setSelected(value)
 	}
 

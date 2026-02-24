@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { Button, Input } from '@concero/ui-kit'
 import { usePresetRanges } from '../model/usePresetRanges'
 import { useCustomDateRange } from '../model/useCustomDateRange'
@@ -25,10 +25,16 @@ export type TAgeFilterOutput = {
 }
 
 export type TProps = {
+	value?: {
+		//Timestamp
+		from: string
+		//Timestamp
+		to: string
+	}
 	onApply: (args: TAgeFilterOutput) => void
 }
 
-export const AgeFilter = ({ onApply }: TProps) => {
+export const AgeFilter = ({ onApply, value }: TProps) => {
 	const [activePreset, setActivePreset] = useState<string | null>(null)
 	const presetRanges = usePresetRanges()
 	const rangeRef = useRef<TAgeFilterOutput | null>(null)
@@ -36,6 +42,15 @@ export const AgeFilter = ({ onApply }: TProps) => {
 		rangeRef.current = args
 	}, [])
 
+	useEffect(() => {
+		if (value?.from && value?.to) {
+			setActivePreset(null)
+			handleFromChange(value.from)
+			handleToChange(value.to)
+			onChange({ range: { from: value.from, to: value.to } })
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [value?.from, onChange, value?.to])
 	const {
 		customFrom,
 		customTo,
@@ -47,13 +62,18 @@ export const AgeFilter = ({ onApply }: TProps) => {
 		clearFromError,
 		clearToError,
 		clear: clearCustom,
-	} = useCustomDateRange(onChange, () => {
-		if (activePreset !== null) {
-			setActivePreset(null)
-			clearFromError()
-			clearToError()
-		}
-	})
+	} = useCustomDateRange(
+		onChange,
+		() => {
+			if (activePreset !== null) {
+				setActivePreset(null)
+				clearFromError()
+				clearToError()
+			}
+		},
+		value?.from,
+		value?.to,
+	)
 
 	const onApplyLocal = useCallback(() => {
 		const isValid = validateAndSetErrors()

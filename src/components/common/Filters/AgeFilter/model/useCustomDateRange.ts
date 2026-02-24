@@ -1,14 +1,26 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { isValidDateInput, parseDateInput } from './useDateValidation'
 
 export const useCustomDateRange = (
 	onChange: (arg: { range: { from: string; to: string } }) => void,
 	onInputStart?: () => void,
+	initialFrom?: string,
+	initialTo?: string,
 ) => {
-	const [customFrom, setCustomFrom] = useState('')
-	const [customTo, setCustomTo] = useState('')
+	const [customFrom, setCustomFrom] = useState(initialFrom ?? '')
+	const [customTo, setCustomTo] = useState(initialTo ?? '')
 	const [fromError, setFromError] = useState(false)
 	const [toError, setToError] = useState(false)
+
+	useEffect(() => {
+		if (initialFrom || initialTo) {
+			const tsFrom = parseDateInput(initialFrom ?? '')?.toString() ?? ''
+			const tsTo = parseDateInput(initialTo ?? '')?.toString() ?? ''
+			onChange({ range: { from: tsFrom, to: tsTo } })
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	const formatInput = useCallback((value: string) => {
 		const digitsOnly = value.replace(/\D/g, '')
 		const validDigits = digitsOnly.slice(0, 8)

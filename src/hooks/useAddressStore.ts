@@ -13,9 +13,16 @@ export type UseAddressStoreResult = {
 	addTransactions: AddressState['addTransactions']
 	setInitialLoading: (loading: boolean) => void
 	setDataLoading: (loading: boolean) => void
-	setDirection: AddressState['setDirection']
 	setPagination: AddressState['setPagination']
 	resetData: AddressState['resetData']
+	//Filters
+	setDirection: AddressState['setDirection']
+	setFromChainIds: AddressState['setFromChainIds']
+	setToChainIds: AddressState['setToChainIds']
+	setStatus: AddressState['setStatus']
+	setType: AddressState['setType']
+	setFromTimestamp: AddressState['setFromTimestamp']
+	setToTimestamp: AddressState['setToTimestamp']
 }
 
 export const useAddressStore = (): UseAddressStoreResult => {
@@ -36,8 +43,16 @@ export const useAddressStore = (): UseAddressStoreResult => {
 		addTransactions: useStore(state => state.addTransactions),
 		setInitialLoading: useStore(state => (loading: boolean) => state.setLoading(loading, true)),
 		setDataLoading: useStore(state => (loading: boolean) => state.setLoading(loading, false)),
-		setDirection: useStore(state => state.setDirection),
 		setPagination: useStore(state => state.setPagination),
 		resetData: useStore(state => state.resetData),
+
+		//Setters Filters
+		setDirection: useStore(state => state.setDirection),
+		setFromChainIds: useStore(state => state.setFromChainIds),
+		setToChainIds: useStore(state => state.setToChainIds),
+		setStatus: useStore(state => state.setStatus),
+		setType: useStore(state => state.setType),
+		setFromTimestamp: useStore(state => state.setFromTimestamp),
+		setToTimestamp: useStore(state => state.setToTimestamp),
 	}
 }
