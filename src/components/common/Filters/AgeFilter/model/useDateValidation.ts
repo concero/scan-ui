@@ -29,3 +29,9 @@ export const parseDateInput = (input: string): number | null => {
 	const date = dayjs(`${yyyy}-${mm}-${dd}`, 'YYYY-MM-DD', true)
 	return date.isValid() ? date.unix() : null
 }
+export const timestampToDateInput = (ts: string | undefined): string => {
+	if (!ts) return ''
+	const date = dayjs.unix(Number(ts))
+	if (!date.isValid()) return ''
+	return `${String(date.date()).padStart(2, '0')} / ${String(date.month() + 1).padStart(2, '0')} / ${date.year()}`
+}

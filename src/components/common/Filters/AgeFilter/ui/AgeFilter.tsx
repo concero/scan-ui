@@ -27,9 +27,9 @@ export type TAgeFilterOutput = {
 export type TProps = {
 	value?: {
 		//Timestamp
-		from: string
+		from?: string
 		//Timestamp
-		to: string
+		to?: string
 	}
 	onApply: (args: TAgeFilterOutput) => void
 }
@@ -45,9 +45,6 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 	useEffect(() => {
 		if (value?.from && value?.to) {
 			setActivePreset(null)
-			handleFromChange(value.from)
-			handleToChange(value.to)
-			onChange({ range: { from: value.from, to: value.to } })
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value?.from, onChange, value?.to])

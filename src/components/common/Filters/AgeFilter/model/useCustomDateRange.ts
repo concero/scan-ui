@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { isValidDateInput, parseDateInput } from './useDateValidation'
+import { isValidDateInput, parseDateInput, timestampToDateInput } from './useDateValidation'
 
 export const useCustomDateRange = (
 	onChange: (arg: { range: { from: string; to: string } }) => void,
@@ -7,19 +7,18 @@ export const useCustomDateRange = (
 	initialFrom?: string,
 	initialTo?: string,
 ) => {
-	const [customFrom, setCustomFrom] = useState(initialFrom ?? '')
-	const [customTo, setCustomTo] = useState(initialTo ?? '')
+	const [customFrom, setCustomFrom] = useState(timestampToDateInput(initialFrom))
+	const [customTo, setCustomTo] = useState(timestampToDateInput(initialTo))
 	const [fromError, setFromError] = useState(false)
 	const [toError, setToError] = useState(false)
 
 	useEffect(() => {
 		if (initialFrom || initialTo) {
-			const tsFrom = parseDateInput(initialFrom ?? '')?.toString() ?? ''
-			const tsTo = parseDateInput(initialTo ?? '')?.toString() ?? ''
+			const tsFrom = initialFrom ? String(initialFrom) : ''
+			const tsTo = initialTo ? String(initialTo) : ''
 			onChange({ range: { from: tsFrom, to: tsTo } })
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [initialFrom, initialTo, onChange])
 
 	const formatInput = useCallback((value: string) => {
 		const digitsOnly = value.replace(/\D/g, '')
@@ -39,10 +38,9 @@ export const useCustomDateRange = (
 			const formatted = formatInput(value)
 			setCustomFrom(formatted)
 
-			const newFrom = formatted
-			const newTo = customTo
-			const tsFrom = parseDateInput(newFrom)?.toString() ?? ''
-			const tsTo = parseDateInput(newTo)?.toString() ?? ''
+			const parsed = parseDateInput(formatted)
+			const tsFrom = parsed !== null ? String(parsed) : ''
+			const tsTo = parseDateInput(customTo)?.toString() ?? ''
 
 			onChange({ range: { from: tsFrom, to: tsTo } })
 		},
@@ -52,12 +50,11 @@ export const useCustomDateRange = (
 		(value: string) => {
 			onInputStart?.()
 			const formatted = formatInput(value)
-
 			setCustomTo(formatted)
-			const newFrom = customFrom
-			const newTo = formatted
-			const tsFrom = parseDateInput(newFrom)?.toString() ?? ''
-			const tsTo = parseDateInput(newTo)?.toString() ?? ''
+
+			const tsFrom = parseDateInput(customFrom)?.toString() ?? ''
+			const parsed = parseDateInput(formatted)
+			const tsTo = parsed !== null ? String(parsed) : ''
 
 			onChange({ range: { from: tsFrom, to: tsTo } })
 		},
@@ -78,7 +75,8 @@ export const useCustomDateRange = (
 		setCustomTo('')
 		setFromError(false)
 		setToError(false)
-	}, [])
+		onChange({ range: { from: '', to: '' } })
+	}, [onChange])
 	const clearFromError = useCallback(() => setFromError(false), [])
 	const clearToError = useCallback(() => setToError(false), [])
 	return {

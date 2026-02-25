@@ -7,6 +7,10 @@ export const AgeHeader = () => {
 	return (
 		<FilterDropdown isApplied={Boolean(dataFilters.fromTimestamp || dataFilters.toTimestamp)} title="Age">
 			<AgeFilter
+				value={{
+					from: dataFilters.fromTimestamp,
+					to: dataFilters.toTimestamp,
+				}}
 				onApply={args => {
 					setFromTimestamp(args.range.from)
 					setToTimestamp(args.range.to)

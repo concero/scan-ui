@@ -21,10 +21,10 @@ export const useLoadAddressData = (): void => {
 		setInitialLoading,
 		setDataLoading,
 		setPagination,
-		setFromChainIds,
-		setStatus,
-		setToChainIds,
-		setType,
+		// setFromChainIds,
+		// setStatus,
+		// setToChainIds,
+		// setType,
 	} = useAddressStore()
 
 	const { take, skip } = pagination
@@ -72,7 +72,18 @@ export const useLoadAddressData = (): void => {
 	}, [addr, parameters])
 
 	const { data, isLoading } = useQuery({
-		queryKey: ['transaction', addr, direction, status, type, skip],
+		queryKey: [
+			'transaction',
+			addr,
+			direction,
+			status,
+			type,
+			dataFilters.fromTimestamp,
+			dataFilters.toTimestamp,
+			dataFilters.fromChainIds,
+			dataFilters.toChainIds,
+			skip,
+		],
 		queryFn: getAddressData,
 		enabled: Boolean(addr),
 		staleTime: 30000,
@@ -87,9 +98,6 @@ export const useLoadAddressData = (): void => {
 	useEffect(() => {
 		setDirection(direction)
 	}, [direction, setDirection])
-	useEffect(() => {
-		setStatus(status)
-	}, [status, setStatus])
 
 	useEffect(() => {
 		if (!Array.isArray(data)) return
