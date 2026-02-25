@@ -7,6 +7,7 @@ export const ChainToHeader = () => {
 	return (
 		<FilterDropdown isApplied={Boolean(dataFilters.toChainIds)} title="To">
 			<ChainFilter
+				value={dataFilters.toChainIds}
 				onApply={arg => {
 					setToChainIds(arg)
 				}}

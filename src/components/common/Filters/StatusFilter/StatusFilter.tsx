@@ -33,9 +33,9 @@ export const StatusFilter = ({ onApply, value }: TProps) => {
 	}
 
 	return (
-		<VStack gap="space_0_75">
-			<Filter title="Set Status">
-				<VStack gap="space_0_25">
+		<VStack gap="space_0_75" className={cls.wrap}>
+			<Filter title="Set Status" isFull>
+				<VStack gap="space_0_25" max>
 					{STATUS_OPTIONS.map(option => (
 						<Button
 							isFull

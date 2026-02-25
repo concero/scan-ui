@@ -46,7 +46,6 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 		if (value?.from && value?.to) {
 			setActivePreset(null)
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value?.from, onChange, value?.to])
 	const {
 		customFrom,
@@ -178,12 +177,13 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 				</VStack>
 			</Filter>
 			<Separator />
-			<HStack gap="space_0_25">
+			<HStack gap="space_0_25" max>
 				<Button
 					variant="secondary"
 					size="m"
 					isDisabled={!customFrom && !customTo && activePreset === null}
 					onClick={clearAll}
+					isFull
 				>
 					Clear
 				</Button>
@@ -192,6 +192,7 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 					size="m"
 					isDisabled={(fromError || toError || !customFrom || !customTo) && !activePreset}
 					onClick={onApplyLocal}
+					isFull
 				>
 					Apply
 				</Button>

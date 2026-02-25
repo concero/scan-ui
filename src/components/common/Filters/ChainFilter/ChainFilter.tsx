@@ -2,19 +2,26 @@ import { Button, Input } from '@concero/ui-kit'
 import { HStack, VStack } from '../../Stack'
 import { Filter } from '../Filter/Filter'
 import { useChainsStore } from '@/hooks/useChainsStore'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Separator } from '../../Separator/Separator'
 import cls from './ChainFilter.module.pcss'
 import { CheckIcon } from '@/assets/check-icon'
 
 export type TProps = {
+	value?: string[]
 	onApply: (chains: string[]) => void
 }
 
-export const ChainFilter = ({ onApply }: TProps) => {
+export const ChainFilter = ({ onApply, value }: TProps) => {
 	const { chains } = useChainsStore()
 	const [search, setSearch] = useState('')
 	const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+
+	useEffect(() => {
+		if (value) {
+			setSelectedIds(new Set(value))
+		}
+	}, [value])
 
 	const filteredChains = useMemo(() => {
 		console.count('DEBUG | ChainFilter: Recalculate chains')

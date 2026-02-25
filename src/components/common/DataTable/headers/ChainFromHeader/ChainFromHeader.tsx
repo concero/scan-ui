@@ -7,6 +7,7 @@ export const ChainFromHeader = () => {
 	return (
 		<FilterDropdown isApplied={Boolean(dataFilters.fromChainIds)} title="From">
 			<ChainFilter
+				value={dataFilters.fromChainIds}
 				onApply={arg => {
 					setFromChainIds(arg)
 				}}
