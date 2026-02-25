@@ -5,7 +5,7 @@ import { useAddressStore } from '@/hooks'
 export const TypeHeader = () => {
 	const { setType, dataFilters } = useAddressStore()
 	return (
-		<FilterDropdown isApplied={Boolean(dataFilters.type)} title="Type">
+		<FilterDropdown isApplied={Boolean(dataFilters.type)} title="Type" key={'Type'}>
 			<TypeFilter
 				value={dataFilters.type}
 				onApply={arg => {

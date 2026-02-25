@@ -5,7 +5,7 @@ import { useAddressStore } from '@/hooks'
 export const ChainFromHeader = () => {
 	const { setFromChainIds, dataFilters } = useAddressStore()
 	return (
-		<FilterDropdown isApplied={Boolean(dataFilters.fromChainIds)} title="From">
+		<FilterDropdown isApplied={Boolean(dataFilters.fromChainIds)} title="From" key={'ChainFrom'}>
 			<ChainFilter
 				value={dataFilters.fromChainIds}
 				onApply={arg => {

@@ -5,7 +5,11 @@ import { useAddressStore } from '@/hooks'
 export const AgeHeader = () => {
 	const { setFromTimestamp, setToTimestamp, dataFilters } = useAddressStore()
 	return (
-		<FilterDropdown isApplied={Boolean(dataFilters.fromTimestamp || dataFilters.toTimestamp)} title="Age">
+		<FilterDropdown
+			isApplied={Boolean(dataFilters.fromTimestamp || dataFilters.toTimestamp)}
+			title="Age"
+			key={'age'}
+		>
 			<AgeFilter
 				value={{
 					from: dataFilters.fromTimestamp,

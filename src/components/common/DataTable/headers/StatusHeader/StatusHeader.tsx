@@ -5,7 +5,7 @@ import { useAddressStore } from '@/hooks'
 export const StatusHeader = () => {
 	const { setStatus, dataFilters } = useAddressStore()
 	return (
-		<FilterDropdown isApplied={Boolean(dataFilters.status)} title="Status">
+		<FilterDropdown isApplied={Boolean(dataFilters.status)} title="Status" key={'Status'}>
 			<StatusFilter
 				value={dataFilters.status}
 				onApply={arg => {
