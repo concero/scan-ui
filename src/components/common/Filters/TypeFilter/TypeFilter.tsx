@@ -15,10 +15,8 @@ export type TProps = {
 const STATUS_OPTIONS: { value: TxTypeValue; label: string }[] = [
 	{ value: TxType.All, label: 'All' },
 	{ value: TxType.LBF, label: 'LBF' },
-	{ value: TxType.IOU, label: 'IOU' },
 	{ value: TxType.Canonical, label: 'Canonical' },
-	{ value: TxType.Message, label: 'Message' }, // Значение 'v2'
-	{ value: TxType.CCIP, label: 'CCIP' },
+	{ value: TxType.Message, label: 'Message' }, // 'v2'
 ]
 
 export const TypeFilter = ({ onApply, value }: TProps) => {

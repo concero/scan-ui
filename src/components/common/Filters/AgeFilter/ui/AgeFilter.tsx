@@ -120,7 +120,7 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 						{PRESETS.slice(3).map(item => (
 							<Button
 								key={item.value}
-								variant={activePreset === item.value ? 'primary' : 'tetrary_color'}
+								variant={activePreset === item.value ? 'secondary_color' : 'tetrary'}
 								size="s"
 								onClick={() => handlePresetClick(item.value)}
 								className={activePreset !== item.value ? cls.unselected_button : undefined}
@@ -132,9 +132,9 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 				</VStack>
 			</Filter>
 			<Separator />
-			<Filter title="Custom Range">
-				<VStack gap="space_0_75">
-					<VStack gap="space_0_5">
+			<Filter title="Custom Range" isFull>
+				<VStack gap="space_0_75" max>
+					<VStack gap="space_0_5" max>
 						<Text variant="heading_small" className={cls.custom_range_subtitle}>
 							From
 						</Text>
@@ -154,7 +154,7 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 							onChange={e => handleFromChange(e.target.value)}
 						/>
 					</VStack>
-					<VStack gap="space_0_5">
+					<VStack gap="space_0_5" max>
 						<Text variant="heading_small" className={cls.custom_range_subtitle}>
 							To
 						</Text>
@@ -188,7 +188,7 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 					Clear
 				</Button>
 				<Button
-					variant={customFrom && customTo ? 'primary' : 'secondary'}
+					variant={(customFrom && customTo) || activePreset ? 'primary' : 'secondary'}
 					size="m"
 					isDisabled={(fromError || toError || !customFrom || !customTo) && !activePreset}
 					onClick={onApplyLocal}
