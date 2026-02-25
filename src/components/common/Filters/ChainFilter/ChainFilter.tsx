@@ -24,7 +24,6 @@ export const ChainFilter = ({ onApply, value }: TProps) => {
 	}, [value])
 
 	const filteredChains = useMemo(() => {
-		console.count('DEBUG | ChainFilter: Recalculate chains')
 		const chainList = Object.entries(chains)
 			.map(([id, chain]) => ({
 				id,

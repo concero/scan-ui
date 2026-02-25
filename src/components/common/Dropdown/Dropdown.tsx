@@ -32,10 +32,6 @@ export const Dropdown = ({
 	const popupRef = useRef<HTMLDivElement>(null)
 	const triggerRef = useRef<HTMLDivElement>(null)
 
-	useEffect(() => {
-		if (open !== undefined) setIsOpen(open)
-	}, [open])
-
 	const toggle = () => {
 		if (disabled) return
 		const newOpen = !isOpen
@@ -61,10 +57,12 @@ export const Dropdown = ({
 	}, [isOpen, onOpenChange])
 
 	useEffect(() => {
-		if (!headless) {
-			setTimeout(() => {
-				popupRef.current?.classList.toggle(cls.popup_visible)
-			}, 0)
+		if (headless || !popupRef.current) return
+
+		if (isOpen) {
+			popupRef.current.classList.add(cls.popup_visible)
+		} else {
+			popupRef.current.classList.remove(cls.popup_visible)
 		}
 	}, [headless, isOpen])
 
