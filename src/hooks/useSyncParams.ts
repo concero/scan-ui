@@ -53,12 +53,6 @@ export const useSyncParams = (): void => {
 
 	const isURLUpdate = useRef<boolean>(false)
 	const isStoreUpdate = useRef<boolean>(false)
-	useEffect(() => {
-		console.log({
-			urlParams,
-			dataFilters,
-		})
-	}, [dataFilters, urlParams])
 
 	// Url to store
 	useEffect(() => {
