@@ -4,97 +4,85 @@ import { useAddressStore } from './useAddressStore'
 import { TxType, Status } from '@/types'
 
 export const useParamsSync = (address: string | undefined): void => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const store = useAddressStore()
-  const isMountedRef = useRef(false)
+	const [params, setParams] = useSearchParams()
+	const store = useAddressStore()
+	const mounted = useRef(false)
 
-  const syncFromUrl = useCallback(() => {
-    const urlType = searchParams.get('type')
-    const parsedType = urlType === 'message' 
-      ? TxType.Message 
-      : [TxType.LBF, TxType.Canonical].includes(urlType as TxType)
-        ? urlType as TxType 
-        : undefined
-    store.setType(parsedType)
+	const syncFromUrl = useCallback(() => {
+		const type = params.get('type')
+		store.setType(
+			type === 'message'
+				? TxType.Message
+				: [TxType.LBF, TxType.Canonical].includes(type as TxType)
+					? (type as TxType)
+					: undefined,
+		)
 
-    const urlStatus = searchParams.get('status') as Status | null
-    store.setStatus(urlStatus && urlStatus !== Status.All ? urlStatus : undefined)
+		const status = params.get('status') as Status | null
+		store.setStatus(status && status !== Status.All ? status : undefined)
 
-    const fromChainIdsStr = searchParams.get('fromChainId')
-    store.setFromChainIds(fromChainIdsStr?.split(',').map(id => id.trim()).filter(Boolean) || undefined)
+		const fromChains = params
+			.get('fromChainId')
+			?.split(',')
+			.map(id => id.trim())
+			.filter(Boolean)
+		store.setFromChainIds(fromChains || undefined)
 
-    const toChainIdsStr = searchParams.get('toChainId')
-    store.setToChainIds(toChainIdsStr?.split(',').map(id => id.trim()).filter(Boolean) || undefined)
-  }, [searchParams, store])
+		const toChains = params
+			.get('toChainId')
+			?.split(',')
+			.map(id => id.trim())
+			.filter(Boolean)
+		store.setToChainIds(toChains || undefined)
+	}, [params, store])
 
-  const syncToUrl = useCallback(() => {
-    const newParams = new URLSearchParams(searchParams)
-    let changed = false
+	const syncToUrl = useCallback(() => {
+		const newParams = new URLSearchParams(params)
+		let changed = false
 
-    const expectedType = store.dataFilters.type && store.dataFilters.type !== TxType.All
-      ? store.dataFilters.type === TxType.Message ? 'message' : store.dataFilters.type
-      : null
-    const currentType = searchParams.get('type')
-    if (expectedType && currentType !== expectedType) {
-      newParams.set('type', expectedType)
-      changed = true
-    } else if (!expectedType && currentType) {
-      newParams.delete('type')
-      changed = true
-    }
+		const type =
+			store.dataFilters.type && store.dataFilters.type !== TxType.All
+				? store.dataFilters.type === TxType.Message
+					? 'message'
+					: store.dataFilters.type
+				: null
+		if (type !== params.get('type')) {
+			type ? newParams.set('type', type) : newParams.delete('type')
+			changed = true
+		}
 
-    const expectedStatus = store.dataFilters.status && store.dataFilters.status !== Status.All 
-      ? store.dataFilters.status 
-      : null
-    const currentStatus = searchParams.get('status')
-    if (expectedStatus && currentStatus !== expectedStatus) {
-      newParams.set('status', expectedStatus)
-      changed = true
-    } else if (!expectedStatus && currentStatus) {
-      newParams.delete('status')
-      changed = true
-    }
+		const status =
+			store.dataFilters.status && store.dataFilters.status !== Status.All ? store.dataFilters.status : null
+		if (status !== params.get('status')) {
+			status ? newParams.set('status', status) : newParams.delete('status')
+			changed = true
+		}
 
-    const expectedFromChain = store.dataFilters.fromChainIds?.length 
-      ? store.dataFilters.fromChainIds.join(',') 
-      : null
-    const currentFromChain = searchParams.get('fromChainId')
-    if (expectedFromChain && currentFromChain !== expectedFromChain) {
-      newParams.set('fromChainId', expectedFromChain)
-      changed = true
-    } else if (!expectedFromChain && currentFromChain) {
-      newParams.delete('fromChainId')
-      changed = true
-    }
+		const from = store.dataFilters.fromChainIds?.length ? store.dataFilters.fromChainIds.join(',') : null
+		if (from !== params.get('fromChainId')) {
+			from ? newParams.set('fromChainId', from) : newParams.delete('fromChainId')
+			changed = true
+		}
 
-    const expectedToChain = store.dataFilters.toChainIds?.length 
-      ? store.dataFilters.toChainIds.join(',') 
-      : null
-    const currentToChain = searchParams.get('toChainId')
-    if (expectedToChain && currentToChain !== expectedToChain) {
-      newParams.set('toChainId', expectedToChain)
-      changed = true
-    } else if (!expectedToChain && currentToChain) {
-      newParams.delete('toChainId')
-      changed = true
-    }
+		const to = store.dataFilters.toChainIds?.length ? store.dataFilters.toChainIds.join(',') : null
+		if (to !== params.get('toChainId')) {
+			to ? newParams.set('toChainId', to) : newParams.delete('toChainId')
+			changed = true
+		}
 
-    if (changed) {
-      setSearchParams(newParams)
-    }
-  }, [searchParams, setSearchParams, store.dataFilters])
+		if (changed) setParams(newParams)
+	}, [params, setParams, store.dataFilters])
 
-  useEffect(() => {
-    if (!address) return
-    
-    if (!isMountedRef.current) {
-      isMountedRef.current = true
-      syncFromUrl()
-    }
-  }, [address, syncFromUrl])
+	useEffect(() => {
+		if (!address) return
+		if (!mounted.current) {
+			mounted.current = true
+			syncFromUrl()
+		}
+	}, [address, syncFromUrl])
 
-  useEffect(() => {
-    if (!isMountedRef.current || !address) return
-    syncToUrl()
-  }, [syncToUrl, address])
+	useEffect(() => {
+		if (!mounted.current || !address) return
+		syncToUrl()
+	}, [syncToUrl, address])
 }

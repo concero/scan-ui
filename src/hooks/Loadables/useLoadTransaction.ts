@@ -38,7 +38,7 @@ export const useLoadTransaction = (): void => {
 		const paramInfo = await identifyParam(id)
 		const { srcHash, dstHash, id: paramId, none } = paramInfo
 
-		const response = await fetchTransaction<Transaction>(id, { srcHash, dstHash, id: paramId, none },take, skip)
+		const response = await fetchTransaction<Transaction>(id, { srcHash, dstHash, id: paramId, none }, take, skip)
 		const transactions = response.transactions ?? null
 
 		if (!transactions || transactions.length === 0) return null

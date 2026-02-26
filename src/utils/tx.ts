@@ -47,7 +47,6 @@ export const fetchTransaction = async <T = unknown>(
 			break
 	}
 
-	
 	const response = await fetch(url.toString(), {
 		headers: {
 			Accept: 'application/json',

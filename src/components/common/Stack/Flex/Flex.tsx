@@ -4,7 +4,6 @@ import cls from './Flex.module.pcss'
 import clsx from 'clsx'
 import { HintedString, OmitTyped } from '@/types/utils'
 
-
 export type FlexJustify = 'start' | 'center' | 'end' | 'between'
 export type FlexAlign = 'start' | 'center' | 'end'
 export type FlexDirection = 'row' | 'column'

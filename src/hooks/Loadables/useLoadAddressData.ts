@@ -23,7 +23,7 @@ export const useLoadAddressData = (): void => {
 		setDataLoading,
 		setPagination,
 	} = useAddressStore()
-	
+
 	useParamsSync(address)
 
 	const { take, skip } = pagination
