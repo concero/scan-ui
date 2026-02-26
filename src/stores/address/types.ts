@@ -32,7 +32,6 @@ export type AddressActions = {
 	setLoading: (loading: boolean, initial?: boolean) => void
 	setPagination: (pagination: AddressPagination) => void
 	resetData: () => void
-	// Filters actions
 	setFromChainIds: (ids: string[] | undefined) => void
 	setToChainIds: (ids: string[] | undefined) => void
 	setStatus: (status: Status | undefined) => void

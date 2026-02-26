@@ -1,5 +1,5 @@
-import { Status, Transaction, TxType } from '@/types'
 import type { Address } from 'viem'
+import { Status, Transaction, TxType } from '@/types'
 import { TxsDirection } from '@/types'
 import { isAddress } from 'viem'
 import { useEffect, useCallback, useMemo, useRef } from 'react'
@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useAddressStore } from '../useAddressStore'
 import { fetchTransactions, SenderOrReceiver } from '@/utils/txs'
+import { useParamsSync } from '../useParamsSync'
 
 export const useLoadAddressData = (): void => {
 	const { address } = useParams<{ address: string }>()
@@ -21,11 +22,9 @@ export const useLoadAddressData = (): void => {
 		setInitialLoading,
 		setDataLoading,
 		setPagination,
-		// setFromChainIds,
-		// setStatus,
-		// setToChainIds,
-		// setType,
 	} = useAddressStore()
+	
+	useParamsSync(address)
 
 	const { take, skip } = pagination
 	const { direction, fromChainIds, status, toChainIds, type } = dataFilters

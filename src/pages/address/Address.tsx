@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { useAddressStore, useLoadAddressData } from '@/hooks'
 import { NotFound } from '@/components/common'
 import { ScreenLoader } from '@/components/common/ScreenLoader'
-import { useSyncParams } from '@/hooks/useSyncParams'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
@@ -15,7 +14,6 @@ const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
 	const { txs, initialLoading } = useAddressStore()
 
-	useSyncParams()
 	useLoadAddressData()
 
 	const render = (): ReactElement => {

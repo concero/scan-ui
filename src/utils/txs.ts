@@ -45,10 +45,6 @@ export const fetchTransactions = async <T = unknown>({
 	} else {
 		throw new Error('Either sender or receiver must be provided.')
 	}
-
-	if (filters.direction) {
-		url.searchParams.set('direction', filters.direction)
-	}
 	if (filters.fromChainIds) {
 		url.searchParams.set('fromChainId', filters.fromChainIds.join(','))
 	}
