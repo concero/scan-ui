@@ -54,7 +54,9 @@ export const fetchTransactions = async <T = unknown>({
 	if (filters.status) {
 		url.searchParams.set('status', filters.status)
 	}
-	if (filters.type) {
+	if (filters.type === 'v2') { 
+		url.searchParams.set('type', 'message')
+	} else if (filters.type) {
 		url.searchParams.set('type', filters.type)
 	}
 

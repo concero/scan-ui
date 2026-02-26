@@ -3,91 +3,98 @@ import { useSearchParams } from 'react-router-dom'
 import { useAddressStore } from './useAddressStore'
 import { TxType, Status } from '@/types'
 
-const syncFilterFromUrl = <T>(
-    address: string | undefined,
-    searchParams: URLSearchParams,
-    setter: (value: T | undefined) => void,
-    paramName: string,
-    allValue: T
-): void => {
+export const useParamsSync = (address: string | undefined): void => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const store = useAddressStore()
+  const isMountedRef = useRef(false)
+
+  const syncFromUrl = useCallback(() => {
+    const urlType = searchParams.get('type')
+    const parsedType = urlType === 'message' 
+      ? TxType.Message 
+      : [TxType.LBF, TxType.Canonical].includes(urlType as TxType)
+        ? urlType as TxType 
+        : undefined
+    store.setType(parsedType)
+
+    const urlStatus = searchParams.get('status') as Status | null
+    store.setStatus(urlStatus && urlStatus !== Status.All ? urlStatus : undefined)
+
+    const fromChainIdsStr = searchParams.get('fromChainId')
+    store.setFromChainIds(fromChainIdsStr?.split(',').map(id => id.trim()).filter(Boolean) || undefined)
+
+    const toChainIdsStr = searchParams.get('toChainId')
+    store.setToChainIds(toChainIdsStr?.split(',').map(id => id.trim()).filter(Boolean) || undefined)
+  }, [searchParams, store])
+
+  const syncToUrl = useCallback(() => {
+    const newParams = new URLSearchParams(searchParams)
+    let changed = false
+
+    const expectedType = store.dataFilters.type && store.dataFilters.type !== TxType.All
+      ? store.dataFilters.type === TxType.Message ? 'message' : store.dataFilters.type
+      : null
+    const currentType = searchParams.get('type')
+    if (expectedType && currentType !== expectedType) {
+      newParams.set('type', expectedType)
+      changed = true
+    } else if (!expectedType && currentType) {
+      newParams.delete('type')
+      changed = true
+    }
+
+    const expectedStatus = store.dataFilters.status && store.dataFilters.status !== Status.All 
+      ? store.dataFilters.status 
+      : null
+    const currentStatus = searchParams.get('status')
+    if (expectedStatus && currentStatus !== expectedStatus) {
+      newParams.set('status', expectedStatus)
+      changed = true
+    } else if (!expectedStatus && currentStatus) {
+      newParams.delete('status')
+      changed = true
+    }
+
+    const expectedFromChain = store.dataFilters.fromChainIds?.length 
+      ? store.dataFilters.fromChainIds.join(',') 
+      : null
+    const currentFromChain = searchParams.get('fromChainId')
+    if (expectedFromChain && currentFromChain !== expectedFromChain) {
+      newParams.set('fromChainId', expectedFromChain)
+      changed = true
+    } else if (!expectedFromChain && currentFromChain) {
+      newParams.delete('fromChainId')
+      changed = true
+    }
+
+    const expectedToChain = store.dataFilters.toChainIds?.length 
+      ? store.dataFilters.toChainIds.join(',') 
+      : null
+    const currentToChain = searchParams.get('toChainId')
+    if (expectedToChain && currentToChain !== expectedToChain) {
+      newParams.set('toChainId', expectedToChain)
+      changed = true
+    } else if (!expectedToChain && currentToChain) {
+      newParams.delete('toChainId')
+      changed = true
+    }
+
+    if (changed) {
+      setSearchParams(newParams)
+    }
+  }, [searchParams, setSearchParams, store.dataFilters])
+
+  useEffect(() => {
     if (!address) return
     
-    const urlValue = searchParams.get(paramName) as T | null
-    const newValue = urlValue && urlValue !== allValue ? urlValue : undefined
-
-    setter(newValue)
-}
-
-const syncFilterToUrl = <T>(
-    searchParams: URLSearchParams,
-    setSearchParams: (params: URLSearchParams) => void,
-    paramName: string,
-    value: T | undefined,
-    allValue: T,
-    skipSync: boolean
-): void => {
-    if (skipSync) return
-    
-    const newParams = new URLSearchParams(searchParams)
-    
-    if (value && value !== allValue) {
-        newParams.set(paramName, String(value))
-    } else {
-        newParams.delete(paramName)
+    if (!isMountedRef.current) {
+      isMountedRef.current = true
+      syncFromUrl()
     }
-    
-    setSearchParams(newParams)
-}
+  }, [address, syncFromUrl])
 
-const useTypeSync = (address: string | undefined) => {
-    const [searchParams, setSearchParams] = useSearchParams()
-    const store = useAddressStore()
-    const skipToUrlRef = useRef(false)
-
-    const syncFromUrl = useCallback(() => {
-        skipToUrlRef.current = true
-        syncFilterFromUrl(address, searchParams, store.setType, 'type', TxType.All)
-        Promise.resolve().then(() => skipToUrlRef.current = false)
-    }, [address, searchParams, store.setType])
-
-    const syncToUrl = useCallback(() => {
-        syncFilterToUrl(searchParams, setSearchParams, 'type', store.dataFilters.type, TxType.All, skipToUrlRef.current)
-    }, [store.dataFilters.type, searchParams, setSearchParams])
-
-    useEffect(() => {
-        syncFromUrl()
-    }, [syncFromUrl])
-
-    useEffect(() => {
-        syncToUrl()
-    }, [syncToUrl])
-}
-
-const useStatusSync = (address: string | undefined) => {
-    const [searchParams, setSearchParams] = useSearchParams()
-    const { dataFilters, setStatus } = useAddressStore()
-    const skipToUrlRef = useRef(false)
-
-    const syncFromUrl = useCallback(() => {
-        skipToUrlRef.current = true
-        syncFilterFromUrl(address, searchParams, setStatus, 'status', Status.All)
-        Promise.resolve().then(() => skipToUrlRef.current = false)
-    }, [address, searchParams, setStatus])
-
-    const syncToUrl = useCallback(() => {
-        syncFilterToUrl(searchParams, setSearchParams, 'status', dataFilters.status, Status.All, skipToUrlRef.current)
-    }, [dataFilters.status, searchParams, setSearchParams])
-
-    useEffect(() => {
-        syncFromUrl()
-    }, [syncFromUrl])
-
-    useEffect(() => {
-        syncToUrl()
-    }, [syncToUrl])
-}
-
-export const useParamsSync = (address: string | undefined): void => {
-    useTypeSync(address)
-    useStatusSync(address)
+  useEffect(() => {
+    if (!isMountedRef.current || !address) return
+    syncToUrl()
+  }, [syncToUrl, address])
 }
