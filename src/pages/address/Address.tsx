@@ -5,16 +5,15 @@ import { useParams } from 'react-router-dom'
 import { useAddressStore, useLoadAddressData } from '@/hooks'
 import { NotFound } from '@/components/common'
 import { ScreenLoader } from '@/components/common/ScreenLoader'
-import { useSyncParams } from '@/hooks/useSyncParams'
 
 const META_TITLE = 'Concero | Scan'
 const META_DESCRIPTION =
 	'Explore any address to see its activity across Concero — recent transactions and interactions in one clear, unified view'
 
-export const AddressPage: FC = (): ReactElement => {
+const AddressPage: FC = (): ReactElement => {
 	const { address } = useParams<{ address: string }>()
 	const { txs, initialLoading } = useAddressStore()
-	useSyncParams()
+
 	useLoadAddressData()
 
 	const render = (): ReactElement => {
@@ -40,3 +39,4 @@ export const AddressPage: FC = (): ReactElement => {
 		</>
 	)
 }
+export default AddressPage

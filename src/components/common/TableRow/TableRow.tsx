@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import './styles.pcss'
 
 export type Column<T> = {
-	header: string
+	header: ReactNode
 	accessor: keyof T
 	cellRenderer?: (value: T[keyof T], row: T) => ReactElement | string
 }

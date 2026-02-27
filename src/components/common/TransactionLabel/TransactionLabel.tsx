@@ -12,6 +12,7 @@ type TransactionLabelProps = {
 export const TransactionLabel = ({ type }: TransactionLabelProps): ReactElement => {
 	return (
 		<div>
+			{/*@ts-expect-error TODO: fix types*/}
 			<Tag variant="neutral">{TxTypeLabels[type]}</Tag>
 		</div>
 	)

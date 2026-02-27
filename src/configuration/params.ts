@@ -1,7 +1,7 @@
-import { TxsDirection } from '@/types'
+import { TxsDirection, TxType } from '@/types'
 
 type ParseFn<T> = (val: string | null) => T
-type ValidateFn<T> = (val: T) => boolean
+type ValidateFn<T> = (val: T | undefined) => boolean
 
 export const parseDirection: ParseFn<TxsDirection> = val => {
 	if (!val) return TxsDirection.Incoming
@@ -11,7 +11,27 @@ export const parseDirection: ParseFn<TxsDirection> = val => {
 	return TxsDirection.Incoming
 }
 
-export const validateDirection: ValidateFn<TxsDirection> = val => Object.values(TxsDirection).includes(val)
+export const validateDirection: ValidateFn<TxsDirection> = val =>
+	val !== undefined && Object.values(TxsDirection).includes(val)
+
+// --- Status ---
+const parseStringParam: ParseFn<string | undefined> = val => val ?? undefined
+const validateStringParam: ValidateFn<string | undefined> = () => true
+
+// --- Chain IDs (fromChainId / toChainId) ---
+const parseChainIdParam: ParseFn<string | undefined> = val => val ?? undefined
+const validateChainIdParam: ValidateFn<string | undefined> = val => !val || /^\d+(,\d+)*$/.test(val)
+
+// --- Timestamps ---
+const parseTimestampParam: ParseFn<string | undefined> = val => val ?? undefined
+const validateTimestampParam: ValidateFn<string | undefined> = val => !val || (/^\d+$/.test(val) && Number(val) > 0)
+// --- TxType ---
+export const parseType: ParseFn<TxType> = val => {
+	if (!val) return TxType.All
+	const lowerVal = val.toLowerCase()
+	return Object.values(TxType).includes(lowerVal as TxType) ? (lowerVal as TxType) : TxType.All
+}
+export const validateType: ValidateFn<TxType> = val => val !== undefined && Object.values(TxType).includes(val)
 
 // TODO: Add page parsing logic
 
@@ -20,6 +40,36 @@ export const paramConfig = {
 		defaultValue: TxsDirection.Incoming,
 		parse: parseDirection,
 		validate: validateDirection,
+	},
+	status: {
+		defaultValue: undefined,
+		parse: parseStringParam,
+		validate: validateStringParam,
+	},
+	type: {
+		defaultValue: undefined,
+		parse: parseStringParam,
+		validate: validateStringParam,
+	},
+	fromChainId: {
+		defaultValue: undefined,
+		parse: parseChainIdParam,
+		validate: validateChainIdParam,
+	},
+	toChainId: {
+		defaultValue: undefined,
+		parse: parseChainIdParam,
+		validate: validateChainIdParam,
+	},
+	fromTimestamp: {
+		defaultValue: undefined,
+		parse: parseTimestampParam,
+		validate: validateTimestampParam,
+	},
+	toTimestamp: {
+		defaultValue: undefined,
+		parse: parseTimestampParam,
+		validate: validateTimestampParam,
 	},
 } as const
 

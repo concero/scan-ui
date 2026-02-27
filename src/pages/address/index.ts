@@ -1,1 +1,1 @@
-export * from './Address'
+export { AddressPageAsync as AddressPage } from './Address.async'

@@ -1,7 +1,7 @@
 type Validator = {
+	id: boolean
 	srcHash: boolean
 	dstHash: boolean
-	id: boolean
 	none: boolean
 }
 

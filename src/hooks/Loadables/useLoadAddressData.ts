@@ -1,12 +1,13 @@
-import type { Transaction } from '@/types'
 import type { Address } from 'viem'
+import { Status, Transaction, TxType } from '@/types'
 import { TxsDirection } from '@/types'
 import { isAddress } from 'viem'
 import { useEffect, useCallback, useMemo, useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useAddressStore } from '../useAddressStore'
-import { fetchTransactions } from '@/utils/txs'
+import { fetchTransactions, SenderOrReceiver } from '@/utils/txs'
+import { useParamsSync } from '../useParamsSync'
 
 export const useLoadAddressData = (): void => {
 	const { address } = useParams<{ address: string }>()
@@ -23,8 +24,10 @@ export const useLoadAddressData = (): void => {
 		setPagination,
 	} = useAddressStore()
 
+	useParamsSync(address)
+
 	const { take, skip } = pagination
-	const { direction } = dataFilters
+	const { direction, fromChainIds, status, toChainIds, type, fromTimestamp, toTimestamp } = dataFilters
 
 	const addr = useMemo<Address | null>(() => {
 		return address && isAddress(address) ? address : null
@@ -46,11 +49,18 @@ export const useLoadAddressData = (): void => {
 	}, [direction, addr])
 
 	const parameters = useMemo(() => {
-		const params: { take: number; skip: number; sender?: string; receiver?: string } = { take, skip }
+		const params: SenderOrReceiver = { take, skip, filters: { direction } }
 		if (sender) params.sender = sender
 		if (receiver) params.receiver = receiver
+		if (type) params.filters.type = type === TxType.All ? undefined : type
+		if (fromChainIds) params.filters.fromChainIds = fromChainIds
+		if (toChainIds) params.filters.toChainIds = toChainIds
+		if (status) params.filters.status = status === Status.All ? undefined : status
+		if (fromTimestamp) params.filters.fromTimestamp = fromTimestamp
+		if (toTimestamp) params.filters.toTimestamp = toTimestamp
+
 		return params
-	}, [take, skip, sender, receiver])
+	}, [take, skip, direction, sender, receiver, type, fromChainIds, toChainIds, status, fromTimestamp, toTimestamp])
 
 	const hasMore = useRef<boolean>(true)
 
@@ -63,7 +73,18 @@ export const useLoadAddressData = (): void => {
 	}, [addr, parameters])
 
 	const { data, isLoading } = useQuery({
-		queryKey: ['transaction', addr, direction, skip],
+		queryKey: [
+			'transaction',
+			addr,
+			direction,
+			status,
+			type,
+			dataFilters.fromTimestamp,
+			dataFilters.toTimestamp,
+			dataFilters.fromChainIds,
+			dataFilters.toChainIds,
+			skip,
+		],
 		queryFn: getAddressData,
 		enabled: Boolean(addr),
 		staleTime: 30000,
