@@ -27,7 +27,7 @@ export const useLoadAddressData = (): void => {
 	useParamsSync(address)
 
 	const { take, skip } = pagination
-	const { direction, fromChainIds, status, toChainIds, type } = dataFilters
+	const { direction, fromChainIds, status, toChainIds, type, fromTimestamp, toTimestamp } = dataFilters
 
 	const addr = useMemo<Address | null>(() => {
 		return address && isAddress(address) ? address : null
@@ -56,9 +56,11 @@ export const useLoadAddressData = (): void => {
 		if (fromChainIds) params.filters.fromChainIds = fromChainIds
 		if (toChainIds) params.filters.toChainIds = toChainIds
 		if (status) params.filters.status = status === Status.All ? undefined : status
+		if (fromTimestamp) params.filters.fromTimestamp = fromTimestamp
+		if (toTimestamp) params.filters.toTimestamp = toTimestamp
 
 		return params
-	}, [take, skip, direction, sender, receiver, type, fromChainIds, toChainIds, status])
+	}, [take, skip, direction, sender, receiver, type, fromChainIds, toChainIds, status, fromTimestamp, toTimestamp])
 
 	const hasMore = useRef<boolean>(true)
 

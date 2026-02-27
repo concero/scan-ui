@@ -34,6 +34,12 @@ export const useParamsSync = (address: string | undefined): void => {
 			.map(id => id.trim())
 			.filter(Boolean)
 		store.setToChainIds(toChains || undefined)
+
+		const fromTimestamp = params.get('fromTimestamp')
+		store.setFromTimestamp(fromTimestamp || undefined)
+
+		const toTimestamp = params.get('toTimestamp')
+		store.setToTimestamp(toTimestamp || undefined)
 	}, [params, store])
 
 	const syncToUrl = useCallback(() => {
@@ -59,6 +65,7 @@ export const useParamsSync = (address: string | undefined): void => {
 		}
 
 		const from = store.dataFilters.fromChainIds?.length ? store.dataFilters.fromChainIds.join(',') : null
+
 		if (from !== params.get('fromChainId')) {
 			from ? newParams.set('fromChainId', from) : newParams.delete('fromChainId')
 			changed = true
@@ -67,6 +74,17 @@ export const useParamsSync = (address: string | undefined): void => {
 		const to = store.dataFilters.toChainIds?.length ? store.dataFilters.toChainIds.join(',') : null
 		if (to !== params.get('toChainId')) {
 			to ? newParams.set('toChainId', to) : newParams.delete('toChainId')
+			changed = true
+		}
+
+		const fromTimestamp = store.dataFilters.fromTimestamp ? store.dataFilters.fromTimestamp : null
+		if (fromTimestamp !== params.get('fromTimestamp')) {
+			fromTimestamp ? newParams.set('fromTimestamp', fromTimestamp) : newParams.delete('fromTimestamp')
+			changed = true
+		}
+		const toTimestamp = store.dataFilters.toTimestamp ? store.dataFilters.toTimestamp : null
+		if (toTimestamp !== params.get('toTimestamp')) {
+			toTimestamp ? newParams.set('toTimestamp', toTimestamp) : newParams.delete('toTimestamp')
 			changed = true
 		}
 

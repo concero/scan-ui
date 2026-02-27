@@ -97,7 +97,10 @@ export const AgeFilter = ({ onApply, value }: TProps) => {
 		setActivePreset(null)
 		clearCustom()
 		onChange({ range: { from: '', to: '' } })
-	}, [clearCustom, onChange])
+		if (rangeRef.current !== null) {
+			onApply(rangeRef.current)
+		}
+	}, [clearCustom, onApply, onChange])
 
 	return (
 		<VStack gap="space_0_75" max>

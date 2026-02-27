@@ -47,12 +47,13 @@ export const ChainFilter = ({ onApply, value }: TProps) => {
 		})
 	}
 
-	const handleApply = () => {
-		onApply(Array.from(selectedIds))
+	const handleApply = (newList?: string[]) => {
+		onApply(Array.from(newList ?? selectedIds))
 	}
 
 	const handleClear = () => {
 		setSelectedIds(new Set())
+		handleApply([])
 	}
 
 	return (
@@ -87,7 +88,7 @@ export const ChainFilter = ({ onApply, value }: TProps) => {
 				<Button variant="secondary" size="m" isFull onClick={handleClear}>
 					Clear
 				</Button>
-				<Button variant="secondary" size="m" isFull onClick={handleApply} isDisabled={selectedIds.size === 0}>
+				<Button variant="primary" size="m" isFull onClick={()=> handleApply()} isDisabled={selectedIds.size === 0}>
 					Apply
 				</Button>
 			</HStack>

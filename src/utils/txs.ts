@@ -45,14 +45,20 @@ export const fetchTransactions = async <T = unknown>({
 	} else {
 		throw new Error('Either sender or receiver must be provided.')
 	}
-	if (filters.fromChainIds) {
+	if (filters.fromChainIds?.length) {
 		url.searchParams.set('fromChainId', filters.fromChainIds.join(','))
 	}
-	if (filters.toChainIds) {
+	if (filters.toChainIds?.length) {
 		url.searchParams.set('toChainId', filters.toChainIds.join(','))
 	}
 	if (filters.status) {
 		url.searchParams.set('status', filters.status)
+	}
+	if (filters.fromTimestamp) {
+		url.searchParams.set('fromTimestamp', filters.fromTimestamp)
+	}
+	if (filters.toTimestamp) {
+		url.searchParams.set('toTimestamp', filters.toTimestamp)
 	}
 	if (filters.type === 'v2') {
 		url.searchParams.set('type', 'message')
