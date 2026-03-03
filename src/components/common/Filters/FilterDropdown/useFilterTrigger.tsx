@@ -5,23 +5,35 @@ import { FilterUnselectedActiveIcon } from '@/assets/filter-unselected-active-ic
 import { FilterSelectedDeactiveIcon } from '@/assets/filter-selected-deactive-icon'
 
 type FilterState = 'idle' | 'opened' | 'applied'
-
+const DEBUG_FILTER_NAME = 'Type'
 export const useFilterTrigger = (title: string, isApplied: boolean) => {
+	if (title === DEBUG_FILTER_NAME) {
+		console.log('useFilterTrigger | Begining', {
+			isApplied,
+		})
+	}
 	const [state, setState] = useState<FilterState>(isApplied ? 'applied' : 'idle')
 	const [isOpen, setIsOpen] = useState(false)
 
 	useEffect(() => {
 		if (isApplied) {
-			setState(prev => (prev === 'opened' ? 'applied' : 'opened'))
+			if (title === DEBUG_FILTER_NAME) {
+				console.log('useFilterTrigger | useEffect', {
+					isApplied,
+				})
+			}
+
+			// setState(prev => (prev === 'opened' ? 'applied' : 'opened'))
 		} else {
-			setState(prev => (prev === 'opened' ? 'opened' : 'idle'))
+			setState('idle')
+			// setState(prev => (prev === 'opened' ? 'opened' : 'idle'))
 		}
 	}, [isApplied])
 
 	const open = useCallback(() => {
 		setIsOpen(true)
 
-		setState(prev => (prev === 'idle' ? 'opened' : prev))
+		// setState(prev => (prev === 'idle' ? 'opened' : prev))
 	}, [])
 
 	const close = useCallback(() => {
@@ -38,12 +50,19 @@ export const useFilterTrigger = (title: string, isApplied: boolean) => {
 	}, [])
 
 	const getIcon = useCallback(() => {
+		if (title === DEBUG_FILTER_NAME) {
+			console.log('useFilterTrigger | getIcon | state:', state)
+		}
+
 		if (isOpen) {
 			return state === 'applied' ? <FilterSelectedActiveIcon /> : <FilterUnselectedActiveIcon />
 		}
 		return state === 'applied' ? <FilterSelectedDeactiveIcon /> : <FilterUnselectedDeactiveIcon />
 	}, [isOpen, state])
 
+	if (title === DEBUG_FILTER_NAME) {
+		console.log('useFilterTrigger | prerender | state:', state)
+	}
 	return {
 		isOpen,
 		open,
