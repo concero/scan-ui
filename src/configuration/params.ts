@@ -25,12 +25,7 @@ const validateChainIdParam: ValidateFn<string | undefined> = val => !val || /^\d
 // --- Timestamps ---
 const parseTimestampParam: ParseFn<string | undefined> = val => val ?? undefined
 const validateTimestampParam: ValidateFn<string | undefined> = val => !val || (/^\d+$/.test(val) && Number(val) > 0)
-// --- TxType ---
-export const parseType: ParseFn<TxType> = val => {
-	if (!val) return TxType.All
-	const lowerVal = val.toLowerCase()
-	return Object.values(TxType).includes(lowerVal as TxType) ? (lowerVal as TxType) : TxType.All
-}
+
 export const validateType: ValidateFn<TxType> = val => val !== undefined && Object.values(TxType).includes(val)
 
 // TODO: Add page parsing logic

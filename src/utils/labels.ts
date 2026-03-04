@@ -1,6 +1,5 @@
 import { TxType } from '@/types'
-type LocalTxType = Exclude<TxType, TxType.All>
-export const TxTypeLabels: Record<LocalTxType, string> = {
+export const TxTypeLabels: Record<TxType, string> = {
 	[TxType.LBF]: 'LBF Bridge',
 	[TxType.IOU]: 'IOU Bridge',
 	[TxType.Canonical]: 'Canonical Bridge',

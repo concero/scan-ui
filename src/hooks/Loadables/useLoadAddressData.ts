@@ -1,5 +1,5 @@
 import type { Address } from 'viem'
-import { Status, Transaction, TxType } from '@/types'
+import { Transaction } from '@/types'
 import { TxsDirection } from '@/types'
 import { isAddress } from 'viem'
 import { useEffect, useCallback, useMemo, useRef } from 'react'
@@ -52,10 +52,10 @@ export const useLoadAddressData = (): void => {
 		const params: SenderOrReceiver = { take, skip, filters: { direction } }
 		if (sender) params.sender = sender
 		if (receiver) params.receiver = receiver
-		if (type) params.filters.type = type === TxType.All ? undefined : type
+		if (type) params.filters.type = type
 		if (fromChainIds) params.filters.fromChainIds = fromChainIds
 		if (toChainIds) params.filters.toChainIds = toChainIds
-		if (status) params.filters.status = status === Status.All ? undefined : status
+		if (status) params.filters.status = status
 		if (fromTimestamp) params.filters.fromTimestamp = fromTimestamp
 		if (toTimestamp) params.filters.toTimestamp = toTimestamp
 

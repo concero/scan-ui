@@ -19,7 +19,7 @@ export const useParamsSync = (address: string | undefined): void => {
 		)
 
 		const status = params.get('status') as Status | null
-		store.setStatus(status && status !== Status.All ? status : undefined)
+		store.setStatus(status ?? undefined)
 
 		const fromChains = params
 			.get('fromChainId')
@@ -47,18 +47,14 @@ export const useParamsSync = (address: string | undefined): void => {
 		let changed = false
 
 		const type =
-			store.dataFilters.type && store.dataFilters.type !== TxType.All
-				? store.dataFilters.type === TxType.Message
-					? 'message'
-					: store.dataFilters.type
-				: null
+			store.dataFilters.type && store.dataFilters.type === TxType.Message ? 'message' : store.dataFilters.type
+
 		if (type !== params.get('type')) {
 			type ? newParams.set('type', type) : newParams.delete('type')
 			changed = true
 		}
 
-		const status =
-			store.dataFilters.status && store.dataFilters.status !== Status.All ? store.dataFilters.status : null
+		const status = store.dataFilters.status
 		if (status !== params.get('status')) {
 			status ? newParams.set('status', status) : newParams.delete('status')
 			changed = true
