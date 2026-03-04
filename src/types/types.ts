@@ -7,14 +7,12 @@ export enum SearchType {
 }
 
 export enum Status {
-	All = 'all',
 	Pending = 'pending',
 	Success = 'success',
 	Canceled = 'canceled',
 }
 
 export enum TxType {
-	All = 'all',
 	LBF = 'lbf',
 	IOU = 'iou',
 	Canonical = 'canonical',

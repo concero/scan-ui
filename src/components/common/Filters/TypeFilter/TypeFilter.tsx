@@ -1,5 +1,5 @@
 import { Button, Checkbox } from '@concero/ui-kit'
-import { VStack } from '../../Stack'
+import { HStack, VStack } from '../../Stack'
 import { Filter } from '../Filter/Filter'
 import { Separator } from '../../Separator/Separator'
 import { useState } from 'react'
@@ -9,11 +9,10 @@ type TxTypeValue = (typeof TxType)[keyof typeof TxType]
 
 export type TProps = {
 	value?: TxTypeValue
-	onApply?: (args: { status: TxTypeValue }) => void
+	onApply?: (args: { status: TxTypeValue | undefined }) => void
 }
 
 const STATUS_OPTIONS: { value: TxTypeValue; label: string }[] = [
-	{ value: TxType.All, label: 'All' },
 	{ value: TxType.LBF, label: 'LBF' },
 	{ value: TxType.Canonical, label: 'Canonical' },
 	{ value: TxType.Message, label: 'Message' }, // 'v2'
@@ -30,6 +29,12 @@ export const TypeFilter = ({ onApply, value }: TProps) => {
 		if (selected) {
 			onApply?.({ status: selected })
 		}
+	}
+	const handleClear = () => {
+		setSelected(null)
+		onApply?.({
+			status: undefined,
+		})
 	}
 
 	return (
@@ -52,9 +57,20 @@ export const TypeFilter = ({ onApply, value }: TProps) => {
 				</VStack>
 			</Filter>
 			<Separator />
-			<Button size="m" onClick={handleApply} isDisabled={!selected} isFull>
-				Apply
-			</Button>
+			<HStack gap="space_0_25" max>
+				<Button variant="secondary" size="m" onClick={handleClear} isDisabled={!selected} isFull>
+					Clear
+				</Button>
+				<Button
+					variant={selected ? 'primary' : 'secondary'}
+					size="m"
+					onClick={handleApply}
+					isDisabled={!selected}
+					isFull
+				>
+					Apply
+				</Button>
+			</HStack>
 		</VStack>
 	)
 }
