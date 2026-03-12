@@ -1,10 +1,13 @@
+
+
 import { memo } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { ContentSecurityPolicy } from '@/configuration/policy'
 
 const DEFAULTS = {
 	TITLE: 'Concero | Scan',
 	DESCRIPTION:
-		'Track and verify Concero transactions effortlessly with Concero Scan. A fast, secure, and transparent tool designed exclusively for monitoring transactions routed through Concero’s cross-chain infrastructure',
+		"Track and verify Concero transactions effortlessly with Concero Scan. A fast, secure, and transparent tool designed exclusively for monitoring transactions routed through Concero's cross-chain infrastructure",
 	KEYWORDS:
 		'concero, concero scan, cross-chain, blockchain testing, decentralized applications, dapps, blockchain integration, ethereum, arbitrum, optimism, sepolia, megaeth, monad, berachain, chainlink, ccip, bridging, messaging, transaction monitoring, cross-chain infrastructure, decentralized bridging, blockchain security, scalable blockchain, capital efficient, cross-chain transactions',
 	IMAGE: 'https://scan.concero.io/OG/OG.png',
@@ -36,6 +39,7 @@ export const MetaTags = memo(
 		additionalMeta,
 	}: MetaTagsProps) => (
 		<Helmet>
+			<meta httpEquiv="Content-Security-Policy" content={ContentSecurityPolicy} />
 			<title>{title}</title>
 			<meta name="description" content={description} />
 			<meta name="keywords" content={DEFAULTS.KEYWORDS} />
@@ -68,3 +72,5 @@ export const MetaTags = memo(
 		</Helmet>
 	),
 )
+
+
