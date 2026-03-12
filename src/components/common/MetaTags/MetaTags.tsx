@@ -2,7 +2,6 @@
 
 import { memo } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { ContentSecurityPolicy } from '@/configuration/policy'
 
 const DEFAULTS = {
 	TITLE: 'Concero | Scan',
@@ -39,7 +38,6 @@ export const MetaTags = memo(
 		additionalMeta,
 	}: MetaTagsProps) => (
 		<Helmet>
-			<meta httpEquiv="Content-Security-Policy" content={ContentSecurityPolicy} />
 			<title>{title}</title>
 			<meta name="description" content={description} />
 			<meta name="keywords" content={DEFAULTS.KEYWORDS} />
